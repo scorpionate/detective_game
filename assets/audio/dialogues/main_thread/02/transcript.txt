@@ -1,20 +1,20 @@
-Jenny: Hey, Wyatt, you don't want to tell me you're stressed?! 
-Wyatt: Of course not! Why do you think so?
-Wyatt: I am just thinking. It's one of the most complicated cases happened to me.
-Wyatt: Well... I do. You never can have enough experience in this job.
-Jenny: That's what I wanted to hear! But I can see you hesitate with something.
-Jenny: Oh, does little Wyatt have some bad feelings? You've always kept a cool head.
-Jenny: Definitely agree. But you've always kept a cool head.
+(conditional)Jenny: Hey, Wyatt, you don't want to tell me you're stressed?! 
+(optional)Wyatt: Of course not! Why do you think so?
+(optional)Wyatt: I am just thinking. It's one of the most complicated cases happened to me.
+(optional)Wyatt: Well... I do. You never can have enough experience in this job.
+(answer)Jenny: That's what I wanted to hear! But I can see you hesitate with something.
+(answer)Jenny: Oh, does little Wyatt have some bad feelings? You've always kept a cool head.
+(answer)Jenny: Definitely agree. But you've always kept a cool head.
 Wyatt: You turned off before the break, didn't you?
 Jenny: I was scheduling the next audio recording and needed to proceed with all these technical things, and finally...
 Wyatt: You did.
 Jenny: Never mind, cut to the end.
 Wyatt: Once the judge was announcing the break, he starred on me. I know him for many years. In a very tiny period, I saw uncertainty in his eyes. There is no doubt for me his final decision will mostly rely on my conclusions.
-Jenny: Boys, I am not looking in your charming eyes in the courtroom. I am supposed to record speeches.
-Wyatt: Don't be afraid to have a little rest from the audio console.
-Wyatt: A professional is always a professional.
-Wyatt: Maybe, you're right. It was just a moment.
-Jenny: For sure, next time I'll do!
-Jenny: Maybe someday I will finally be promoted!
-Jenny: Glad you noticed.
+(conditional)Jenny: Boys, I am not looking in your charming eyes in the courtroom. I am supposed to record speeches.
+(optional)Wyatt: Don't be afraid to have a little rest from the audio console.
+(optional)Wyatt: A professional is always a professional.
+(optional)Wyatt: Maybe, you're right. It was just a moment.
+(answer)Jenny: For sure, next time I'll do!
+(answer)Jenny: Maybe someday I will finally be promoted!
+(answer)Jenny: Glad you noticed.
 Jenny: So Wyatt, you really should try to remind yourself everything again. Have your time. See you after everything!

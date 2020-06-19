@@ -16,10 +16,20 @@ class DialogBox extends StatelessWidget {
     final width = MediaQuery.of(context).size.width - 80;  // Better for debugging 
     //final width = this.scene.tileSize * 16;
 
-    final dlg = data[0];
-    final avatarPath = data[1];
+    // Always supplied by stream
+    final dlg = data[0];        // Main dialogue        
+    final avatarPath = data[1]; // Who is talking
+    var conditionals = List<String>();
+
+    // Supplied by stream if it is conditional dialogue
+    if(data.length > 2) {
+      for (int i = 2; i < data.length; i++) {
+        conditionals.add(data[i]);
+      }
+    }
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
@@ -35,6 +45,7 @@ class DialogBox extends StatelessWidget {
                 width: height,
                 height: height,
                 child: CircleAvatar(
+                  backgroundColor: Color(0xffc7c7c7), 
                   backgroundImage: AssetImage(avatarPath),
                 )
               ),
@@ -56,6 +67,31 @@ class DialogBox extends StatelessWidget {
             ],
           ),
         ),
+
+        Container(
+          width: width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              for (var item in conditionals) Container(
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                     borderRadius: BorderRadius.circular(18.0),
+                     side: BorderSide(color: Colors.black)
+                  ),
+
+                  elevation: 5,
+                  color: Colors.white.withOpacity(0.85),
+                  onPressed: () {
+                    // Send info which button was clicked
+                    this.scene.optionalClicked(item);
+                  },
+                  child: Text(item, style: TextStyle(fontSize: 15),),
+                ),
+              )
+          ],),
+        )
 
 
       ],);

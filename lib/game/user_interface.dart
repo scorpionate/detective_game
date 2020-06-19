@@ -18,10 +18,10 @@ class UserInterface extends StatelessWidget{
           stream: incomingDialogues,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              // Scan data
-              
-              // Show DialogBox with sentence
               return DialogBox(this.scene, snapshot.data);
+            }
+            else if(snapshot.hasError) {
+              
             }
             // Nothing happens - blank UI
             else {

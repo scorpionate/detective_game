@@ -1,3 +1,4 @@
+import 'package:detective_game/game/scenes/main_thread/MT01/MT01.dart';
 import 'package:detective_game/game/scenes/main_thread/MT02/MT02.dart';
 import 'package:detective_game/screens/home_screen.dart';
 import 'package:flutter/services.dart';

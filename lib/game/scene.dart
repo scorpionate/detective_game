@@ -32,12 +32,16 @@ abstract class Scene extends Game {
   }
 
 
-  void playDialog(Duration delay) {
-    _dialogues.play(delay);
+  void playDialogue() {
+    _dialogues.playDialogue();
   }
 
   void nextBackground() {
     _background.next();
+  }
+
+  void optionalClicked(String dlg) {
+    _dialogues.optionalClicked(dlg);
   }
   
   void continueAction();

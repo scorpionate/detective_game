@@ -11,15 +11,16 @@ class MT01 extends Scene {
   ];
   
   static List<String> dlgFiles = <String>[
-    'dialogues/main_thread/01/transcript.txt',   // Txt file with transcript of each dialogue(1 line - 1 dialogue)
-    'dialogues/main_thread/01/01.mp3',           // Other lines are audio files of each dialogue
-    'dialogues/main_thread/01/02.mp3',
+    'assets/audio/dialogues/main_thread/01/transcript.txt',   // Txt file with transcript of each dialogue(1 line - 1 dialogue)
+    'audio/dialogues/main_thread/01/01.mp3',           // Other lines are audio files of each dialogue
+    'audio/dialogues/main_thread/01/02.mp3',
   ];
 
   MT01() : super(bgdImages, dlgFiles);
 
   @override
   void continueAction() {
+        this.playDialogue();
     
   }
   
