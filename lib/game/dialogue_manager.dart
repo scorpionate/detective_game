@@ -13,35 +13,55 @@ class DialogueManager {
   List<String> _dlgText;          // Dialogues texts
   int _index = 1;                 // Current dialogue to play
   int _optionalsCount = 0;
+  bool isConditional = false;
+  bool _isReady = false;
+
 
   DialogueManager(this._scene, this._dlgFiles) {
-    _loadAssets();
+    _initialize();
   }
 
-  void _loadAssets() async { 
-    // Load audio files into cache without transcript.txt located at [0]
-    await _dlgCache.loadAll(_dlgFiles.sublist(1, _dlgFiles.length));
+  bool get isReady {
+    return _isReady;
+  }
 
-    // Transform transcript.txt into string 
-    String transcript = await rootBundle.loadString(_dlgFiles.first);
-    
-    // Extract lines from string into the list(1 dialogue - 1 line).
-    _dlgText = LineSplitter().convert(transcript);                          
-    
-    // Dialogues should start from index 1(transcript.txt located at [0] in audiofiles list).
-    _dlgText.insert(0, '');                                                  
+  void _initialize() async {
+    await _loadAssets();
+    _isReady = true;
+  }
+
+  Future<void> _loadAssets() async { 
+    // Load audio files into cache without transcript.txt located at [0]
+    if (_dlgFiles.isNotEmpty) {
+      await _dlgCache.loadAll(_dlgFiles.sublist(1, _dlgFiles.length));
+
+      // Transform transcript.txt into string 
+      String transcript = await rootBundle.loadString(_dlgFiles.first);
+      
+      // Extract lines from string into the list(1 dialogue - 1 line).
+      _dlgText = LineSplitter().convert(transcript);                          
+      
+      // Dialogues should start from index 1(transcript.txt located at [0] in audiofiles list).
+      _dlgText.insert(0, '');    
+    }                                              
+  }
+
+  int get currentDialogueIndex {
+    return this._index;
   }
 
   void optionalClicked(String dlg) async {
     _index = _dlgText.indexOf(dlg);
+    isConditional = false;
     playDialogue();
   }
 
   Future<void> playDialogue() async {
     // Dialog has multpile optional answers, show complex dialogue
     if (_dlgText[_index].contains('(conditional)')) {
+      isConditional = true;
       
-      // Zero cnts
+      // Zero
       this._optionalsCount = 0;
 
       var list = List<String>();

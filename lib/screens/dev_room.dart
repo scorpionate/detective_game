@@ -1,5 +1,8 @@
 import 'package:detective_game/game/displayer.dart';
+import 'package:detective_game/game/scenes/main_thread/MT00/MT00.dart';
 import 'package:detective_game/game/scenes/main_thread/MT01/MT01.dart';
+import 'package:detective_game/game/scenes/main_thread/MT02/MT02.dart';
+import 'package:detective_game/screens/pick_resolution.dart';
 import 'package:flutter/material.dart';
 
 class DevRoom extends StatelessWidget {
@@ -10,9 +13,9 @@ class DevRoom extends StatelessWidget {
       ListView(
       children: <Widget>[
          ListTile(
-          title: Text('Room0'),
+          title: Text('Resolutiuon Changer'),
           onTap: (){
-            //Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT00())));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PickResolutionScreen(scene: MT00())));
           }
         ,),
         ListTile(
@@ -24,7 +27,7 @@ class DevRoom extends StatelessWidget {
         ListTile(
           title: Text('Room2'),
           onTap: (){
-           // Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT02())));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT02())));
           }
         ,),
         ListTile(

@@ -31,6 +31,11 @@ abstract class Scene extends Game {
     tileSize = screenSize.height / 9;  // Landscape mode inverts width with height, scale to 16:9 ratio
   }
 
+  void changeBackgroundWhen({int dialogueIndexIs}) {
+    if (this._dialogues.currentDialogueIndex == dialogueIndexIs) {
+      this.nextBackground();
+    }
+  }
 
   void playDialogue() {
     _dialogues.playDialogue();
@@ -40,20 +45,40 @@ abstract class Scene extends Game {
     _background.next();
   }
 
+  void previousBackgound() {
+    _background.previous();
+  }
+
+  String get currentBackgroundPath {
+    return this._background.currentBackground;
+  }
+
   void optionalClicked(String dlg) {
     _dialogues.optionalClicked(dlg);
   }
   
-  void continueAction();
+  void continueAction() {
+    // If UI shows buttons disable gesture recognizer
+    if (!this._dialogues.isConditional) {
+      playDialogue();
+    }
+  }
+
+  bool get assetsLoaded {
+    if (this._background.isReady && this._dialogues.isReady) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   @override
   void render(Canvas canvas) {
-    try {
+    if(this.assetsLoaded) {
       _background.render(canvas); // Throws errors at some initial frames(s: delay loading?)
     }
-    catch(e){
-      print(e);
-    } 
+    // Maybe show some loading??
   }
   
   @override

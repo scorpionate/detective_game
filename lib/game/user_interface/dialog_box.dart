@@ -55,7 +55,7 @@ class DialogBox extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   height: height,
                   child: AutoSizeText(
-                    dlg,
+                    _removeBraces(dlg),
                     minFontSize: 15,
                     overflow: TextOverflow.fade,
                     style: TextStyle(
@@ -87,7 +87,7 @@ class DialogBox extends StatelessWidget {
                     // Send info which button was clicked
                     this.scene.optionalClicked(item);
                   },
-                  child: Text(item, style: TextStyle(fontSize: 15),),
+                  child: Text(_removeBraces(_removeAuthor(item)), style: TextStyle(fontSize: 15),),
                 ),
               )
           ],),
@@ -96,4 +96,29 @@ class DialogBox extends StatelessWidget {
 
       ],);
   }
+
+
+  // Use only for display in Widget
+  String _removeBraces(String input) {
+    if (input.contains('(conditional)')) {
+      return input.replaceAll('(conditional)', '');
+    }
+    else if (input.contains('(optional)')) {
+      return input.replaceAll('(optional)', '');
+    }
+    else if (input.contains('(answer)')) {
+      return input.replaceAll('(answer)', '');
+    }
+    else {
+      return input;
+    }
+  }
+
+  // Use only for display in Widget
+  String _removeAuthor(String input) {
+    return input.substring(input.indexOf(':') + 2, input.length);
+  }
+
+
+
 }

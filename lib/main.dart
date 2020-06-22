@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Displayer(scene: MT02()),
-      //home: HomeScreen(),
+      //home: Displayer(scene: MT02()),
+      home: HomeScreen(),
     );
   }
 }

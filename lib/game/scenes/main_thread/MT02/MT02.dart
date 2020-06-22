@@ -6,8 +6,8 @@ class MT02 extends Scene {
 
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/02/01.png',
-    'locations/main_thread/02/02.png',
+    'locations/main_thread/02/01',
+    'locations/main_thread/02/02',
   ];
   
   static List<String> dlgFiles = <String>[
@@ -35,14 +35,10 @@ class MT02 extends Scene {
   ];
 
   MT02() : super(bgdImages, dlgFiles);
-
-  @override
-  void continueAction() {
-    this.playDialogue();
-  }
   
   @override
   void update(double t) {
+    changeBackgroundWhen(dialogueIndexIs: 20);
   }
 
 }
