@@ -29,5 +29,7 @@ class KT03 extends Scene {
   KT03(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
   
   @override
-  void update(double t) {}
+  void update(double t) {
+    super.update(t);
+  }
 }

@@ -18,6 +18,17 @@ abstract class Scene extends Game {
   BackgroundManager _background;
   UIManager uiManager = UIManager();
 
+  // State
+  bool _finished = false;
+  
+  bool get isFinished {
+    return _finished;
+  }
+
+  set isFinished(bool val) {
+    this._finished = val;
+  }
+
   Scene(List<String> backgroundImages, List<String> dialogues, this._gameplay) {
     _initialize(backgroundImages, dialogues);
   }
@@ -39,6 +50,10 @@ abstract class Scene extends Game {
     }
   }
 
+  void sceneEnded() {
+    this._gameplay.nextScene();
+  }
+
   void playDialogue() {
     _dialogues.playDialogue();
   }
@@ -49,6 +64,10 @@ abstract class Scene extends Game {
 
   void previousBackgound() {
     _background.previous();
+  }
+
+  void hideUI() {
+    uiManager.hideUI();
   }
 
   String get currentBackgroundPath {
@@ -84,5 +103,10 @@ abstract class Scene extends Game {
   }
   
   @override
-  void update(double t);
+  void update(double t) {
+    if (this._dialogues.isAudioFinished() && this.isFinished) {
+      this.sceneEnded();
+      this.hideUI();
+    }
+  }
 }

@@ -23,5 +23,7 @@ class MK07 extends Scene {
   MK07(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
   
   @override
-  void update(double t) {}
+  void update(double t) {
+    super.update(t);
+  }
 }

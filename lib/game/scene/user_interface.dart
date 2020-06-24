@@ -17,12 +17,16 @@ class UserInterface extends StatelessWidget{
     
     // if (scene is MT05) => render different
 
-    return Container(
-      child: StreamBuilder(
+    return StreamBuilder(
           stream: incomingDialogues,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return DialogBox(this.scene, snapshot.data);
+              if ( snapshot.data[0] == '#HIDE')  {
+                return TapToGo(this.scene);
+              }
+              else {
+                return DialogBox(this.scene, snapshot.data);
+              }
             }
             else if(snapshot.hasError) {
               print(snapshot.error.toString());
@@ -32,7 +36,6 @@ class UserInterface extends StatelessWidget{
               return TapToGo(this.scene);
             }
           },
-      ),
     );
   }
 }

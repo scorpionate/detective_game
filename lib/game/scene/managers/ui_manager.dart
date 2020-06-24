@@ -19,6 +19,11 @@ class UIManager {
     controller.add(toSend);
   }
 
+  void hideUI() {
+    final toSend = List<String>()..add('#HIDE');
+    controller.add(toSend);
+  }
+
   String _assignAvatar(String dlg) {
     if (dlg.contains('Anton: '))              return 'assets/images/characters/avatars/Anton.png';
     else if (dlg.contains('Brandon: '))       return 'assets/images/characters/avatars/Brandon.png';

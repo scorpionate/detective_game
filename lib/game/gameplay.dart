@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/scene/displayer.dart';
 import 'package:detective_game/game/scenes/config_resolution.dart';
@@ -50,7 +52,8 @@ class Gameplay extends StatelessWidget {
   int _mainThreadIndex = 0;
   int _mikeThreadIndex = 0;
   int _danielThreadIndex = 0;
-  
+
+  StreamController<bool> _sceneController = StreamController<bool>.broadcast();
 
   Gameplay() {
     _jeffThread = [
@@ -103,11 +106,30 @@ class Gameplay extends StatelessWidget {
     ];
   }
 
+  void nextScene() {
+    _sceneController.add(true);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-    var scene = _mainThread[_mainThreadIndex]; 
+    var scene = _kateThread[_kateThreadIndex]; 
     
-    return scene;
+    return StreamBuilder(
+      stream: this._sceneController.stream,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          scene = _kateThread[_kateThreadIndex++]; 
+          return scene;
+        }
+        else if (snapshot.hasError) {
+
+        }
+        else {
+          return scene;
+        }
+      },
+    );
   }
 }

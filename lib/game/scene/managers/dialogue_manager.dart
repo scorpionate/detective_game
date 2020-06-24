@@ -110,6 +110,7 @@ class DialogueManager {
     }
     else {
       bool res = _next();
+      if (!res) this._scene.isFinished = true;
     }
 
   }
@@ -120,9 +121,19 @@ class DialogueManager {
       return true;
     }
     else {
-      _index = 1; //TODO: Only for DEBUG
+      // _index = 1; //TODO: Only for DEBUG
       return false;
     }
+  }
+
+  bool isAudioFinished() {
+    if (_dlgPlayer.state == AudioPlayerState.COMPLETED) {
+      return true;
+    }
+    else {
+      return false;
+    }
+
   }
     
 }

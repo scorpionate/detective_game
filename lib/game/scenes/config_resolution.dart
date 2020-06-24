@@ -21,7 +21,9 @@ class ConfigResolution extends Scene {
   ConfigResolution(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
   
   @override
-  void update(double t) {}
+  void update(double t) {
+    super.update(t);
+  }
 
   @override void previousBackgound() {
     // Change background

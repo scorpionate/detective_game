@@ -28,5 +28,7 @@ class JT01 extends Scene {
 
   
   @override
-  void update(double t) {}
+  void update(double t) {
+    super.update(t);
+  }
 }

@@ -39,6 +39,7 @@ class MT03 extends Scene {
   
   @override
   void update(double t) {
+    super.update(t);
     changeBackgroundWhen(dialogueIndexIs: 20);
   }
 

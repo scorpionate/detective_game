@@ -21,6 +21,7 @@ class MT01 extends Scene {
   
   @override
   void update(double t) {
+    super.update(t);
     changeBackgroundWhen(dialogueIndexIs: 2);
   }
 

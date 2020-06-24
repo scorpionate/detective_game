@@ -29,5 +29,7 @@ class DT01 extends Scene {
   DT01(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
   
   @override
-  void update(double t) {}
+  void update(double t) {
+    super.update(t);
+  }
 }
