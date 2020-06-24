@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:detective_game/game/scenes/main_thread/MT00/MT00.dart';
+import 'package:detective_game/game/scenes/config_resolution.dart';
 
 class PickResolutionScreen extends StatelessWidget {
-  final MT00 scene;
+  final ConfigResolution scene;
   PickResolutionScreen({@required this.scene});
 
   @override

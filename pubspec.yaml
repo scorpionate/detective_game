@@ -28,12 +28,107 @@ flutter:
      - assets/images/
      - assets/images/characters/avatars/
      - assets/images/configuration_set/
+
      - assets/images/locations/main_thread/01/
      - assets/images/locations/main_thread/02/
+     - assets/images/locations/main_thread/03/
+     - assets/images/locations/main_thread/04/
+     - assets/images/locations/main_thread/05/
+     - assets/images/locations/main_thread/06/
+     - assets/images/locations/main_thread/07/
+     - assets/images/locations/main_thread/08/
+     - assets/images/locations/main_thread/09/
+     - assets/images/locations/main_thread/10/
+     - assets/images/locations/main_thread/11/
+     - assets/images/locations/main_thread/12/
+     - assets/images/locations/main_thread/13/
+     - assets/images/locations/main_thread/14/
+     - assets/images/locations/main_thread/15/
+     - assets/images/locations/main_thread/16/
+
+     - assets/images/locations/daniel_thread/01/
+     - assets/images/locations/daniel_thread/02/
+     - assets/images/locations/daniel_thread/03/
+     - assets/images/locations/daniel_thread/04/
+
+     - assets/images/locations/jeff_thread/01/
+     - assets/images/locations/jeff_thread/02/
+     - assets/images/locations/jeff_thread/03/
+     - assets/images/locations/jeff_thread/04/
+     - assets/images/locations/jeff_thread/05/
+
+     - assets/images/locations/kate_thread/01/
+     - assets/images/locations/kate_thread/02/
+     - assets/images/locations/kate_thread/03/
+     - assets/images/locations/kate_thread/04/
+     - assets/images/locations/kate_thread/05/
+     - assets/images/locations/kate_thread/06/
+     - assets/images/locations/kate_thread/07/
+     - assets/images/locations/kate_thread/08/
+     - assets/images/locations/kate_thread/09/
+     
+     - assets/images/locations/luca_thread/01/
+
+     - assets/images/locations/mike_thread/01/
+     - assets/images/locations/mike_thread/02/
+     - assets/images/locations/mike_thread/03/
+     - assets/images/locations/mike_thread/04/
+     - assets/images/locations/mike_thread/05/
+     - assets/images/locations/mike_thread/06/
+     - assets/images/locations/mike_thread/07/
+     - assets/images/locations/mike_thread/08/
+     - assets/images/locations/mike_thread/09/
 
     # Audio
      - assets/audio/dialogues/main_thread/01/
      - assets/audio/dialogues/main_thread/02/
+     - assets/audio/dialogues/main_thread/03/
+     - assets/audio/dialogues/main_thread/04/
+     - assets/audio/dialogues/main_thread/05/
+     - assets/audio/dialogues/main_thread/06/
+     - assets/audio/dialogues/main_thread/07/
+     - assets/audio/dialogues/main_thread/08/
+     - assets/audio/dialogues/main_thread/09/
+     - assets/audio/dialogues/main_thread/10/
+     - assets/audio/dialogues/main_thread/11/
+     - assets/audio/dialogues/main_thread/12/
+     - assets/audio/dialogues/main_thread/13/
+     - assets/audio/dialogues/main_thread/14/
+     - assets/audio/dialogues/main_thread/15/
+     - assets/audio/dialogues/main_thread/16/
+
+     - assets/audio/dialogues/daniel_thread/01/
+     - assets/audio/dialogues/daniel_thread/02/
+     - assets/audio/dialogues/daniel_thread/03/
+     - assets/audio/dialogues/daniel_thread/04/
+
+     - assets/audio/dialogues/jeff_thread/01/
+     - assets/audio/dialogues/jeff_thread/02/
+     - assets/audio/dialogues/jeff_thread/03/
+     - assets/audio/dialogues/jeff_thread/04/
+     - assets/audio/dialogues/jeff_thread/05/
+
+     - assets/audio/dialogues/kate_thread/01/
+     - assets/audio/dialogues/kate_thread/02/
+     - assets/audio/dialogues/kate_thread/03/
+     - assets/audio/dialogues/kate_thread/04/
+     - assets/audio/dialogues/kate_thread/05/
+     - assets/audio/dialogues/kate_thread/06/
+     - assets/audio/dialogues/kate_thread/07/
+     - assets/audio/dialogues/kate_thread/08/
+     - assets/audio/dialogues/kate_thread/09/
+     
+     - assets/audio/dialogues/luca_thread/01/
+
+     - assets/audio/dialogues/mike_thread/01/
+     - assets/audio/dialogues/mike_thread/02/
+     - assets/audio/dialogues/mike_thread/03/
+     - assets/audio/dialogues/mike_thread/04/
+     - assets/audio/dialogues/mike_thread/05/
+     - assets/audio/dialogues/mike_thread/06/
+     - assets/audio/dialogues/mike_thread/07/
+     - assets/audio/dialogues/mike_thread/08/
+     - assets/audio/dialogues/mike_thread/09/
 
   fonts:
     - family: Quicksand

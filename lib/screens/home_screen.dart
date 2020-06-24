@@ -1,5 +1,6 @@
 import 'package:detective_game/screens/dev_room.dart';
 import 'package:flutter/material.dart';
+import 'package:detective_game/game/gameplay.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -44,7 +45,9 @@ class HomeScreen extends StatelessWidget {
                     ),
 
                     RaisedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Gameplay()));
+                      },
                       child: Text('Play.'),
                     ),
                   ],)

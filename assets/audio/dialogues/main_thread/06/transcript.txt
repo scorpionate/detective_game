@@ -1,0 +1,13 @@
+Wyatt: Good morning, the name's Wyatt. I heard it's something with our CCTV installation.
+Technician: My pleasure. Unfortunately, our online service noticed strange troubles in your camcorders network. It broadcasts correctly. But when it comes to saving data locally, some crashes appear unexpectedly.
+Wyatt: Practically, what does it mean for us?
+(conditional)Technician: Practically, you should be aware that sometimes you may not be able to access video archives. On the other hand, live stream proceeds without any errors.
+(optional)Wyatt: Excuse me? It's not grocery, security is important all the time here.
+(optional)Wyatt: It's a serious issue...
+(optional)Wyatt: Please do your job, I won't interrupt you anymore.
+(answer)Technician: My apologizes, sir. I'd suggest involving one of our 24 h guards to watch the live stream. It's free for you.
+(answer)Technician: You're right. I've involved one of our 24 h guards to watch the live stream. It's free for you.
+(answer)Technician: One more thing. I've involved one of our 24 h guards to watch the live stream. It's free for you.
+Wyatt: Good. These are the last moments of that installation, I hope.
+Technician: We are only waiting for the new one's delivery. We'd be already installing it.
+Wyatt: See you later, then.
