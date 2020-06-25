@@ -50,7 +50,7 @@ abstract class Scene extends Game {
     }
   }
 
-  void sceneEnded() {
+  void nextScene() {
     this._gameplay.nextScene();
   }
 
@@ -105,7 +105,7 @@ abstract class Scene extends Game {
   @override
   void update(double t) {
     if (this._dialogues.isAudioFinished() && this.isFinished) {
-      this.sceneEnded();
+      this.nextScene();
       this.hideUI();
     }
   }

@@ -34,6 +34,18 @@ import 'package:detective_game/game/scenes/mike_thread/MK09.dart';
 import 'package:detective_game/game/scenes/main_thread/MT01.dart';
 import 'package:detective_game/game/scenes/main_thread/MT02.dart';
 import 'package:detective_game/game/scenes/main_thread/MT03.dart';
+import 'package:detective_game/game/scenes/main_thread/MT04.dart';
+import 'package:detective_game/game/scenes/main_thread/MT05.dart';
+import 'package:detective_game/game/scenes/main_thread/MT06.dart';
+import 'package:detective_game/game/scenes/main_thread/MT07.dart';
+import 'package:detective_game/game/scenes/main_thread/MT08.dart';
+import 'package:detective_game/game/scenes/main_thread/MT09.dart';
+import 'package:detective_game/game/scenes/main_thread/MT10.dart';
+import 'package:detective_game/game/scenes/main_thread/MT11.dart';
+import 'package:detective_game/game/scenes/main_thread/MT12.dart';
+import 'package:detective_game/game/scenes/main_thread/MT13.dart';
+import 'package:detective_game/game/scenes/main_thread/MT14.dart';
+import 'package:detective_game/game/scenes/main_thread/MT15.dart';
 
 // Manage gameplay, toggle between scenes
 class Gameplay extends StatelessWidget {
@@ -52,6 +64,8 @@ class Gameplay extends StatelessWidget {
   int _mainThreadIndex = 0;
   int _mikeThreadIndex = 0;
   int _danielThreadIndex = 0;
+
+  var _scene;
 
   StreamController<bool> _sceneController = StreamController<bool>.broadcast();
 
@@ -84,6 +98,18 @@ class Gameplay extends StatelessWidget {
       Displayer(scene: MT01(this)),
       Displayer(scene: MT02(this)),
       Displayer(scene: MT03(this)),
+      Displayer(scene: MT04(this)),
+      Displayer(scene: MT05(this)),
+      Displayer(scene: MT06(this)),
+      Displayer(scene: MT07(this)),
+      Displayer(scene: MT08(this)),
+      Displayer(scene: MT09(this)),
+      Displayer(scene: MT10(this)),
+      Displayer(scene: MT11(this)),
+      Displayer(scene: MT12(this)),
+      Displayer(scene: MT13(this)),
+      Displayer(scene: MT14(this)),
+      Displayer(scene: MT15(this)),
     ];
 
     _mikeThread = [
@@ -107,27 +133,38 @@ class Gameplay extends StatelessWidget {
   }
 
   void nextScene() {
+    // Decide which scene display
+    _scene = _incrementScene();
+
+    // Rebuild widget
     _sceneController.add(true);
   }
 
+  Displayer _incrementScene() {
+    _mainThreadIndex++;
+    return _mainThread[_mainThreadIndex];
+  }
 
+  Displayer _initialScene() {
+    // Load last played scene from shared prefs
+
+    // In other case start with MT01
+    return _mainThread[_mainThreadIndex];
+  }
 
   @override
   Widget build(BuildContext context) {
-    var scene = _kateThread[_kateThreadIndex]; 
+    _scene = _initialScene(); 
     
     return StreamBuilder(
       stream: this._sceneController.stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          scene = _kateThread[_kateThreadIndex++]; 
-          return scene;
+          return _scene;
         }
-        else if (snapshot.hasError) {
-
-        }
+        else if (snapshot.hasError) {}
         else {
-          return scene;
+          return _scene;
         }
       },
     );

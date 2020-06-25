@@ -1,18 +1,10 @@
-Martin: Welcome detective.
-Roger: Hi Wyatt.
-Wyatt: Good to see you, gentlemen. Roger, I see you've finally earned your right-hand man.
-Roger: Indeed, they just don't let me retire peacefully.
-Wyatt: Old buddy, enthusiastic like always. It was a couple of time since you were here.
-(conditional)Roger: The longer the better. I'd have nothing against seeing you only in an evening pub. Need I tell you what happened?
-(optional)Wyatt: Oh, the pub would be great. Anyway, you don't suggest I am not well informed, do you?
-(optional)Wyatt: It's about that central park's accident, I presume?
-(optional)Wyatt: You know I don't like pubs. Tell me more.
-(answer)Roger: Me? Never. How could you don't know about that girl found dead in the central park?
-(answer)Roger: Yes, yes. You're well informed.
-(answer)Roger: You should at least try some pubs. I was mentioning that girl found dead in the central park.
-Roger: Next to her body, we found only crashed glass. Nothing more, nothing less. It's hard to explain. Her boyfriend swears to God, she was happy and without any job, social or family problems.
-Martin: What's friggin us the most, we tracked in the city monitoring, the guy she visited a couple of days ago, has gone missing recently.
-Wyatt: Here we go again... Have you prepared an action plan yet?
-Roger: Of course! You officially take leadership.
-Wyatt: I thought you at least ask.
-Roger: Martin, let me introduce you to the case's new chief detective. Clarify him everything!
+Waiter: Here's your order, sir. Let me leave this small leaflet from our befriended company.
+Wyatt: Fly tours above the city? I don't suffer a lack of high-powered emotions.
+Waiter: Maybe, someday you will! Enjoy your meal.
+Wyatt: Hello, Detective Wyatt speaking.
+Martin: Hello, Martin's here. We have a lot of work. I want to tell you we found that missed guy we were talking about yesterday. He's been killed.
+Wyatt: What?!
+Martin: He was stabbed in the back. This morning body seemed to fell down from the stairs alerting neighbours. He was some kind of cruise and travel pilot.
+Wyatt: Martin, e-mail me everything ASAP.
+Martin: Fine, later.
+Wyatt: My God... The pilot... Fly tours above the city...

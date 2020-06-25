@@ -24,11 +24,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    # Graphics
      - assets/images/
      - assets/images/characters/avatars/
      - assets/images/configuration_set/
 
+     # Main Thread Audio + Graphics
      - assets/images/locations/main_thread/01/
      - assets/images/locations/main_thread/02/
      - assets/images/locations/main_thread/03/
@@ -44,42 +44,6 @@ flutter:
      - assets/images/locations/main_thread/13/
      - assets/images/locations/main_thread/14/
      - assets/images/locations/main_thread/15/
-     - assets/images/locations/main_thread/16/
-
-     - assets/images/locations/daniel_thread/01/
-     - assets/images/locations/daniel_thread/02/
-     - assets/images/locations/daniel_thread/03/
-     - assets/images/locations/daniel_thread/04/
-
-     - assets/images/locations/jeff_thread/01/
-     - assets/images/locations/jeff_thread/02/
-     - assets/images/locations/jeff_thread/03/
-     - assets/images/locations/jeff_thread/04/
-     - assets/images/locations/jeff_thread/05/
-
-     - assets/images/locations/kate_thread/01/
-     - assets/images/locations/kate_thread/02/
-     - assets/images/locations/kate_thread/03/
-     - assets/images/locations/kate_thread/04/
-     - assets/images/locations/kate_thread/05/
-     - assets/images/locations/kate_thread/06/
-     - assets/images/locations/kate_thread/07/
-     - assets/images/locations/kate_thread/08/
-     - assets/images/locations/kate_thread/09/
-     
-     - assets/images/locations/luca_thread/01/
-
-     - assets/images/locations/mike_thread/01/
-     - assets/images/locations/mike_thread/02/
-     - assets/images/locations/mike_thread/03/
-     - assets/images/locations/mike_thread/04/
-     - assets/images/locations/mike_thread/05/
-     - assets/images/locations/mike_thread/06/
-     - assets/images/locations/mike_thread/07/
-     - assets/images/locations/mike_thread/08/
-     - assets/images/locations/mike_thread/09/
-
-    # Audio
      - assets/audio/dialogues/main_thread/01/
      - assets/audio/dialogues/main_thread/02/
      - assets/audio/dialogues/main_thread/03/
@@ -94,20 +58,40 @@ flutter:
      - assets/audio/dialogues/main_thread/12/
      - assets/audio/dialogues/main_thread/13/
      - assets/audio/dialogues/main_thread/14/
-     - assets/audio/dialogues/main_thread/15/
-     - assets/audio/dialogues/main_thread/16/
-
+     - assets/audio/dialogues/main_thread/15/     
+    
+     # Daniel Thread Audio + Graphics
+     - assets/images/locations/daniel_thread/01/
+     - assets/images/locations/daniel_thread/02/
+     - assets/images/locations/daniel_thread/03/
+     - assets/images/locations/daniel_thread/04/
      - assets/audio/dialogues/daniel_thread/01/
      - assets/audio/dialogues/daniel_thread/02/
      - assets/audio/dialogues/daniel_thread/03/
      - assets/audio/dialogues/daniel_thread/04/
 
+     # Jeff Thread Audio + Graphics
+     - assets/images/locations/jeff_thread/01/
+     - assets/images/locations/jeff_thread/02/
+     - assets/images/locations/jeff_thread/03/
+     - assets/images/locations/jeff_thread/04/
+     - assets/images/locations/jeff_thread/05/
      - assets/audio/dialogues/jeff_thread/01/
      - assets/audio/dialogues/jeff_thread/02/
      - assets/audio/dialogues/jeff_thread/03/
      - assets/audio/dialogues/jeff_thread/04/
      - assets/audio/dialogues/jeff_thread/05/
 
+     # Kate Thread Audio + Graphics
+     - assets/images/locations/kate_thread/01/
+     - assets/images/locations/kate_thread/02/
+     - assets/images/locations/kate_thread/03/
+     - assets/images/locations/kate_thread/04/
+     - assets/images/locations/kate_thread/05/
+     - assets/images/locations/kate_thread/06/
+     - assets/images/locations/kate_thread/07/
+     - assets/images/locations/kate_thread/08/
+     - assets/images/locations/kate_thread/09/
      - assets/audio/dialogues/kate_thread/01/
      - assets/audio/dialogues/kate_thread/02/
      - assets/audio/dialogues/kate_thread/03/
@@ -118,8 +102,20 @@ flutter:
      - assets/audio/dialogues/kate_thread/08/
      - assets/audio/dialogues/kate_thread/09/
      
+     # Luca Thread Audio + Graphics
+     - assets/images/locations/luca_thread/01/
      - assets/audio/dialogues/luca_thread/01/
 
+     # Mike Thread Audio + Graphics    
+     - assets/images/locations/mike_thread/01/
+     - assets/images/locations/mike_thread/02/
+     - assets/images/locations/mike_thread/03/
+     - assets/images/locations/mike_thread/04/
+     - assets/images/locations/mike_thread/05/
+     - assets/images/locations/mike_thread/06/
+     - assets/images/locations/mike_thread/07/
+     - assets/images/locations/mike_thread/08/
+     - assets/images/locations/mike_thread/09/
      - assets/audio/dialogues/mike_thread/01/
      - assets/audio/dialogues/mike_thread/02/
      - assets/audio/dialogues/mike_thread/03/

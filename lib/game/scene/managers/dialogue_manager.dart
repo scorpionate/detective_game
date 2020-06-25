@@ -65,7 +65,7 @@ class DialogueManager {
       var list = List<String>();
       list.add(_dlgText[_index]);
 
-      // Find following optional answers
+      // Find following optional 
       int i = _index + 1;
       while(true) {
         if(_dlgText[i].isNotEmpty && _dlgText[i].contains('(optional)')) {
@@ -121,7 +121,6 @@ class DialogueManager {
       return true;
     }
     else {
-      // _index = 1; //TODO: Only for DEBUG
       return false;
     }
   }

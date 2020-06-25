@@ -1,1 +1,19 @@
-Wyatt: 10 days before the court hearing.
+Susy: Good morning, detective.
+Wyatt: How are you, Susy? Anything new apart from paperwork?
+(conditional)Susy: Good, thank you. There is a technician inside the server room, he said he wanted to speak to you about the CCTV maintenance.
+(optional)Wyatt: Oh my, again? I am so exhausted with these guys.
+(optional)Wyatt: Right, I'll meet him in a few moments.
+(optional)Wyatt: Does he really require my attention?
+(answer)Susy: I've already scheduled a new installation to be applied. I hope they'll make it in the following month.
+(answer)Susy: Perfect. He is doing something with wires now.
+(answer)Susy: I am afraid he does. He said it was important.
+Susy: Have you seen last media feed, sir?
+Wyatt: No, I admit I just went silent and relax yesterday. Has something happened?
+Susy: Some girl died nearby, at the central park. Reasons unknown. They found only crashed glass next to her body.
+Wyatt: Are reasons unknown? Guess who is going to call me in tomorrow.
+(conditional)Susy: I believe I know! But let's be honest, this time the evidence is as good as nothing. I bet it could be not enough even for you.
+(optional)Wyatt: So, let it be. I can clarify the case if needed. Consider a dinner as a betting prize.
+(optional)Wyatt: Poor girl. Let's wait for further news.
+(optional)Wyatt: Please be serious. That girl died.
+Wyatt: Now, I am going to talk with the technician.
+Susy: Have a good day, detective!
