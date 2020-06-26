@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:detective_game/game/scene/scene.dart';
 import 'package:detective_game/game/scene/user_interface.dart';
-import 'package:flutter/material.dart';
+
+// Displayer combines single scene's game layer with UI layer and 
+// establishes bridge between them.
 
 class Displayer extends StatelessWidget {
   final Scene scene;
@@ -8,24 +11,16 @@ class Displayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ui = UserInterface(this.scene);  // Displays dialogs and buttons over scene, INHERITED WIDGET
+    final ui = UserInterface(this.scene); 
 
-    return Scaffold(    
+    return Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Game Layer
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: scene.continueAction,
-              child: scene.widget
-            )),
-          
-          // UI Layer
-          Positioned.fill(child: ui),
-      ],),
-    
+          Positioned.fill(child: scene.widget), // Engine
+          Positioned.fill(child: ui),           // UI, buttons, etc.
+        ],
+      ),
     );
-   }
-
+  }
 }

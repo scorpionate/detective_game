@@ -16,73 +16,13 @@ abstract class Scene extends Game {
   Gameplay _gameplay;
   DialogueManager _dialogues;
   BackgroundManager _background;
-  UIManager uiManager = UIManager();
+  UIManager _uiManager = UIManager();
 
   // State
   bool _finished = false;
   
   bool get isFinished {
     return _finished;
-  }
-
-  set isFinished(bool val) {
-    this._finished = val;
-  }
-
-  Scene(List<String> backgroundImages, List<String> dialogues, this._gameplay) {
-    _initialize(backgroundImages, dialogues);
-  }
-
-  void _initialize(List<String> backgroundImages, List<String> dlgFiles) async {
-    await _resize();
-    this._background = BackgroundManager(this, backgroundImages);
-    this._dialogues = DialogueManager(this, dlgFiles);
-  }
-  
-  Future<void> _resize() async {
-    screenSize = await Flame.util.initialDimensions();
-    tileSize = screenSize.height / 9;  // Landscape mode inverts width with height, scale to 16:9 ratio
-  }
-
-  void changeBackgroundWhen({int dialogueIndexIs}) {
-    if (this._dialogues.currentDialogueIndex == dialogueIndexIs) {
-      this.nextBackground();
-    }
-  }
-
-  void nextScene() {
-    this._gameplay.nextScene();
-  }
-
-  void playDialogue() {
-    _dialogues.playDialogue();
-  }
-
-  void nextBackground() {
-    _background.next();
-  }
-
-  void previousBackgound() {
-    _background.previous();
-  }
-
-  void hideUI() {
-    uiManager.hideUI();
-  }
-
-  String get currentBackgroundPath {
-    return this._background.currentBackground;
-  }
-
-  void optionalDialogueClicked(String dlg) {
-    _dialogues.optionalClicked(dlg);
-  }
-  
-  void continueAction() {
-    // If UI shows buttons disable gesture recognizer
-    if (!this._dialogues.isConditional) {
-      playDialogue();
-    }
   }
 
   bool get assetsLoaded {
@@ -94,17 +34,94 @@ abstract class Scene extends Game {
     }
   }
 
+  String get currentBackgroundPath {
+    return this._background.currentBackground;
+  }
+
+  Stream get uiStream {
+    return this._uiManager.controller.stream;
+  }
+
+  set isFinished(bool val) {
+    this._finished = val;
+  }
+
+  // Initializers
+  Scene(List<String> backgroundImages, List<String> dialogues, this._gameplay) {
+    _initialize(backgroundImages, dialogues);
+  }
+
+  void _initialize(List<String> backgroundImages, List<String> dlgFiles) async {
+    await _resize();
+    this._background = BackgroundManager(this, backgroundImages);
+    this._dialogues = DialogueManager(this, dlgFiles);
+  }
+
+  // Lifecycle func
+  void nextScene() {
+    this._gameplay.nextScene();
+  }
+
+  void playDialogue() {
+    _dialogues.playDialogue();
+  }
+
+  void optionalDialogueClicked(String dlg) {
+    _dialogues.optionalClicked(dlg);
+  }
+  
+  void onTap() {
+    // Casual => 
+    if (!this._dialogues.isConditional) {
+      playDialogue();
+    }
+  }
+
+  // Background management
+  void nextBackground() {
+    _background.next();
+  }
+
+  void previousBackgound() {
+    _background.previous();
+  }
+
+  // UI Management
+  void showDialogueWithOptionalAnswers(List<String> data) {
+    this._uiManager.showDialogueWithOptionalAnswers(data);
+  }
+
+  void showSimpleDialogue(String val) {
+    this._uiManager.showSimpleDialogue(val);
+  }
+
+  void changeBackgroundWhen({int dialogueIndexIs}) {
+    if (this._dialogues.currentDialogueIndex == dialogueIndexIs) {
+      this.nextBackground();
+    }
+  }
+  
+  void hideUI() {
+    this._uiManager.hideUI();
+  }
+
+  // Engine funcs
+  Future<void> _resize() async {
+    screenSize = await Flame.util.initialDimensions();
+    tileSize = screenSize.height / 9;  // Landscape mode inverts width with height, scale to 16:9 ratio
+  }
+  
   @override
   void render(Canvas canvas) {
     if(this.assetsLoaded) {
       _background.render(canvas); 
     }
-    // Maybe show some loading??
+    // else:  Maybe show some loading??
   }
   
   @override
   void update(double t) {
-    if (this._dialogues.isAudioFinished() && this.isFinished) {
+    if (this._dialogues.isDialogueFinished() && this.isFinished) {
       this.nextScene();
       this.hideUI();
     }

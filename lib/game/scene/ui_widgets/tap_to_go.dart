@@ -16,7 +16,7 @@ class _TapToGoState extends State<TapToGo> {
       color: Colors.black.withOpacity(0.4),
       child: GestureDetector (
         onTap: (){
-          widget.scene.continueAction();
+          widget.scene.onTap();
         },
         
         child: Center(

@@ -8,19 +8,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Displays and shifts background
 class BackgroundManager {
   final Scene _scene;
-  final List<String> _images;  // Background image paths
-  List<String> _bgdImages = List<String>();
+  final List<String> _images; // Background image paths without resolution and .png
+  List<String> _bgdImages = List<String>(); // Background image paths with resolution and .png
 
   Sprite _sprite;
   Rect _rect;
-  int _index = 0;  // Image to display  
-  bool _isReady = false;
+
+  int _bgdImagesindex = 0;  // Image to display  
+  bool _isReady = false;  // Loading assets indicator => true = assets loaded
 
   bool get isReady {
     return _isReady;
   }
   
   BackgroundManager(this._scene, this._images) {_initialize();}
+
+  String get currentBackground {
+    return _bgdImages[_bgdImagesindex];
+  }
 
   void _initialize() async {
     await _loadAssets();
@@ -30,20 +35,18 @@ class BackgroundManager {
 
   Future<void> _loadAssets() async {
     final prefs = await SharedPreferences.getInstance();
+    // Add automatic pixel density detection
     final resolution = prefs.getString('RESOLUTION') ?? '@2x';
 
     _images.forEach((element) {
+      // ConfigResolution has different file paths from other scenes
       var line = (this._scene is ConfigResolution) ? element : element + resolution + '.png';
       _bgdImages.add(line);
     });
 
-    // TODO: ADD TRY
-    await Flame.images.loadAll(_bgdImages);
+    await Flame.images.loadAll(_bgdImages); // Throws
   }
 
-  String get currentBackground {
-    return _bgdImages[_index];
-  }
 
   void _updateSprite() {
     // Background images are in 16:9 resolution (9 tiles height / 16 tiles width)
@@ -54,14 +57,14 @@ class BackgroundManager {
     double top = 0.0;
     double left = (_scene.screenSize.width - width) / 2; // Center the background
 
-    _sprite = Sprite(_bgdImages[_index]);
+    _sprite = Sprite(_bgdImages[_bgdImagesindex]);
     _rect = Rect.fromLTWH(left, top, width, height);
   }
 
   
   bool next() {
-    if (_index < _bgdImages.length - 1) {
-      _index++;
+    if (_bgdImagesindex < _bgdImages.length - 1) {
+      _bgdImagesindex++;
       _updateSprite();
       return true;
     }
@@ -71,8 +74,8 @@ class BackgroundManager {
   }
 
   bool previous() {
-    if (_index > 0) {
-      _index--;
+    if (_bgdImagesindex > 0) {
+      _bgdImagesindex--;
       _updateSprite();
       return true;
     }

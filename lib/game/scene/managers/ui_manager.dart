@@ -1,21 +1,30 @@
 import 'dart:async';
 
 class UIManager {
-
   // Sends dialogue and path to author's image to UI widget
   StreamController<List<String>> controller = StreamController<List<String>>.broadcast();
 
-  void showSimpleDialogue(String dlg) {
+  void showSimpleDialogue(String val) {
+    // Structure to send:
+    // [0]: Sentence(with author name as prefix)
+    // [1]: Path to the author's avatar picture
+    
     final toSend = List<String>()
-      ..add(dlg)
-      ..add(_assignAvatar(dlg)); 
+      ..add(val)
+      ..add(_assignAvatar(val)); 
       
     controller.add(toSend);
   }
 
-  void showDialogueWithAnswers(List<String> dlgs) {
-    final toSend = dlgs;
-    dlgs.insert(1, _assignAvatar(dlgs[0]));
+  void showDialogueWithOptionalAnswers(List<String> data) {
+    // Structure to send:
+    // [0]: Sentence(with author name as prefix)
+    // [1]: Path to the author's avatar picture
+    // [2]: Optional sentence to be shown as button
+    // [3]: Optional sentence to be shown as button
+    // ...
+    
+    final toSend = data..insert(1, _assignAvatar(data[0]));
     controller.add(toSend);
   }
 
@@ -41,7 +50,7 @@ class UIManager {
     else if (dlg.contains('Martin: '))        return 'assets/images/characters/avatars/Martin.png';
     else if (dlg.contains('Mike: '))          return 'assets/images/characters/avatars/Mike.png';
     else if (dlg.contains('Roger: '))         return 'assets/images/characters/avatars/Roger.png';
-    else if (dlg.contains('Seller: '))      return 'assets/images/characters/avatars/Seller.png';
+    else if (dlg.contains('Seller: '))        return 'assets/images/characters/avatars/Seller.png';
     else if (dlg.contains('Susy: '))          return 'assets/images/characters/avatars/Susy.png';
     else if (dlg.contains('Technician: '))    return 'assets/images/characters/avatars/Technician.png';
     else if (dlg.contains('Waiter: '))        return 'assets/images/characters/avatars/Waiter.png';

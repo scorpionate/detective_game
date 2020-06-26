@@ -10,17 +10,25 @@ class DialogueManager {
   var _dlgPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   final List<String> _dlgFiles;   // Dialogues audio paths
   List<String> _dlgText;          // Dialogues texts
-  int _index = 1;                 // Current dialogue to play
+  int _dlgTextIndex = 1;                 // Current dialogue to play
   int _optionalsCount = 0;
-  bool isConditional = false;
-  bool _isReady = false;
+  bool _isConditional = false; // 
+  bool _isReady = false;      // Loading assets indicator => true = assets loaded
 
-  DialogueManager(this._scene, this._dlgFiles) {
-    _initialize();
+  bool get isConditional {
+    return _isConditional;
   }
 
   bool get isReady {
     return _isReady;
+  }
+  
+  int get currentDialogueIndex {
+    return this._dlgTextIndex;
+  }
+  
+  DialogueManager(this._scene, this._dlgFiles) {
+    _initialize();
   }
 
   void _initialize() async {
@@ -44,29 +52,24 @@ class DialogueManager {
     }                                              
   }
 
-  int get currentDialogueIndex {
-    return this._index;
-  }
-
   void optionalClicked(String dlg) async {
-    _index = _dlgText.indexOf(dlg);
-    isConditional = false;
+    _dlgTextIndex = _dlgText.indexOf(dlg);
+    _isConditional = false;
     playDialogue();
   }
 
-  Future<void> playDialogue() async {
+  void _showDialogBox() {
     // Dialog has multpile optional answers, show complex dialogue
-    if (_dlgText[_index].contains('(conditional)')) {
-      isConditional = true;
+    if (_dlgText[_dlgTextIndex].contains('(conditional)')) {
+      _isConditional = true;
       
       // Zero
       this._optionalsCount = 0;
-
       var list = List<String>();
-      list.add(_dlgText[_index]);
+      list.add(_dlgText[_dlgTextIndex]);
 
       // Find following optional 
-      int i = _index + 1;
+      int i = _dlgTextIndex + 1;
       while(true) {
         if(_dlgText[i].isNotEmpty && _dlgText[i].contains('(optional)')) {
           list.add(_dlgText[i]);
@@ -78,29 +81,38 @@ class DialogueManager {
         }
       }
       
-      this._scene.uiManager.showDialogueWithAnswers(list);
+      this._scene.showDialogueWithOptionalAnswers(list);
     }
-    // Simple dialog
+    // Simple, casual dialog
     else {
-      this._scene.uiManager.showSimpleDialogue(_dlgText[_index]);
+      this._scene.showSimpleDialogue(_dlgText[_dlgTextIndex]);
     }
+  }
 
-    // Stop previous audio
+  Future<void> playDialogue() async {
+    
+    _showDialogBox();
+
+    // Stop any dialogue audio
     if (_dlgPlayer.state == AudioPlayerState.PLAYING)
       await _dlgPlayer.stop();
 
     // Play current audio
-    _dlgPlayer = await _dlgCache.play(_dlgFiles[_index]); // Throws!
+    _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]); // Throws!
     
     // Shuffle audio; Index operation
-    if (_dlgText[_index].contains('(optional)')) {
-      _index += this._optionalsCount;
+    _nextDialogue();
+  }
+
+  void _nextDialogue() {
+    if (_dlgText[_dlgTextIndex].contains('(optional)')) {
+      _dlgTextIndex += this._optionalsCount;
     }
-    else if (_dlgText[_index].contains('(answer)')) {
+    else if (_dlgText[_dlgTextIndex].contains('(answer)')) {
       // Procced to first dialogue after answer
       while(true) {
-        if(_dlgText[_index].isNotEmpty && _dlgText[_index].contains('(answer)')) {
-          _index++;
+        if(_dlgText[_dlgTextIndex].isNotEmpty && _dlgText[_dlgTextIndex].contains('(answer)')) {
+          _dlgTextIndex++;
         }
         else {
           break;
@@ -109,15 +121,14 @@ class DialogueManager {
 
     }
     else {
-      bool res = _next();
+      bool res = _incrementIndex();
       if (!res) this._scene.isFinished = true;
     }
-
   }
 
-  bool _next() {
-    if (_index < _dlgFiles.length - 1) {
-      _index++;
+  bool _incrementIndex() {
+    if (_dlgTextIndex < _dlgFiles.length - 1) {
+      _dlgTextIndex++;
       return true;
     }
     else {
@@ -125,14 +136,8 @@ class DialogueManager {
     }
   }
 
-  bool isAudioFinished() {
-    if (_dlgPlayer.state == AudioPlayerState.COMPLETED) {
-      return true;
-    }
-    else {
-      return false;
-    }
-
+  bool isDialogueFinished() {
+    return _dlgPlayer.state == AudioPlayerState.COMPLETED ? true : false;
   }
     
 }
