@@ -10,10 +10,12 @@ class DialogueManager {
   var _dlgPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   final List<String> _dlgFiles;   // Dialogues audio paths
   List<String> _dlgText;          // Dialogues texts
-  int _dlgTextIndex = 1;                 // Current dialogue to play
-  int _optionalsCount = 0;
-  bool _isConditional = false; // 
   bool _isReady = false;      // Loading assets indicator => true = assets loaded
+  
+  // Dlg management
+  int _dlgTextIndex = 1;                 // Current dialogue to play
+  bool _isConditional = false; // 
+  int _optionalsCount = 0;
 
   bool get isConditional {
     return _isConditional;
@@ -21,6 +23,10 @@ class DialogueManager {
 
   bool get isReady {
     return _isReady;
+  }
+
+  int get optCount {
+    return _optionalsCount;
   }
   
   int get currentDialogueIndex {
@@ -71,10 +77,14 @@ class DialogueManager {
       // Find following optional 
       int i = _dlgTextIndex + 1;
       while(true) {
-        if(_dlgText[i].isNotEmpty && _dlgText[i].contains('(optional)')) {
+        if (_dlgText[i].isNotEmpty && _dlgText[i].contains('(optional)')) {
           list.add(_dlgText[i]);
           i++;
           this._optionalsCount++;
+          if (i == _dlgText.length) {
+            this._scene.isFinished = true;
+            break;
+          }
         }
         else {
           break;
@@ -107,6 +117,7 @@ class DialogueManager {
   void _nextDialogue() {
     if (_dlgText[_dlgTextIndex].contains('(optional)')) {
       _dlgTextIndex += this._optionalsCount;
+    
     }
     else if (_dlgText[_dlgTextIndex].contains('(answer)')) {
       // Procced to first dialogue after answer
