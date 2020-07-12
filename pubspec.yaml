@@ -44,6 +44,7 @@ flutter:
      - assets/images/locations/main_thread/13/
      - assets/images/locations/main_thread/14/
      - assets/images/locations/main_thread/15/
+     - assets/images/locations/main_thread/16/
      - assets/audio/dialogues/main_thread/01/
      - assets/audio/dialogues/main_thread/02/
      - assets/audio/dialogues/main_thread/03/
@@ -59,6 +60,7 @@ flutter:
      - assets/audio/dialogues/main_thread/13/
      - assets/audio/dialogues/main_thread/14/
      - assets/audio/dialogues/main_thread/15/     
+     - assets/audio/dialogues/main_thread/16/     
     
      # Daniel Thread Audio + Graphics
      - assets/images/locations/daniel_thread/01/

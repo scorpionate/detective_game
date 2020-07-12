@@ -11,4 +11,5 @@ Wyatt: I know! Here's what we do. Interrogations proceed as planned. In the tech
 (conditional)Roger: You realize you're not a machine, right? There are 5 people to hear.
 (optional)Wyatt: Leave it to me. I know what I'm doing.
 (optional)Wyatt: Maybe this craziness pays off. 
-(optional)Wyatt: I do, it's hopeless. We need at least try.
+(optional)Wyatt: I do, it's hopeless. 
+Wyatt: We need at least try.

@@ -27,6 +27,7 @@ class MT10 extends Scene {
     'audio/dialogues/main_thread/10/10_a.mp3',
     'audio/dialogues/main_thread/10/10_b.mp3',
     'audio/dialogues/main_thread/10/10_c.mp3',
+    'audio/dialogues/main_thread/10/11.mp3',
   ];
   
   MT10(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);

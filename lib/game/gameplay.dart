@@ -46,6 +46,7 @@ import 'package:detective_game/game/scenes/main_thread/MT12.dart';
 import 'package:detective_game/game/scenes/main_thread/MT13.dart';
 import 'package:detective_game/game/scenes/main_thread/MT14.dart';
 import 'package:detective_game/game/scenes/main_thread/MT15.dart';
+import 'package:detective_game/game/scenes/main_thread/MT16.dart';
 
 // Manage gameplay, toggle between scenes
 class Gameplay extends StatelessWidget {
@@ -67,7 +68,8 @@ class Gameplay extends StatelessWidget {
 
   var _scene;
 
-  StreamController<bool> _sceneController = StreamController<bool>.broadcast();
+  final StreamController<bool> _sceneController =
+      StreamController<bool>.broadcast();
 
   Gameplay() {
     _jeffThread = [
@@ -110,6 +112,7 @@ class Gameplay extends StatelessWidget {
       Displayer(scene: MT13(this)),
       Displayer(scene: MT14(this)),
       Displayer(scene: MT15(this)),
+      Displayer(scene: MT16(this)),
     ];
 
     _mikeThread = [
@@ -132,38 +135,127 @@ class Gameplay extends StatelessWidget {
     ];
   }
 
-  void nextScene() {
-    // Decide which scene display
-    _scene = _incrementScene();
+  void _incrementIndexes() {
+    if (_danielThread.length > _danielThreadIndex) _danielThreadIndex++;
+    if (_jeffThread.length > _jeffThreadIndex) _jeffThreadIndex++;
+    if (_kateThread.length > _kateThreadIndex) _kateThreadIndex++;
+    if (_lucaThread.length > _lucaThreadIndex) _lucaThreadIndex++;
+    if (_mikeThread.length > _mikeThreadIndex) _mikeThreadIndex++;
+  }
 
-    // Rebuild widget
+  bool _areThreadsEnded() {
+    bool a = false, b = false, c = false, d = false, e = false;
+
+    if (_danielThread.length <= _danielThreadIndex) a = true;
+    if (_mikeThread.length <= _mikeThreadIndex) b = true;
+    if (_lucaThread.length <= _lucaThreadIndex) c = true;
+    if (_kateThread.length <= _kateThreadIndex) d = true;
+    if (_kateThread.length <= _kateThreadIndex) e = true;
+
+    if (a && b && c && d && e)
+      return true;
+    else
+      return false;
+  }
+
+  void playMainThreadScene({int index}) {
+    if (index == null) {
+      _scene = _mainThread[_mainThreadIndex];
+      _mainThreadIndex++;
+    } else {
+      _scene = _mainThread[index];
+    }
+
     _sceneController.add(true);
   }
 
-  Displayer _incrementScene() {
-    _mainThreadIndex++;
-    return _mainThread[_mainThreadIndex];
+  void playDanielThreadScene() {
+    if (_danielThread.length > _danielThreadIndex) {
+      _scene = _danielThread[_danielThreadIndex];
+      _danielThreadIndex++;
+      _sceneController.add(true);
+    } else {
+      if (_areThreadsEnded()) {
+        _mainThreadIndex++;
+        playMainThreadScene();
+      }
+    }
+  }
+
+  void playMikeThreadScene() {
+    if (_mikeThread.length > _mikeThreadIndex) {
+      _scene = _mikeThread[_mikeThreadIndex];
+      _mikeThreadIndex++;
+      _sceneController.add(true);
+    } else {
+      if (_areThreadsEnded()) {
+        _mainThreadIndex++;
+        playMainThreadScene();
+      }
+    }
+  }
+
+  void playLucaThreadScene() {
+    if (_lucaThread.length > _lucaThreadIndex) {
+      _scene = _lucaThread[_lucaThreadIndex];
+      _lucaThreadIndex++;
+      _sceneController.add(true);
+    } else {
+      if (_areThreadsEnded()) {
+        _mainThreadIndex++;
+        playMainThreadScene();
+      }
+    }
+  }
+
+  void playKateThreadScene() {
+    if (_kateThread.length > _kateThreadIndex) {
+      _scene = _kateThread[_kateThreadIndex];
+      _kateThreadIndex++;
+      _sceneController.add(true);
+    } else {
+      if (_areThreadsEnded()) {
+        _mainThreadIndex++;
+        playMainThreadScene();
+      }
+    }
+  }
+
+  void playJeffThreadScene() {
+    if (_jeffThread.length > _jeffThreadIndex) {
+      _scene = _jeffThread[_jeffThreadIndex];
+      _jeffThreadIndex++;
+      _sceneController.add(true);
+    } else {
+      if (_areThreadsEnded()) {
+        _mainThreadIndex++;
+        playMainThreadScene();
+      }
+    }
   }
 
   Displayer _initialScene() {
     // Load last played scene from shared prefs
 
     // In other case start with MT01
-    return _mainThread[_mainThreadIndex];
+    _mainThreadIndex = 11;
+
+    final scene = _mainThread[_mainThreadIndex];
+    return scene;
   }
 
   @override
   Widget build(BuildContext context) {
-    _scene = _initialScene(); 
-    
+    _scene = _initialScene();
+
     return StreamBuilder(
       stream: this._sceneController.stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return _scene;
-        }
-        else if (snapshot.hasError) {}
-        else {
+        } else if (snapshot.hasError) {
+          return Container();
+        } else {
           return _scene;
         }
       },

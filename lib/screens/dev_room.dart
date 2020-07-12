@@ -40,7 +40,6 @@ import 'package:detective_game/game/scenes/main_thread/MT08.dart';
 import 'package:detective_game/game/scenes/main_thread/MT09.dart';
 import 'package:detective_game/game/scenes/main_thread/MT10.dart';
 import 'package:detective_game/game/scenes/main_thread/MT11.dart';
-import 'package:detective_game/game/scenes/main_thread/MT12.dart';
 import 'package:detective_game/game/scenes/main_thread/MT13.dart';
 import 'package:detective_game/game/scenes/main_thread/MT14.dart';
 import 'package:detective_game/game/scenes/main_thread/MT15.dart';
@@ -52,288 +51,412 @@ class DevRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-      ListView(
+        body: ListView(
       children: <Widget>[
-         ListTile(
+        ListTile(
           title: Text('Resolution Changer'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PickResolutionScreen(scene: ConfigResolution(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PickResolutionScreen(
+                        scene: ConfigResolution(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('DT01'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: DT01(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: DT01(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('DT02'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: DT02(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: DT02(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('DT03'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: DT03(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: DT03(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('DT04'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: DT04(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: DT04(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('JT01'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: JT01(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: JT01(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('JT02'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: JT02(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: JT02(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('JT03'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: JT03(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: JT03(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('JT04'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: JT04(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: JT04(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('JT05'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: JT05(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: JT05(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT01'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT01(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT01(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT02'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT02(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT02(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT03'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT03(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT03(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT04'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT04(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT04(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT05'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT05(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT05(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT06'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT06(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT06(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT07'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT07(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT07(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT08'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT08(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT08(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('KT09'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: KT09(Gameplay()))));
-          }
-        ,),
-         ListTile(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: KT09(Gameplay()))));
+          },
+        ),
+        ListTile(
           title: Text('LT01'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: LT01(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: LT01(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK01'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK01(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK01(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK02'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK02(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK02(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK03'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK03(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK03(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK04'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK04(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK04(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK05'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK05(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK05(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK06'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK06(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK06(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK07'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK07(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK07(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK08'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK08(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK08(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MK09'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MK09(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MK09(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT01'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT01(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT01(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT02'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT02(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT02(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT03'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT03(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT03(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT04'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT04(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT04(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT05'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT05(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT05(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT06'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT06(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT06(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT07'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT07(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT07(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT08'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT08(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT08(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT09'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT09(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT09(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT10'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT10(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT10(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT11'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT11(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT11(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT11'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT11(Gameplay()))));
-          }
-        ,),
-        ListTile(
-          title: Text('MT12'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT12(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT11(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT13'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT13(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT13(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT14'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT14(Gameplay()))));
-          }
-        ,),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT14(Gameplay()))));
+          },
+        ),
         ListTile(
           title: Text('MT15'),
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Displayer(scene: MT15(Gameplay()))));
-          }
-        ,),
-             ListTile(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Displayer(scene: MT15(Gameplay()))));
+          },
+        ),
+        ListTile(
           title: Text('Go back'),
-          onTap: (){
+          onTap: () {
             Navigator.pop(context);
-          }
-        ,),
-
-
-
-      ],));
+          },
+        ),
+      ],
+    ));
   }
 }

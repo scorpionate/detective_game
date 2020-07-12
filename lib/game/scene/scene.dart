@@ -11,16 +11,20 @@ abstract class Scene extends Game {
   // Screen properties
   Size screenSize;
   double tileSize;
-  
+
+  // State
+  bool _finished = false;
+
   // Components
   Gameplay _gameplay;
   DialogueManager _dialogues;
   BackgroundManager _background;
   UIManager _uiManager = UIManager();
 
-  // State
-  bool _finished = false;
-  
+  Gameplay get gameplay {
+    return _gameplay;
+  }
+
   bool get isFinished {
     return _finished;
   }
@@ -28,10 +32,13 @@ abstract class Scene extends Game {
   bool get assetsLoaded {
     if (this._background.isReady && this._dialogues.isReady) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
+  }
+
+  int get currentDialogueIndex {
+    return this._dialogues.currentDialogueIndex;
   }
 
   String get currentBackgroundPath {
@@ -59,7 +66,8 @@ abstract class Scene extends Game {
 
   // Lifecycle func
   void nextScene() {
-    this._gameplay.nextScene();
+    // By default
+    this._gameplay.playMainThreadScene();
   }
 
   void playDialogue() {
@@ -69,13 +77,15 @@ abstract class Scene extends Game {
   void optionalDialogueClicked(String dlg) {
     _dialogues.optionalClicked(dlg);
   }
-  
+
   void onTap() {
-    // Casual => 
+    // Casual =>
     if (!this._dialogues.isConditional) {
       playDialogue();
     }
   }
+
+  void bottomButtonClicked({@required int id}) {}
 
   // Background management
   void nextBackground() {
@@ -84,6 +94,12 @@ abstract class Scene extends Game {
 
   void previousBackgound() {
     _background.previous();
+  }
+
+  void changeBackgroundWhen({@required int dialogueIndexIs}) {
+    if (this._dialogues.currentDialogueIndex == dialogueIndexIs) {
+      this.nextBackground();
+    }
   }
 
   // UI Management
@@ -95,12 +111,6 @@ abstract class Scene extends Game {
     this._uiManager.showSimpleDialogue(val);
   }
 
-  void changeBackgroundWhen({int dialogueIndexIs}) {
-    if (this._dialogues.currentDialogueIndex == dialogueIndexIs) {
-      this.nextBackground();
-    }
-  }
-  
   void hideUI() {
     this._uiManager.hideUI();
   }
@@ -108,17 +118,18 @@ abstract class Scene extends Game {
   // Engine funcs
   Future<void> _resize() async {
     screenSize = await Flame.util.initialDimensions();
-    tileSize = screenSize.height / 9;  // Landscape mode inverts width with height, scale to 16:9 ratio
+    tileSize = screenSize.height /
+        9; // Landscape mode inverts width with height, scale to 16:9 ratio
   }
-  
+
   @override
   void render(Canvas canvas) {
-    if(this.assetsLoaded) {
-      _background.render(canvas); 
+    if (this.assetsLoaded) {
+      _background.render(canvas);
     }
     // else:  Maybe show some loading??
   }
-  
+
   @override
   void update(double t) {
     if (this._dialogues.isDialogueFinished() && this.isFinished) {

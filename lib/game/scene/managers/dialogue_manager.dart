@@ -16,6 +16,7 @@ class DialogueManager {
   int _dlgTextIndex = 1;                 // Current dialogue to play
   bool _isConditional = false; // 
   int _optionalsCount = 0;
+  bool _hasAnswers = false;
 
   bool get isConditional {
     return _isConditional;
@@ -23,10 +24,6 @@ class DialogueManager {
 
   bool get isReady {
     return _isReady;
-  }
-
-  int get optCount {
-    return _optionalsCount;
   }
   
   int get currentDialogueIndex {
@@ -71,10 +68,12 @@ class DialogueManager {
       
       // Zero
       this._optionalsCount = 0;
+      this._hasAnswers = false;
+
       var list = List<String>();
       list.add(_dlgText[_dlgTextIndex]);
 
-      // Find following optional 
+      // Find following optionals
       int i = _dlgTextIndex + 1;
       while(true) {
         if (_dlgText[i].isNotEmpty && _dlgText[i].contains('(optional)')) {
@@ -82,15 +81,19 @@ class DialogueManager {
           i++;
           this._optionalsCount++;
           if (i == _dlgText.length) {
-            this._scene.isFinished = true;
             break;
           }
         }
+        else if (_dlgText[i].isNotEmpty && _dlgText[i].contains('(answer)')) {
+          this._hasAnswers = true;
+          break;
+        }
+        
         else {
           break;
         }
       }
-      
+
       this._scene.showDialogueWithOptionalAnswers(list);
     }
     // Simple, casual dialog
@@ -116,8 +119,21 @@ class DialogueManager {
 
   void _nextDialogue() {
     if (_dlgText[_dlgTextIndex].contains('(optional)')) {
-      _dlgTextIndex += this._optionalsCount;
-    
+      if (this._hasAnswers) {
+        _dlgTextIndex += this._optionalsCount;
+      }
+      else {
+        while(true) {
+          if (_dlgText.length >= _dlgTextIndex && _dlgText[_dlgTextIndex].contains('(optional)')) {
+              _dlgTextIndex++;
+          }
+          
+          else {
+            break;
+          }
+        }
+      }
+
     }
     else if (_dlgText[_dlgTextIndex].contains('(answer)')) {
       // Procced to first dialogue after answer

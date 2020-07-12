@@ -1,13 +1,6 @@
-Judge: I see everybody's in place. We should get back to work. The short break ends now. The main detective is asked to stand.
-Judge: Dear Mr Wyatt. Can you tell us what happened to the girl found dead in the central park?
-(conditional)Wyatt: Dear judge, we collected a certain amount of data. We also interrogated five people, the closest friends or companions to our victims. Once getting familiar with it, I can clearly say, that
-(optional)Wyatt: Her boyfriend Luca killed her.
-(nested_optional)Wyatt: Luca's clearly unstable. On the one hand, he seems to be emotional about her and I believe he truly loved her. On the other hand, the witness Jeff confirmed, that Luca is not able to control his emotions. He was threatening that girl with a bottle once he got overly jealous. Moreover, he lied with other things.
-(optional)Wyatt: It was an unfortunate accident.
-(nested_optional)Wyatt: She was hit with a glass bottle thrown out from the plane. During she was walking through the central park, above the central park there was the fly above the city tour. The pilot was showing aggressive manoeuvres. Because of them, trash in the cockpit somehow got ejected. It was not a crew fault nor passengers. The plane's logs agree.
-(nested_optional)Wyatt: She stumbled. The crushed glass was already there. Thanks to CCTV we noticed, that local drunkard Jeff likes to booze. He used to throw bottles at random places earlier. I checked other possible threads, too. But none of them explains better what could happen.
-(nested_optional)Wyatt: She was robbed by someone. Due to stress, she passed away. The cold night did the rest.
-(optional)Wyatt: Daniel killed her.
-(optional)Wyatt: A drunkard named Jeff killed her.
-(optional)Wyatt: 
-Judge: Please explain with details.
+Jenny: Wyatt?
+Jenny: Wyatt? Wyatt!
+Jenny: Gosh, finally! I told you to remind the most important evidence. I don't remember anything about sleeping or almost being late.
+Wyatt: What?
+Jenny: Oh, come on. The short break arranged by the judge is just about to end. We need to come back. You need to tell your version of the story.
+Wyatt: Yes, yes. I dug deep in my mind. Let's go.
