@@ -72,6 +72,10 @@ class Gameplay extends StatelessWidget {
       StreamController<bool>.broadcast();
 
   Gameplay() {
+    _initialize();
+  }
+
+  void _initialize() {
     _jeffThread = [
       Displayer(scene: JT01(this)),
       Displayer(scene: JT02(this)),
@@ -135,6 +139,25 @@ class Gameplay extends StatelessWidget {
     ];
   }
 
+  bool get areAllScenesLoaded {
+    for (int i = 0; i < _danielThread.length; i++)
+      if (!_danielThread[i].scene.assetsLoaded) return false;
+
+    for (int i = 0; i < _jeffThread.length; i++)
+      if (!_jeffThread[i].scene.assetsLoaded) return false;
+
+    for (int i = 0; i < _lucaThread.length; i++)
+      if (!_lucaThread[i].scene.assetsLoaded) return false;
+
+    for (int i = 0; i < _kateThread.length; i++)
+      if (!_kateThread[i].scene.assetsLoaded) return false;
+
+    for (int i = 0; i < _mikeThread.length; i++)
+      if (!_mikeThread[i].scene.assetsLoaded) return false;
+
+    return true;
+  }
+
   void _incrementIndexes() {
     if (_danielThread.length > _danielThreadIndex) _danielThreadIndex++;
     if (_jeffThread.length > _jeffThreadIndex) _jeffThreadIndex++;
@@ -160,8 +183,8 @@ class Gameplay extends StatelessWidget {
 
   void playMainThreadScene({int index}) {
     if (index == null) {
-      _scene = _mainThread[_mainThreadIndex];
       _mainThreadIndex++;
+      _scene = _mainThread[_mainThreadIndex];
     } else {
       _scene = _mainThread[index];
     }
@@ -238,7 +261,7 @@ class Gameplay extends StatelessWidget {
     // Load last played scene from shared prefs
 
     // In other case start with MT01
-    _mainThreadIndex = 11;
+    _mainThreadIndex = 0;
 
     final scene = _mainThread[_mainThreadIndex];
     return scene;

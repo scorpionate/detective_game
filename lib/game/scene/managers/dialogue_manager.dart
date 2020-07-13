@@ -8,13 +8,13 @@ class DialogueManager {
   final Scene _scene;
   var _dlgCache = AudioCache();
   var _dlgPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-  final List<String> _dlgFiles;   // Dialogues audio paths
-  List<String> _dlgText;          // Dialogues texts
-  bool _isReady = false;      // Loading assets indicator => true = assets loaded
-  
+  final List<String> _dlgFiles; // Dialogues audio paths
+  List<String> _dlgText; // Dialogues texts
+  bool _isReady = false; // Loading assets indicator => true = assets loaded
+
   // Dlg management
-  int _dlgTextIndex = 1;                 // Current dialogue to play
-  bool _isConditional = false; // 
+  int _dlgTextIndex = 1; // Current dialogue to play
+  bool _isConditional = false; //
   int _optionalsCount = 0;
   bool _hasAnswers = false;
 
@@ -25,11 +25,11 @@ class DialogueManager {
   bool get isReady {
     return _isReady;
   }
-  
+
   int get currentDialogueIndex {
     return this._dlgTextIndex;
   }
-  
+
   DialogueManager(this._scene, this._dlgFiles) {
     _initialize();
   }
@@ -39,20 +39,20 @@ class DialogueManager {
     _isReady = true;
   }
 
-  Future<void> _loadAssets() async { 
+  Future<void> _loadAssets() async {
     // Load audio files into cache without transcript.txt located at [0]
     if (_dlgFiles.isNotEmpty) {
       await _dlgCache.loadAll(_dlgFiles.sublist(1, _dlgFiles.length));
 
-      // Transform transcript.txt into string 
+      // Transform transcript.txt into string
       String transcript = await rootBundle.loadString(_dlgFiles.first);
-      
+
       // Extract lines from string into the list(1 dialogue - 1 line).
-      _dlgText = LineSplitter().convert(transcript);                          
-      
+      _dlgText = LineSplitter().convert(transcript);
+
       // Dialogues should start from index 1(transcript.txt located at [0] in audiofiles list).
-      _dlgText.insert(0, '');    
-    }                                              
+      _dlgText.insert(0, '');
+    }
   }
 
   void optionalClicked(String dlg) async {
@@ -65,7 +65,7 @@ class DialogueManager {
     // Dialog has multpile optional answers, show complex dialogue
     if (_dlgText[_dlgTextIndex].contains('(conditional)')) {
       _isConditional = true;
-      
+
       // Zero
       this._optionalsCount = 0;
       this._hasAnswers = false;
@@ -75,7 +75,7 @@ class DialogueManager {
 
       // Find following optionals
       int i = _dlgTextIndex + 1;
-      while(true) {
+      while (true) {
         if (_dlgText[i].isNotEmpty && _dlgText[i].contains('(optional)')) {
           list.add(_dlgText[i]);
           i++;
@@ -83,13 +83,10 @@ class DialogueManager {
           if (i == _dlgText.length) {
             break;
           }
-        }
-        else if (_dlgText[i].isNotEmpty && _dlgText[i].contains('(answer)')) {
+        } else if (_dlgText[i].isNotEmpty && _dlgText[i].contains('(answer)')) {
           this._hasAnswers = true;
           break;
-        }
-        
-        else {
+        } else {
           break;
         }
       }
@@ -102,17 +99,19 @@ class DialogueManager {
     }
   }
 
+  Future<void> stopDialogue() async {
+    // Stop any dialogue audio
+    if (_dlgPlayer.state == AudioPlayerState.PLAYING) await _dlgPlayer.stop();
+  }
+
   Future<void> playDialogue() async {
-    
     _showDialogBox();
 
-    // Stop any dialogue audio
-    if (_dlgPlayer.state == AudioPlayerState.PLAYING)
-      await _dlgPlayer.stop();
+    stopDialogue();
 
     // Play current audio
     _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]); // Throws!
-    
+
     // Shuffle audio; Index operation
     _nextDialogue();
   }
@@ -121,33 +120,27 @@ class DialogueManager {
     if (_dlgText[_dlgTextIndex].contains('(optional)')) {
       if (this._hasAnswers) {
         _dlgTextIndex += this._optionalsCount;
-      }
-      else {
-        while(true) {
-          if (_dlgText.length >= _dlgTextIndex && _dlgText[_dlgTextIndex].contains('(optional)')) {
-              _dlgTextIndex++;
-          }
-          
-          else {
+      } else {
+        while (true) {
+          if (_dlgText.length >= _dlgTextIndex &&
+              _dlgText[_dlgTextIndex].contains('(optional)')) {
+            _dlgTextIndex++;
+          } else {
             break;
           }
         }
       }
-
-    }
-    else if (_dlgText[_dlgTextIndex].contains('(answer)')) {
+    } else if (_dlgText[_dlgTextIndex].contains('(answer)')) {
       // Procced to first dialogue after answer
-      while(true) {
-        if(_dlgText[_dlgTextIndex].isNotEmpty && _dlgText[_dlgTextIndex].contains('(answer)')) {
+      while (true) {
+        if (_dlgText[_dlgTextIndex].isNotEmpty &&
+            _dlgText[_dlgTextIndex].contains('(answer)')) {
           _dlgTextIndex++;
-        }
-        else {
+        } else {
           break;
         }
       }
-
-    }
-    else {
+    } else {
       bool res = _incrementIndex();
       if (!res) this._scene.isFinished = true;
     }
@@ -157,8 +150,7 @@ class DialogueManager {
     if (_dlgTextIndex < _dlgFiles.length - 1) {
       _dlgTextIndex++;
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -166,5 +158,4 @@ class DialogueManager {
   bool isDialogueFinished() {
     return _dlgPlayer.state == AudioPlayerState.COMPLETED ? true : false;
   }
-    
 }

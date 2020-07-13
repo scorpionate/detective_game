@@ -14,6 +14,7 @@ abstract class Scene extends Game {
 
   // State
   bool _finished = false;
+  bool _fadeOut = false;
 
   // Components
   Gameplay _gameplay;
@@ -102,7 +103,6 @@ abstract class Scene extends Game {
     }
   }
 
-  // UI Management
   void showDialogueWithOptionalAnswers(List<String> data) {
     this._uiManager.showDialogueWithOptionalAnswers(data);
   }
@@ -132,9 +132,16 @@ abstract class Scene extends Game {
 
   @override
   void update(double t) {
+    // only once
+    if (this.gameplay.areAllScenesLoaded && !this._fadeOut) {
+      this._fadeOut = true;
+      this._uiManager.fadeOut();
+    }
+
     if (this._dialogues.isDialogueFinished() && this.isFinished) {
-      this.nextScene();
-      this.hideUI();
+      this._uiManager.fadeIn();
+      // this.nextScene();
+      // this.hideUI();
     }
   }
 }

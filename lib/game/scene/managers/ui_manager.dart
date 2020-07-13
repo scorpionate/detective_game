@@ -27,6 +27,16 @@ class UIManager {
     controller.add(toSend);
   }
 
+  void fadeOut() {
+    final toSend = List<String>()..add('#FADEOUT');
+    controller.add(toSend);
+  }
+
+  void fadeIn() {
+    final toSend = List<String>()..add('#FADEIN');
+    controller.add(toSend);
+  }
+
   void hideUI() {
     final toSend = List<String>()..add('#HIDE');
     controller.add(toSend);

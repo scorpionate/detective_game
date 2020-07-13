@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:detective_game/game/scene/ui_widgets/fadeout_box.dart';
+import 'package:detective_game/game/scene/ui_widgets/fadein_box.dart';
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/scene/scene.dart';
 import 'package:detective_game/game/scene/ui_widgets/dialog_box.dart';
@@ -20,6 +22,10 @@ class UserInterface extends StatelessWidget {
         if (snapshot.hasData) {
           if (snapshot.data[0] == '#HIDE') {
             return TapToGo(this.scene);
+          } else if (snapshot.data[0] == '#FADEOUT') {
+            return FadeOutBox(this.scene);
+          } else if (snapshot.data[0] == '#FADEIN') {
+            return FadeInBox(this.scene);
           } else {
             return DialogBox(this.scene, snapshot.data);
           }
@@ -29,7 +35,7 @@ class UserInterface extends StatelessWidget {
         }
         // Nothing happens - blank UI
         else {
-          return TapToGo(this.scene);
+          return Container(); //color: Colors.black);
         }
       },
     );
