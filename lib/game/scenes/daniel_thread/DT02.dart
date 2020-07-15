@@ -6,7 +6,7 @@ import 'package:detective_game/game/scene/scene.dart';
 class DT02 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/daniel_thread/02/01',
+    'locations/daniel_thread/02',
   ];
 
   static List<String> dlgFiles = <String>[
@@ -21,25 +21,11 @@ class DT02 extends Scene {
     'audio/dialogues/daniel_thread/02/08.mp3',
     'audio/dialogues/daniel_thread/02/09.mp3',
     'audio/dialogues/daniel_thread/02/10.mp3',
-    'audio/dialogues/daniel_thread/02/11.mp3',
-    'audio/dialogues/daniel_thread/02/12.mp3',
-    'audio/dialogues/daniel_thread/02/13.mp3',
-    'audio/dialogues/daniel_thread/02/14.mp3',
-    'audio/dialogues/daniel_thread/02/15.mp3',
-    'audio/dialogues/daniel_thread/02/16.mp3',
-    'audio/dialogues/daniel_thread/02/17.mp3',
-    'audio/dialogues/daniel_thread/02/18.mp3',
-    'audio/dialogues/daniel_thread/02/19.mp3',
-    'audio/dialogues/daniel_thread/02/20.mp3',
-    'audio/dialogues/daniel_thread/02/21.mp3',
   ];
 
-  DT02(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
+  static List<int> chgBackground = <int>[];
 
-  @override
-  void update(double t) {
-    super.update(t);
-  }
+  DT02(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 
   @override
   void nextScene() {

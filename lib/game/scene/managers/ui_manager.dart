@@ -27,6 +27,11 @@ class UIManager {
     controller.add(toSend);
   }
 
+  void showSimpleMessage(String message) {
+    final toSend = List<String>()..add('#MESSAGEBOX')..add(message);
+    controller.add(toSend);
+  }
+
   void fadeOut() {
     final toSend = List<String>()..add('#FADEOUT');
     controller.add(toSend);

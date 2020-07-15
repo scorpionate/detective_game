@@ -6,7 +6,7 @@ import 'package:detective_game/game/scene/scene.dart';
 class MT11 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/11/01',
+    'locations/main_thread/15',
   ];
 
   static List<String> dlgFiles = <String>[
@@ -29,7 +29,9 @@ class MT11 extends Scene {
     'audio/dialogues/main_thread/11/16.mp3',
   ];
 
-  MT11(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
+  static List<int> chgBackground = <int>[];
+
+  MT11(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 
   @override
   void bottomButtonClicked({int id}) {
@@ -38,16 +40,16 @@ class MT11 extends Scene {
 
   @override
   void onTap({int buttonId}) {
-    if (this.currentDialogueIndex == 2) {
-      if (buttonId == 1) this.playDialogue();
-    } else if (this.currentDialogueIndex == 3) {
-      if (buttonId == 2) this.playDialogue();
-    } else if (this.currentDialogueIndex == 4) {
-      if (buttonId == 3) this.playDialogue();
-    } else if (this.currentDialogueIndex == 5) {
-      if (buttonId == 4) this.playDialogue();
-    } else if (this.currentDialogueIndex == 6) {
-      if (buttonId == 5) this.playDialogue();
+    if (this.dialogueManager.currentDialogueIndex == 4) {
+      if (buttonId == 1) this.dialogueManager.playDialogue();
+    } else if (this.dialogueManager.currentDialogueIndex == 7) {
+      if (buttonId == 2) this.dialogueManager.playDialogue();
+    } else if (this.dialogueManager.currentDialogueIndex == 10) {
+      if (buttonId == 3) this.dialogueManager.playDialogue();
+    } else if (this.dialogueManager.currentDialogueIndex == 12) {
+      if (buttonId == 4) this.dialogueManager.playDialogue();
+    } else if (this.dialogueManager.currentDialogueIndex == 14) {
+      if (buttonId == 5) this.dialogueManager.playDialogue();
     } else {
       if (buttonId != 1 &&
           buttonId != 2 &&
@@ -55,13 +57,8 @@ class MT11 extends Scene {
           buttonId != 4 &&
           buttonId != 5 &&
           buttonId != 6) {
-        this.playDialogue();
+        this..dialogueManager.playDialogue();
       }
     }
-  }
-
-  @override
-  void update(double t) {
-    super.update(t);
   }
 }

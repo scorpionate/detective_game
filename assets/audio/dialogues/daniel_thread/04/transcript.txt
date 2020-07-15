@@ -1,14 +1,7 @@
-Interrogator4: You guys sympathize with obeying the law, don't you?
-Daniel: As long as we pay tickets, you have nothing against us. 
-Interrogator4: You shall not be too confident, badass. Remind me the day you went to the airstrip. 
-Daniel: We hit the road in afternoon. Traffic was horrible, but we managed it. After arriving at the airstrip we met Mike and Brandon in person.
-Interrogator4: Did you complete the safety course?
-Daniel: Indeed. We checked the money. Then we proceeded to safety. It took around 30 minutes. Then we met our guide, Kate. Kate showed us the route and introduced key events.
-Interrogator4: What happened when you started?
-Daniel: Good question. The plane started to fly!
-Interrogator4: Did I ever tell you to be serious?
-Daniel: Soon after we took off, the pilot, Brandon, circled the airstrip and headed to the river. We saw a couple of the city's monuments. When we were above the central park things got excited. Brandon told us to stand tight because one of the extras was about to come. And he wildly did some crazy manoeuvres above the central park. I loved them. Then we returned home.
-Interrogator4: Did any suspicious happen above the central park?
-Daniel: I don't remember. I think it didn't. Anyway, I was truly enjoying a moment.
-Interrogator4: Thanks for your feedback.
-Daniel: Any time.
+Anton: Hello, this is Anton. I am calling you to ask about the fly above the city tour.
+Mike: Good evening, sir. How can I help you?
+Anton: I am interested in signing in. Can you show me the details?
+Mike: The deal is simple. You consult a date with me. I confirm it. You transfer 30% of the final cost. Then you arrive at the airstrip. You participate in a short meeting with a pilot and a guide. After, you start. The cruise takes around 2 hours. There are extras during it and constant voice guide support.  
+Anton: Thank you. I'd like to take two seats, for me and my friend Daniel, the following weekend.
+Mike: Fine. Give me 30 minutes and I'll text you a confirmation.
+Anton: Thank you, looking for your message.

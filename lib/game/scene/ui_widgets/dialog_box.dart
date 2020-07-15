@@ -39,23 +39,23 @@ class DialogBox extends StatelessWidget {
               children: <Widget>[
                 RaisedButton(
                   onPressed: () => this.scene.bottomButtonClicked(id: 1),
-                  child: Text('1'),
+                  child: Text('Room1'),
                 ),
                 RaisedButton(
                   onPressed: () => this.scene.bottomButtonClicked(id: 2),
-                  child: Text('2'),
+                  child: Text('Room2'),
                 ),
                 RaisedButton(
                   onPressed: () => this.scene.bottomButtonClicked(id: 3),
-                  child: Text('3'),
+                  child: Text('Room3'),
                 ),
                 RaisedButton(
                   onPressed: () => this.scene.bottomButtonClicked(id: 4),
-                  child: Text('4'),
+                  child: Text('Room4'),
                 ),
                 RaisedButton(
                   onPressed: () => this.scene.bottomButtonClicked(id: 5),
-                  child: Text('5'),
+                  child: Text('Room5'),
                 ),
               ],
             ),
@@ -122,7 +122,7 @@ class DialogBox extends StatelessWidget {
                     color: Colors.white.withOpacity(0.85),
                     onPressed: () {
                       // Send info which button was clicked
-                      this.scene.optionalDialogueClicked(item);
+                      this.scene.dialogueManager.optionalDialogueClicked(item);
                     },
                     child: Text(
                       _removeBraces(_removeAuthor(item)),

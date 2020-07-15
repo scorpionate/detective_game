@@ -4,16 +4,15 @@ import 'package:detective_game/game/scene/scene.dart';
 
 // MT01 ==> Main Thread (Scene) 02
 class MT10 extends Scene {
-
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/10/01',
-    'locations/main_thread/10/02',
+    'locations/main_thread/13',
+    'locations/main_thread/14',
   ];
-  
+
   static List<String> dlgFiles = <String>[
-    'assets/audio/dialogues/main_thread/10/transcript.txt',   // Txt file with transcript of each dialogue(1 line - 1 dialogue)
-    'audio/dialogues/main_thread/10/01.mp3',                  // Other lines are audio files of each dialogue
+    'assets/audio/dialogues/main_thread/10/transcript.txt', // Txt file with transcript of each dialogue(1 line - 1 dialogue)
+    'audio/dialogues/main_thread/10/01.mp3', // Other lines are audio files of each dialogue
     'audio/dialogues/main_thread/10/02_a.mp3',
     'audio/dialogues/main_thread/10/02_b.mp3',
     'audio/dialogues/main_thread/10/02_c.mp3',
@@ -29,12 +28,8 @@ class MT10 extends Scene {
     'audio/dialogues/main_thread/10/10_c.mp3',
     'audio/dialogues/main_thread/10/11.mp3',
   ];
-  
-  MT10(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
-  
-  @override
-  void update(double t) {
-    super.update(t);
-  }
 
+  static List<int> chgBackground = <int>[7];
+
+  MT10(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 }

@@ -6,8 +6,10 @@ import 'package:detective_game/game/scene/scene.dart';
 class KT06 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/kate_thread/06/01',
-    'locations/kate_thread/06/02',
+    'locations/kate_thread/04',
+    'locations/kate_thread/07',
+    'locations/kate_thread/08',
+    'locations/kate_thread/09',
   ];
 
   static List<String> dlgFiles = <String>[
@@ -18,17 +20,11 @@ class KT06 extends Scene {
     'audio/dialogues/kate_thread/06/04.mp3',
     'audio/dialogues/kate_thread/06/05.mp3',
     'audio/dialogues/kate_thread/06/06.mp3',
-    'audio/dialogues/kate_thread/06/07.mp3',
-    'audio/dialogues/kate_thread/06/08.mp3',
-    'audio/dialogues/kate_thread/06/09.mp3',
   ];
 
-  KT06(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
+  static List<int> chgBackground = <int>[3, 5, 6];
 
-  @override
-  void update(double t) {
-    super.update(t);
-  }
+  KT06(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 
   @override
   void nextScene() {

@@ -9,6 +9,7 @@ class DialogueManager {
   var _dlgCache = AudioCache();
   var _dlgPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   final List<String> _dlgFiles; // Dialogues audio paths
+  final List<int> _changeBackgorund;
   List<String> _dlgText; // Dialogues texts
   bool _isReady = false; // Loading assets indicator => true = assets loaded
 
@@ -30,7 +31,7 @@ class DialogueManager {
     return this._dlgTextIndex;
   }
 
-  DialogueManager(this._scene, this._dlgFiles) {
+  DialogueManager(this._scene, this._dlgFiles, this._changeBackgorund) {
     _initialize();
   }
 
@@ -55,7 +56,7 @@ class DialogueManager {
     }
   }
 
-  void optionalClicked(String dlg) async {
+  void optionalDialogueClicked(String dlg) async {
     _dlgTextIndex = _dlgText.indexOf(dlg);
     _isConditional = false;
     playDialogue();
@@ -91,11 +92,11 @@ class DialogueManager {
         }
       }
 
-      this._scene.showDialogueWithOptionalAnswers(list);
+      this._scene.uiManager.showDialogueWithOptionalAnswers(list);
     }
     // Simple, casual dialog
     else {
-      this._scene.showSimpleDialogue(_dlgText[_dlgTextIndex]);
+      this._scene.uiManager.showSimpleDialogue(_dlgText[_dlgTextIndex]);
     }
   }
 
@@ -104,7 +105,17 @@ class DialogueManager {
     if (_dlgPlayer.state == AudioPlayerState.PLAYING) await _dlgPlayer.stop();
   }
 
+  void _changeBackgroundIf() {
+    this._changeBackgorund.forEach((element) {
+      if (element == _dlgTextIndex) {
+        this._scene.backgroundManager.nextBackground();
+      }
+    });
+  }
+
   Future<void> playDialogue() async {
+    _changeBackgroundIf();
+
     _showDialogBox();
 
     stopDialogue();

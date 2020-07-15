@@ -6,16 +6,18 @@ import 'package:detective_game/game/scene/scene.dart';
 class MT12 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/12/01',
+    'locations/main_thread/15',
   ];
 
   static List<String> dlgFiles = <String>[];
 
-  MT12(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
+  static List<int> chgBackground = <int>[];
+
+  MT12(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 
   @override
   void bottomButtonClicked({int id}) {
-    this.hideUI();
+    //TODO: Fade in!
 
     if (id == 1) {
       this.gameplay.playDanielThreadScene();
@@ -32,9 +34,6 @@ class MT12 extends Scene {
 
   @override
   void onTap() {
-    this.showSimpleDialogue('XD');
+    this.uiManager.showSimpleMessage('Click to choose between scenes');
   }
-
-  @override
-  void update(double t) {}
 }

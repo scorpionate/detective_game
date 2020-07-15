@@ -27,7 +27,7 @@ class BackgroundManager {
     _initialize();
   }
 
-  String get currentBackground {
+  String get currentBackgroundPath {
     return _bgdImages[_bgdImagesindex];
   }
 
@@ -67,7 +67,7 @@ class BackgroundManager {
     _rect = Rect.fromLTWH(left, top, width, height);
   }
 
-  bool next() {
+  bool nextBackground() {
     if (_bgdImagesindex < _bgdImages.length - 1) {
       _bgdImagesindex++;
       _updateSprite();
@@ -77,7 +77,7 @@ class BackgroundManager {
     }
   }
 
-  bool previous() {
+  bool previousBackground() {
     if (_bgdImagesindex > 0) {
       _bgdImagesindex--;
       _updateSprite();

@@ -6,7 +6,7 @@ import 'package:detective_game/game/scene/scene.dart';
 class MT16 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/15/01',
+    'locations/main_thread/19',
   ];
 
   static List<String> dlgFiles = <String>[
@@ -26,10 +26,7 @@ class MT16 extends Scene {
     'audio/dialogues/main_thread/16/05_c.mp3',
   ];
 
-  MT16(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
+  static List<int> chgBackground = <int>[];
 
-  @override
-  void update(double t) {
-    super.update(t);
-  }
+  MT16(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 }

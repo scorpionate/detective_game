@@ -1,13 +1,12 @@
 import 'dart:ui';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
-import 'package:flutter/rendering.dart';
 
 // DT01 ==> Daniel Thread (Scene) 01
 class DT01 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/daniel_thread/01/01',
+    'locations/daniel_thread/01',
   ];
 
   static List<String> dlgFiles = <String>[
@@ -26,12 +25,9 @@ class DT01 extends Scene {
     'audio/dialogues/daniel_thread/01/12.mp3',
   ];
 
-  DT01(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
+  static List<int> chgBackground = <int>[];
 
-  @override
-  void update(double t) {
-    super.update(t);
-  }
+  DT01(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 
   @override
   void nextScene() {

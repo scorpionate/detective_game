@@ -6,8 +6,8 @@ import 'package:detective_game/game/scene/scene.dart';
 class MT02 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/02/01',
-    'locations/main_thread/02/02',
+    'locations/main_thread/03',
+    'locations/main_thread/04',
   ];
 
   static List<String> dlgFiles = <String>[
@@ -34,11 +34,7 @@ class MT02 extends Scene {
     'audio/dialogues/main_thread/02/12.mp3',
   ];
 
-  MT02(Gameplay gameplay) : super(bgdImages, dlgFiles, gameplay);
+  static List<int> chgBackground = <int>[20];
 
-  @override
-  void update(double t) {
-    super.update(t);
-    changeBackgroundWhen(dialogueIndexIs: 20);
-  }
+  MT02(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 }

@@ -18,7 +18,6 @@ import 'package:detective_game/game/scenes/kate_thread/KT05.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT06.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT07.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT08.dart';
-import 'package:detective_game/game/scenes/kate_thread/KT09.dart';
 import 'package:detective_game/game/scenes/luca_thread/LT01.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK01.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK02.dart';
@@ -28,7 +27,6 @@ import 'package:detective_game/game/scenes/mike_thread/MK05.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK06.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK07.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK08.dart';
-import 'package:detective_game/game/scenes/mike_thread/MK09.dart';
 import 'package:detective_game/game/scenes/main_thread/MT01.dart';
 import 'package:detective_game/game/scenes/main_thread/MT02.dart';
 import 'package:detective_game/game/scenes/main_thread/MT03.dart';
@@ -217,15 +215,6 @@ class DevRoom extends StatelessWidget {
           },
         ),
         ListTile(
-          title: Text('KT09'),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Displayer(scene: KT09(Gameplay()))));
-          },
-        ),
-        ListTile(
           title: Text('LT01'),
           onTap: () {
             Navigator.push(
@@ -304,15 +293,6 @@ class DevRoom extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => Displayer(scene: MK08(Gameplay()))));
-          },
-        ),
-        ListTile(
-          title: Text('MK09'),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Displayer(scene: MK09(Gameplay()))));
           },
         ),
         ListTile(

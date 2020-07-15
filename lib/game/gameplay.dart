@@ -7,11 +7,14 @@ import 'package:detective_game/game/scenes/daniel_thread/DT01.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT02.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT03.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT04.dart';
+import 'package:detective_game/game/scenes/daniel_thread/DT05.dart';
+import 'package:detective_game/game/scenes/daniel_thread/DT06.dart';
 import 'package:detective_game/game/scenes/jeff_thread/JT01.dart';
 import 'package:detective_game/game/scenes/jeff_thread/JT02.dart';
 import 'package:detective_game/game/scenes/jeff_thread/JT03.dart';
 import 'package:detective_game/game/scenes/jeff_thread/JT04.dart';
 import 'package:detective_game/game/scenes/jeff_thread/JT05.dart';
+import 'package:detective_game/game/scenes/jeff_thread/JT06.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT01.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT02.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT03.dart';
@@ -20,8 +23,12 @@ import 'package:detective_game/game/scenes/kate_thread/KT05.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT06.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT07.dart';
 import 'package:detective_game/game/scenes/kate_thread/KT08.dart';
-import 'package:detective_game/game/scenes/kate_thread/KT09.dart';
 import 'package:detective_game/game/scenes/luca_thread/LT01.dart';
+import 'package:detective_game/game/scenes/luca_thread/LT02.dart';
+import 'package:detective_game/game/scenes/luca_thread/LT03.dart';
+import 'package:detective_game/game/scenes/luca_thread/LT04.dart';
+import 'package:detective_game/game/scenes/luca_thread/LT05.dart';
+import 'package:detective_game/game/scenes/luca_thread/LT06.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK01.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK02.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK03.dart';
@@ -30,7 +37,6 @@ import 'package:detective_game/game/scenes/mike_thread/MK05.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK06.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK07.dart';
 import 'package:detective_game/game/scenes/mike_thread/MK08.dart';
-import 'package:detective_game/game/scenes/mike_thread/MK09.dart';
 import 'package:detective_game/game/scenes/main_thread/MT01.dart';
 import 'package:detective_game/game/scenes/main_thread/MT02.dart';
 import 'package:detective_game/game/scenes/main_thread/MT03.dart';
@@ -82,6 +88,25 @@ class Gameplay extends StatelessWidget {
       Displayer(scene: JT03(this)),
       Displayer(scene: JT04(this)),
       Displayer(scene: JT05(this)),
+      Displayer(scene: JT06(this)),
+    ];
+
+    _lucaThread = [
+      Displayer(scene: LT01(this)),
+      Displayer(scene: LT02(this)),
+      Displayer(scene: LT03(this)),
+      Displayer(scene: LT04(this)),
+      Displayer(scene: LT05(this)),
+      Displayer(scene: LT06(this)),
+    ];
+
+    _danielThread = [
+      Displayer(scene: DT01(this)),
+      Displayer(scene: DT02(this)),
+      Displayer(scene: DT03(this)),
+      Displayer(scene: DT04(this)),
+      Displayer(scene: DT05(this)),
+      Displayer(scene: DT06(this)),
     ];
 
     _kateThread = [
@@ -93,11 +118,17 @@ class Gameplay extends StatelessWidget {
       Displayer(scene: KT06(this)),
       Displayer(scene: KT07(this)),
       Displayer(scene: KT08(this)),
-      Displayer(scene: KT09(this)),
     ];
 
-    _lucaThread = [
-      Displayer(scene: LT01(this)),
+    _mikeThread = [
+      Displayer(scene: MK01(this)),
+      Displayer(scene: MK02(this)),
+      Displayer(scene: MK03(this)),
+      Displayer(scene: MK04(this)),
+      Displayer(scene: MK05(this)),
+      Displayer(scene: MK06(this)),
+      Displayer(scene: MK07(this)),
+      Displayer(scene: MK08(this)),
     ];
 
     _mainThread = [
@@ -118,42 +149,26 @@ class Gameplay extends StatelessWidget {
       Displayer(scene: MT15(this)),
       Displayer(scene: MT16(this)),
     ];
-
-    _mikeThread = [
-      Displayer(scene: MK01(this)),
-      Displayer(scene: MK02(this)),
-      Displayer(scene: MK03(this)),
-      Displayer(scene: MK04(this)),
-      Displayer(scene: MK05(this)),
-      Displayer(scene: MK06(this)),
-      Displayer(scene: MK07(this)),
-      Displayer(scene: MK08(this)),
-      Displayer(scene: MK09(this)),
-    ];
-
-    _danielThread = [
-      Displayer(scene: DT01(this)),
-      Displayer(scene: DT02(this)),
-      Displayer(scene: DT03(this)),
-      Displayer(scene: DT04(this)),
-    ];
   }
 
   bool get areAllScenesLoaded {
-    for (int i = 0; i < _danielThread.length; i++)
-      if (!_danielThread[i].scene.assetsLoaded) return false;
-
     for (int i = 0; i < _jeffThread.length; i++)
       if (!_jeffThread[i].scene.assetsLoaded) return false;
 
     for (int i = 0; i < _lucaThread.length; i++)
       if (!_lucaThread[i].scene.assetsLoaded) return false;
 
+    for (int i = 0; i < _danielThread.length; i++)
+      if (!_danielThread[i].scene.assetsLoaded) return false;
+
     for (int i = 0; i < _kateThread.length; i++)
       if (!_kateThread[i].scene.assetsLoaded) return false;
 
     for (int i = 0; i < _mikeThread.length; i++)
       if (!_mikeThread[i].scene.assetsLoaded) return false;
+
+    for (int i = 0; i < _mainThread.length; i++)
+      if (!_mainThread[i].scene.assetsLoaded) return false;
 
     return true;
   }
@@ -187,6 +202,8 @@ class Gameplay extends StatelessWidget {
       _scene = _mainThread[_mainThreadIndex];
     } else {
       _scene = _mainThread[index];
+      final val = _scene as Displayer;
+      val.scene.fadeOut = false;
     }
 
     _sceneController.add(true);
@@ -261,7 +278,7 @@ class Gameplay extends StatelessWidget {
     // Load last played scene from shared prefs
 
     // In other case start with MT01
-    _mainThreadIndex = 0;
+    _mainThreadIndex = 11;
 
     final scene = _mainThread[_mainThreadIndex];
     return scene;

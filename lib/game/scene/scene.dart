@@ -18,12 +18,24 @@ abstract class Scene extends Game {
 
   // Components
   Gameplay _gameplay;
-  DialogueManager _dialogues;
-  BackgroundManager _background;
-  UIManager _uiManager = UIManager();
+  DialogueManager _dlgManager;
+  BackgroundManager _bgdManager;
+  UIManager _uiManager = UIManager(); // Needs to be here
 
   Gameplay get gameplay {
-    return _gameplay;
+    return this._gameplay;
+  }
+
+  DialogueManager get dialogueManager {
+    return this._dlgManager;
+  }
+
+  BackgroundManager get backgroundManager {
+    return this._bgdManager;
+  }
+
+  UIManager get uiManager {
+    return this._uiManager;
   }
 
   bool get isFinished {
@@ -31,38 +43,32 @@ abstract class Scene extends Game {
   }
 
   bool get assetsLoaded {
-    if (this._background.isReady && this._dialogues.isReady) {
+    if (this._bgdManager.isReady && this._dlgManager.isReady) {
       return true;
     } else {
       return false;
     }
   }
 
-  int get currentDialogueIndex {
-    return this._dialogues.currentDialogueIndex;
-  }
-
-  String get currentBackgroundPath {
-    return this._background.currentBackground;
-  }
-
-  Stream get uiStream {
-    return this._uiManager.controller.stream;
-  }
-
   set isFinished(bool val) {
     this._finished = val;
   }
 
-  // Initializers
-  Scene(List<String> backgroundImages, List<String> dialogues, this._gameplay) {
-    _initialize(backgroundImages, dialogues);
+  set fadeOut(bool val) {
+    this._fadeOut = val;
   }
 
-  void _initialize(List<String> backgroundImages, List<String> dlgFiles) async {
+  // Initializers
+  Scene(List<String> backgroundImages, List<String> dialogues,
+      List<int> changeBackground, this._gameplay) {
+    _initialize(backgroundImages, dialogues, changeBackground);
+  }
+
+  void _initialize(List<String> backgroundImages, List<String> dlgFiles,
+      List<int> changeBackground) async {
     await _resize();
-    this._background = BackgroundManager(this, backgroundImages);
-    this._dialogues = DialogueManager(this, dlgFiles);
+    this._bgdManager = BackgroundManager(this, backgroundImages);
+    this._dlgManager = DialogueManager(this, dlgFiles, changeBackground);
   }
 
   // Lifecycle func
@@ -71,18 +77,10 @@ abstract class Scene extends Game {
     this._gameplay.playMainThreadScene();
   }
 
-  void playDialogue() {
-    _dialogues.playDialogue();
-  }
-
-  void optionalDialogueClicked(String dlg) {
-    _dialogues.optionalClicked(dlg);
-  }
-
   void onTap() {
     // Casual =>
-    if (!this._dialogues.isConditional) {
-      playDialogue();
+    if (!this._dlgManager.isConditional) {
+      _dlgManager.playDialogue();
     }
   }
 
@@ -90,17 +88,11 @@ abstract class Scene extends Game {
 
   // Background management
   void nextBackground() {
-    _background.next();
+    _bgdManager.nextBackground();
   }
 
   void previousBackgound() {
-    _background.previous();
-  }
-
-  void changeBackgroundWhen({@required int dialogueIndexIs}) {
-    if (this._dialogues.currentDialogueIndex == dialogueIndexIs) {
-      this.nextBackground();
-    }
+    _bgdManager.previousBackground();
   }
 
   void showDialogueWithOptionalAnswers(List<String> data) {
@@ -125,7 +117,7 @@ abstract class Scene extends Game {
   @override
   void render(Canvas canvas) {
     if (this.assetsLoaded) {
-      _background.render(canvas);
+      _bgdManager.render(canvas);
     }
     // else:  Maybe show some loading??
   }
@@ -138,7 +130,7 @@ abstract class Scene extends Game {
       this._uiManager.fadeOut();
     }
 
-    if (this._dialogues.isDialogueFinished() && this.isFinished) {
+    if (this._dlgManager.isDialogueFinished() && this.isFinished) {
       this._uiManager.fadeIn();
       // this.nextScene();
       // this.hideUI();
