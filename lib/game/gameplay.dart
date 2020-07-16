@@ -73,6 +73,12 @@ class Gameplay extends StatelessWidget {
   int _mikeThreadIndex = 0;
   int _danielThreadIndex = 0;
 
+  bool jeffButton = true;
+  bool kateButton = true;
+  bool lucaButton = true;
+  bool mikeButton = true;
+  bool danielButton = true;
+
   var _scene;
 
   final StreamController<bool> _sceneController =
@@ -174,7 +180,7 @@ class Gameplay extends StatelessWidget {
     return true;
   }
 
-  void _incrementIndexes() {
+  void _incrementAllIndexes() {
     // Increment all
     if (_danielThread.length > _danielThreadIndex) _danielThreadIndex++;
     if (_jeffThread.length > _jeffThreadIndex) _jeffThreadIndex++;
@@ -198,6 +204,27 @@ class Gameplay extends StatelessWidget {
       return false;
   }
 
+  bool _areAllButtonsDisabled() {
+    bool a = danielButton ? true : false;
+    bool b = mikeButton ? true : false;
+    bool c = jeffButton ? true : false;
+    bool d = lucaButton ? true : false;
+    bool e = kateButton ? true : false;
+
+    if (!a && !b && !c && !d && !e)
+      return true;
+    else
+      return false;
+  }
+
+  bool _setAllButtons({bool to}) {
+    jeffButton = to;
+    kateButton = to;
+    mikeButton = to;
+    danielButton = to;
+    lucaButton = to;
+  }
+
   void playMainThreadScene({int index}) {
     if (index == null) {
       _mainThreadIndex++;
@@ -215,8 +242,14 @@ class Gameplay extends StatelessWidget {
     if (_danielThread.length > _danielThreadIndex) {
       _scene = _danielThread[_danielThreadIndex];
 
-      //Increment all scenes
-      _incrementIndexes();
+      if (_danielThreadIndex == 0) {
+        _danielThreadIndex++;
+        danielButton = false;
+        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
+      } else {
+        //Increment all scenes
+        _incrementAllIndexes();
+      }
 
       _sceneController.add(true);
     } else {
@@ -230,8 +263,14 @@ class Gameplay extends StatelessWidget {
     if (_mikeThread.length > _mikeThreadIndex) {
       _scene = _mikeThread[_mikeThreadIndex];
 
-      //Increment all scenes
-      _incrementIndexes();
+      if (_mikeThreadIndex == 0) {
+        _mikeThreadIndex++;
+        mikeButton = false;
+        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
+      } else {
+        //Increment all scenes
+        _incrementAllIndexes();
+      }
 
       _sceneController.add(true);
     } else {
@@ -245,8 +284,14 @@ class Gameplay extends StatelessWidget {
     if (_lucaThread.length > _lucaThreadIndex) {
       _scene = _lucaThread[_lucaThreadIndex];
 
-      //Increment all scenes
-      _incrementIndexes();
+      if (_lucaThreadIndex == 0) {
+        _lucaThreadIndex++;
+        lucaButton = false;
+        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
+      } else {
+        //Increment all scenes
+        _incrementAllIndexes();
+      }
 
       _sceneController.add(true);
     } else {
@@ -260,8 +305,14 @@ class Gameplay extends StatelessWidget {
     if (_kateThread.length > _kateThreadIndex) {
       _scene = _kateThread[_kateThreadIndex];
 
-      //Increment all scenes
-      _incrementIndexes();
+      if (_kateThreadIndex == 0) {
+        _kateThreadIndex++;
+        kateButton = false;
+        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
+      } else {
+        //Increment all scenes
+        _incrementAllIndexes();
+      }
 
       _sceneController.add(true);
     } else {
@@ -275,8 +326,14 @@ class Gameplay extends StatelessWidget {
     if (_jeffThread.length > _jeffThreadIndex) {
       _scene = _jeffThread[_jeffThreadIndex];
 
-      //Increment all scenes
-      _incrementIndexes();
+      if (_jeffThreadIndex == 0) {
+        _jeffThreadIndex++;
+        jeffButton = false;
+        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
+      } else {
+        //Increment all scenes
+        _incrementAllIndexes();
+      }
 
       _sceneController.add(true);
     } else {
@@ -290,7 +347,7 @@ class Gameplay extends StatelessWidget {
     // Load last played scene from shared prefs
 
     // In other case start with MT01
-    _mainThreadIndex = 13;
+    _mainThreadIndex = 11;
 
     final scene = _mainThread[_mainThreadIndex];
     return scene;

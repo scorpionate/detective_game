@@ -132,8 +132,6 @@ abstract class Scene extends Game {
 
     if (this._dlgManager.isDialogueFinished() && this.isFinished) {
       this._uiManager.fadeIn();
-      // this.nextScene();
-      // this.hideUI();
     }
   }
 }

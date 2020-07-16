@@ -7,12 +7,12 @@ void main() async {
 
   // Hide Status Bar and bottom buttons
   await SystemChrome.setEnabledSystemUIOverlays([]);
-  
+
   await SystemChrome.setPreferredOrientations([
     // DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight
   ]);
-  
+
   runApp(MyApp());
 }
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Multithreaded detective game.',
-      // showPerformanceOverlay: true,
+      //showPerformanceOverlay: true,
       theme: ThemeData(
         fontFamily: 'Quicksand',
         primarySwatch: Colors.blue,

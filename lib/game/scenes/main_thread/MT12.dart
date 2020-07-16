@@ -34,6 +34,6 @@ class MT12 extends Scene {
 
   @override
   void onTap() {
-    this.uiManager.showSimpleMessage('Click to choose between scenes');
+    this.uiManager.showSimpleMessage('Click to choooose between scenes');
   }
 }

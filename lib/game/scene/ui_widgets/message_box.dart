@@ -24,23 +24,33 @@ class MessageBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               RaisedButton(
-                onPressed: () => this.scene.bottomButtonClicked(id: 1),
+                onPressed: this.scene.gameplay.danielButton
+                    ? () => this.scene.bottomButtonClicked(id: 1)
+                    : null,
                 child: Text('Room1'),
               ),
               RaisedButton(
-                onPressed: () => this.scene.bottomButtonClicked(id: 2),
+                onPressed: this.scene.gameplay.jeffButton
+                    ? () => this.scene.bottomButtonClicked(id: 2)
+                    : null,
                 child: Text('Room2'),
               ),
               RaisedButton(
-                onPressed: () => this.scene.bottomButtonClicked(id: 3),
+                onPressed: this.scene.gameplay.kateButton
+                    ? () => this.scene.bottomButtonClicked(id: 3)
+                    : null,
                 child: Text('Room3'),
               ),
               RaisedButton(
-                onPressed: () => this.scene.bottomButtonClicked(id: 4),
+                onPressed: this.scene.gameplay.lucaButton
+                    ? () => this.scene.bottomButtonClicked(id: 4)
+                    : null,
                 child: Text('Room4'),
               ),
               RaisedButton(
-                onPressed: () => this.scene.bottomButtonClicked(id: 5),
+                onPressed: this.scene.gameplay.mikeButton
+                    ? () => this.scene.bottomButtonClicked(id: 5)
+                    : null,
                 child: Text('Room5'),
               ),
             ],

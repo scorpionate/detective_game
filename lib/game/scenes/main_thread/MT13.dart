@@ -20,7 +20,7 @@ class MT13 extends Scene {
     'audio/dialogues/main_thread/13/06.mp3',
   ];
 
-  static List<int> chgBackground = <int>[];
+  static List<int> chgBackground = <int>[3];
 
   MT13(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 }
