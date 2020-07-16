@@ -55,6 +55,7 @@ import 'package:detective_game/game/scenes/main_thread/MT15.dart';
 import 'package:detective_game/game/scenes/main_thread/MT16.dart';
 
 // Manage gameplay, toggle between scenes
+
 class Gameplay extends StatelessWidget {
   // Scenes
   List<Displayer> _jeffThread;
@@ -174,6 +175,7 @@ class Gameplay extends StatelessWidget {
   }
 
   void _incrementIndexes() {
+    // Increment all
     if (_danielThread.length > _danielThreadIndex) _danielThreadIndex++;
     if (_jeffThread.length > _jeffThreadIndex) _jeffThreadIndex++;
     if (_kateThread.length > _kateThreadIndex) _kateThreadIndex++;
@@ -212,11 +214,13 @@ class Gameplay extends StatelessWidget {
   void playDanielThreadScene() {
     if (_danielThread.length > _danielThreadIndex) {
       _scene = _danielThread[_danielThreadIndex];
-      _danielThreadIndex++;
+
+      //Increment all scenes
+      _incrementIndexes();
+
       _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        _mainThreadIndex++;
         playMainThreadScene();
       }
     }
@@ -225,11 +229,13 @@ class Gameplay extends StatelessWidget {
   void playMikeThreadScene() {
     if (_mikeThread.length > _mikeThreadIndex) {
       _scene = _mikeThread[_mikeThreadIndex];
-      _mikeThreadIndex++;
+
+      //Increment all scenes
+      _incrementIndexes();
+
       _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        _mainThreadIndex++;
         playMainThreadScene();
       }
     }
@@ -238,11 +244,13 @@ class Gameplay extends StatelessWidget {
   void playLucaThreadScene() {
     if (_lucaThread.length > _lucaThreadIndex) {
       _scene = _lucaThread[_lucaThreadIndex];
-      _lucaThreadIndex++;
+
+      //Increment all scenes
+      _incrementIndexes();
+
       _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        _mainThreadIndex++;
         playMainThreadScene();
       }
     }
@@ -251,11 +259,13 @@ class Gameplay extends StatelessWidget {
   void playKateThreadScene() {
     if (_kateThread.length > _kateThreadIndex) {
       _scene = _kateThread[_kateThreadIndex];
-      _kateThreadIndex++;
+
+      //Increment all scenes
+      _incrementIndexes();
+
       _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        _mainThreadIndex++;
         playMainThreadScene();
       }
     }
@@ -264,11 +274,13 @@ class Gameplay extends StatelessWidget {
   void playJeffThreadScene() {
     if (_jeffThread.length > _jeffThreadIndex) {
       _scene = _jeffThread[_jeffThreadIndex];
-      _jeffThreadIndex++;
+
+      //Increment all scenes
+      _incrementIndexes();
+
       _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        _mainThreadIndex++;
         playMainThreadScene();
       }
     }
@@ -278,11 +290,13 @@ class Gameplay extends StatelessWidget {
     // Load last played scene from shared prefs
 
     // In other case start with MT01
-    _mainThreadIndex = 11;
+    _mainThreadIndex = 13;
 
     final scene = _mainThread[_mainThreadIndex];
     return scene;
   }
+
+  void showStatisticsScreen() {}
 
   @override
   Widget build(BuildContext context) {

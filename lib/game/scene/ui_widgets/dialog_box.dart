@@ -114,10 +114,11 @@ class DialogBox extends StatelessWidget {
             children: <Widget>[
               for (var item in conditionals)
                 Container(
+                  height: 30,
                   child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.black)),
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(18.0),
+                    //     side: BorderSide(color: Colors.black)),
                     elevation: 5,
                     color: Colors.white.withOpacity(0.85),
                     onPressed: () {
@@ -126,7 +127,7 @@ class DialogBox extends StatelessWidget {
                     },
                     child: Text(
                       _removeBraces(_removeAuthor(item)),
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 10),
                     ),
                   ),
                 )

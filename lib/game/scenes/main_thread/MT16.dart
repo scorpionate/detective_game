@@ -29,4 +29,10 @@ class MT16 extends Scene {
   static List<int> chgBackground = <int>[];
 
   MT16(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+
+  @override
+  void nextScene() {
+    // Show stats
+    this.gameplay.showStatisticsScreen();
+  }
 }

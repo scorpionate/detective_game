@@ -62,6 +62,33 @@ class DialogueManager {
     playDialogue();
   }
 
+  Future<void> stopDialogue() async {
+    // Stop any dialogue audio
+    if (_dlgPlayer.state == AudioPlayerState.PLAYING) await _dlgPlayer.stop();
+  }
+
+  void _changeBackgroundIf() {
+    this._changeBackgorund.forEach((element) {
+      if (element == _dlgTextIndex) {
+        this._scene.backgroundManager.nextBackground();
+      }
+    });
+  }
+
+  Future<void> playDialogue() async {
+    _changeBackgroundIf();
+
+    _showDialogBox();
+
+    stopDialogue();
+
+    // Play current audio
+    _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]); // Throws!
+
+    // Shuffle audio; Index operation
+    _nextDialogue();
+  }
+
   void _showDialogBox() {
     // Dialog has multpile optional answers, show complex dialogue
     if (_dlgText[_dlgTextIndex].contains('(conditional)')) {
@@ -94,37 +121,11 @@ class DialogueManager {
 
       this._scene.uiManager.showDialogueWithOptionalAnswers(list);
     }
-    // Simple, casual dialog
+
+    // Simple, casual dialog without any options
     else {
       this._scene.uiManager.showSimpleDialogue(_dlgText[_dlgTextIndex]);
     }
-  }
-
-  Future<void> stopDialogue() async {
-    // Stop any dialogue audio
-    if (_dlgPlayer.state == AudioPlayerState.PLAYING) await _dlgPlayer.stop();
-  }
-
-  void _changeBackgroundIf() {
-    this._changeBackgorund.forEach((element) {
-      if (element == _dlgTextIndex) {
-        this._scene.backgroundManager.nextBackground();
-      }
-    });
-  }
-
-  Future<void> playDialogue() async {
-    _changeBackgroundIf();
-
-    _showDialogBox();
-
-    stopDialogue();
-
-    // Play current audio
-    _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]); // Throws!
-
-    // Shuffle audio; Index operation
-    _nextDialogue();
   }
 
   void _nextDialogue() {
