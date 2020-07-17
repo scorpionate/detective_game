@@ -1,4 +1,5 @@
 import 'package:detective_game/screens/dev_room.dart';
+import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/screens/pick_resolution.dart';
@@ -7,6 +8,9 @@ import 'package:detective_game/game/scenes/config_resolution.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // TODO: Only for deving
+    LocalSaveManager().clearSavedChoices();
+
     return Scaffold(
       body: Stack(fit: StackFit.expand, children: <Widget>[
         // Background Layer

@@ -1,0 +1,36 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:detective_game/model/choice.dart';
+import 'package:detective_game/model/choices.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class LocalSaveManager {
+  Future<void> addToOptionalChoices(String scene, int index) async {
+    final prefs = await SharedPreferences.getInstance();
+    final choices = await this.loadOptionalChoices();
+
+    var list = List<Choice>()
+      ..addAll(choices.data)
+      ..add(Choice(scene, index));
+
+    final result = json.encode(Choices(list).toJson());
+    prefs.setString('SAVEDCHOICES', result);
+  }
+
+  Future<void> clearSavedChoices() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('SAVEDCHOICES', null);
+  }
+
+  Future<Choices> loadOptionalChoices() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('SAVEDCHOICES');
+
+    if (data != null) {
+      Map val = json.decode(data);
+      return Choices.fromJson(val);
+    } else {
+      return Choices.init();
+    }
+  }
+}

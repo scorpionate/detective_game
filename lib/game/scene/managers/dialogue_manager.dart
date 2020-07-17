@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
@@ -56,8 +57,12 @@ class DialogueManager {
     }
   }
 
-  void optionalDialogueClicked(String dlg) async {
+  void optionalDialogueClicked(String dlg) {
     _dlgTextIndex = _dlgText.indexOf(dlg);
+
+    LocalSaveManager().addToOptionalChoices(
+        this._scene.runtimeType.toString(), _dlgTextIndex);
+
     _isConditional = false;
     playDialogue();
   }

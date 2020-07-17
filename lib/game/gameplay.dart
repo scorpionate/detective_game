@@ -73,6 +73,7 @@ class Gameplay extends StatelessWidget {
   int _mikeThreadIndex = 0;
   int _danielThreadIndex = 0;
 
+  // Only place where this data is not wiped after loading scene
   bool jeffButton = true;
   bool kateButton = true;
   bool lucaButton = true;
@@ -217,7 +218,7 @@ class Gameplay extends StatelessWidget {
       return false;
   }
 
-  bool _setAllButtons({bool to}) {
+  void _setAllButtons({bool to}) {
     jeffButton = to;
     kateButton = to;
     mikeButton = to;
@@ -347,7 +348,7 @@ class Gameplay extends StatelessWidget {
     // Load last played scene from shared prefs
 
     // In other case start with MT01
-    _mainThreadIndex = 11;
+    _mainThreadIndex = 12;
 
     final scene = _mainThread[_mainThreadIndex];
     return scene;
