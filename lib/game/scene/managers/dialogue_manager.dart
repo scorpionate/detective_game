@@ -20,6 +20,10 @@ class DialogueManager {
   int _optionalsCount = 0;
   bool _hasAnswers = false;
 
+  List<String> get dialogues {
+    return _dlgFiles;
+  }
+
   bool get isConditional {
     return _isConditional;
   }
@@ -30,6 +34,10 @@ class DialogueManager {
 
   int get currentDialogueIndex {
     return this._dlgTextIndex;
+  }
+
+  set currentDialogueIndex(int val) {
+    this._dlgTextIndex = val;
   }
 
   DialogueManager(this._scene, this._dlgFiles, this._changeBackgorund) {

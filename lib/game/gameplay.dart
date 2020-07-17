@@ -348,7 +348,7 @@ class Gameplay extends StatelessWidget {
     // Load last played scene from shared prefs
 
     // In other case start with MT01
-    _mainThreadIndex = 12;
+    _mainThreadIndex = 13;
 
     final scene = _mainThread[_mainThreadIndex];
     return scene;

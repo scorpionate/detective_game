@@ -107,6 +107,8 @@ abstract class Scene extends Game {
     this._uiManager.hideUI();
   }
 
+  void onStart() {}
+
   // Engine funcs
   Future<void> _resize() async {
     screenSize = await Flame.util.initialDimensions();
@@ -126,6 +128,7 @@ abstract class Scene extends Game {
   void update(double t) {
     // only once
     if (this.gameplay.areAllScenesLoaded && !this._fadeOut) {
+      this.onStart();
       this._fadeOut = true;
       this._uiManager.fadeOut();
     }
