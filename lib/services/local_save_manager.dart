@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:detective_game/model/choice.dart';
 import 'package:detective_game/model/choices.dart';
+import 'package:detective_game/model/game_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalSaveManager {
@@ -20,6 +21,25 @@ class LocalSaveManager {
   Future<void> clearAllSavedChoices() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('SAVEDCHOICES', null);
+  }
+
+  Future<void> saveGameState(GameState state) async {
+    final prefs = await SharedPreferences.getInstance();
+    final val = json.encode(state.toJson());
+    prefs.setString('GAMESTATE', val);
+  }
+
+  Future<GameState> loadGameState() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('GAMESTATE');
+
+    if (data != null) {
+      Map val = json.decode(data);
+      final state = GameState.fromJson(val);
+      return state;
+    } else {
+      return GameState(0);
+    }
   }
 
   Future<void> clearSavedChoicesForScene(String type) async {

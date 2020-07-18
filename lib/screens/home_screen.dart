@@ -1,3 +1,4 @@
+import 'package:detective_game/model/game_state.dart';
 import 'package:detective_game/screens/dev_room.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
@@ -37,12 +38,10 @@ class HomeScreen extends StatelessWidget {
                     children: <Widget>[
                       OutlineButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DevRoom()));
+                          LocalSaveManager().saveGameState(GameState(0));
+                          LocalSaveManager().clearAllSavedChoices();
                         },
-                        child: Text('Dev Room'),
+                        child: Text('ResetProgress'),
                       ),
                       OutlineButton(
                         onPressed: () {

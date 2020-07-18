@@ -116,6 +116,12 @@ abstract class Scene extends Game {
         9; // Landscape mode inverts width with height, scale to 16:9 ratio
   }
 
+  void onEnd() {
+    this.nextScene();
+    this.hideUI();
+    Flame.assets.clearCache();
+  }
+
   @override
   void render(Canvas canvas) {
     if (this.assetsLoaded) {

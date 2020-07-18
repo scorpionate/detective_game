@@ -25,8 +25,7 @@ class _FadeInBoxState extends State<FadeInBox>
       ..addListener(() => setState(() {}))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          widget.scene.nextScene();
-          widget.scene.uiManager.hideUI();
+          widget.scene.onEnd();
         }
       });
 

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
+import 'package:detective_game/services/local_save_manager.dart';
 
 // MT01 ==> Main Thread (Scene) 02
 class MT10 extends Scene {
@@ -32,4 +33,9 @@ class MT10 extends Scene {
   static List<int> chgBackground = <int>[7];
 
   MT10(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+
+  @override
+  void onStart() {
+    LocalSaveManager().clearSavedChoicesForScene(this.runtimeType.toString());
+  }
 }

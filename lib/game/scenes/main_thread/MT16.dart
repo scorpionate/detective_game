@@ -40,6 +40,9 @@ class MT16 extends Scene {
   }
 
   void _onStart() async {
+    await LocalSaveManager()
+        .clearSavedChoicesForScene(this.runtimeType.toString());
+
     final choices = await LocalSaveManager().loadOptionalChoices();
 
     var choosen = List<int>();

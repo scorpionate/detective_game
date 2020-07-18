@@ -1,5 +1,10 @@
 import 'dart:async';
 
+import 'package:detective_game/game/scene/scene.dart';
+import 'package:detective_game/model/game_state.dart';
+import 'package:detective_game/screens/loading_screen.dart';
+import 'package:detective_game/screens/stats_screen.dart';
+import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/scene/displayer.dart';
 import 'package:detective_game/game/scenes/config_resolution.dart';
@@ -55,15 +60,14 @@ import 'package:detective_game/game/scenes/main_thread/MT15.dart';
 import 'package:detective_game/game/scenes/main_thread/MT16.dart';
 
 // Manage gameplay, toggle between scenes
-
 class Gameplay extends StatelessWidget {
   // Scenes
-  List<Displayer> _jeffThread;
-  List<Displayer> _kateThread;
-  List<Displayer> _lucaThread;
-  List<Displayer> _mainThread;
-  List<Displayer> _mikeThread;
-  List<Displayer> _danielThread;
+  final List<Displayer> _jeffThread = List<Displayer>();
+  final List<Displayer> _kateThread = List<Displayer>();
+  final List<Displayer> _lucaThread = List<Displayer>();
+  final List<Displayer> _mainThread = List<Displayer>();
+  final List<Displayer> _mikeThread = List<Displayer>();
+  final List<Displayer> _danielThread = List<Displayer>();
 
   // Current scene played
   int _jeffThreadIndex = 0;
@@ -86,77 +90,68 @@ class Gameplay extends StatelessWidget {
       StreamController<bool>.broadcast();
 
   Gameplay() {
-    _initialize();
+    _initializeFirstStage();
+    _initializeSecondStage();
   }
 
-  void _initialize() {
-    _jeffThread = [
-      Displayer(scene: JT01(this)),
-      Displayer(scene: JT02(this)),
-      Displayer(scene: JT03(this)),
-      Displayer(scene: JT04(this)),
-      Displayer(scene: JT05(this)),
-      Displayer(scene: JT06(this)),
-    ];
+  void _initializeFirstStage() {
+    _mainThread.add(Displayer(scene: MT01(this)));
+    _mainThread.add(Displayer(scene: MT02(this)));
+    _mainThread.add(Displayer(scene: MT03(this)));
+    _mainThread.add(Displayer(scene: MT04(this)));
+    _mainThread.add(Displayer(scene: MT05(this)));
+    _mainThread.add(Displayer(scene: MT06(this)));
+    _mainThread.add(Displayer(scene: MT07(this)));
+    _mainThread.add(Displayer(scene: MT08(this)));
+    _mainThread.add(Displayer(scene: MT09(this)));
+    _mainThread.add(Displayer(scene: MT10(this)));
+    _mainThread.add(Displayer(scene: MT11(this)));
+    _mainThread.add(Displayer(scene: MT12(this)));
+    _mainThread.add(Displayer(scene: MT13(this)));
+    _mainThread.add(Displayer(scene: MT14(this)));
+    _mainThread.add(Displayer(scene: MT15(this)));
+    _mainThread.add(Displayer(scene: MT16(this)));
+  }
 
-    _lucaThread = [
-      Displayer(scene: LT01(this)),
-      Displayer(scene: LT02(this)),
-      Displayer(scene: LT03(this)),
-      Displayer(scene: LT04(this)),
-      Displayer(scene: LT05(this)),
-      Displayer(scene: LT06(this)),
-    ];
+  void _initializeSecondStage() {
+    _jeffThread.add(Displayer(scene: JT01(this)));
+    _jeffThread.add(Displayer(scene: JT02(this)));
+    _jeffThread.add(Displayer(scene: JT03(this)));
+    _jeffThread.add(Displayer(scene: JT04(this)));
+    _jeffThread.add(Displayer(scene: JT05(this)));
+    _jeffThread.add(Displayer(scene: JT06(this)));
 
-    _danielThread = [
-      Displayer(scene: DT01(this)),
-      Displayer(scene: DT02(this)),
-      Displayer(scene: DT03(this)),
-      Displayer(scene: DT04(this)),
-      Displayer(scene: DT05(this)),
-      Displayer(scene: DT06(this)),
-    ];
+    _lucaThread.add(Displayer(scene: LT01(this)));
+    _lucaThread.add(Displayer(scene: LT02(this)));
+    _lucaThread.add(Displayer(scene: LT03(this)));
+    _lucaThread.add(Displayer(scene: LT04(this)));
+    _lucaThread.add(Displayer(scene: LT05(this)));
+    _lucaThread.add(Displayer(scene: LT06(this)));
 
-    _kateThread = [
-      Displayer(scene: KT01(this)),
-      Displayer(scene: KT02(this)),
-      Displayer(scene: KT03(this)),
-      Displayer(scene: KT04(this)),
-      Displayer(scene: KT05(this)),
-      Displayer(scene: KT06(this)),
-      Displayer(scene: KT07(this)),
-      Displayer(scene: KT08(this)),
-    ];
+    _danielThread.add(Displayer(scene: DT01(this)));
+    _danielThread.add(Displayer(scene: DT02(this)));
+    _danielThread.add(Displayer(scene: DT03(this)));
+    _danielThread.add(Displayer(scene: DT04(this)));
+    _danielThread.add(Displayer(scene: DT05(this)));
+    _danielThread.add(Displayer(scene: DT06(this)));
 
-    _mikeThread = [
-      Displayer(scene: MK01(this)),
-      Displayer(scene: MK02(this)),
-      Displayer(scene: MK03(this)),
-      Displayer(scene: MK04(this)),
-      Displayer(scene: MK05(this)),
-      Displayer(scene: MK06(this)),
-      Displayer(scene: MK07(this)),
-      Displayer(scene: MK08(this)),
-    ];
+    _kateThread.add(Displayer(scene: KT01(this)));
+    _kateThread.add(Displayer(scene: KT02(this)));
+    _kateThread.add(Displayer(scene: KT03(this)));
+    _kateThread.add(Displayer(scene: KT04(this)));
+    _kateThread.add(Displayer(scene: KT05(this)));
+    _kateThread.add(Displayer(scene: KT06(this)));
+    _kateThread.add(Displayer(scene: KT07(this)));
+    _kateThread.add(Displayer(scene: KT08(this)));
 
-    _mainThread = [
-      Displayer(scene: MT01(this)),
-      Displayer(scene: MT02(this)),
-      Displayer(scene: MT03(this)),
-      Displayer(scene: MT04(this)),
-      Displayer(scene: MT05(this)),
-      Displayer(scene: MT06(this)),
-      Displayer(scene: MT07(this)),
-      Displayer(scene: MT08(this)),
-      Displayer(scene: MT09(this)),
-      Displayer(scene: MT10(this)),
-      Displayer(scene: MT11(this)),
-      Displayer(scene: MT12(this)),
-      Displayer(scene: MT13(this)),
-      Displayer(scene: MT14(this)),
-      Displayer(scene: MT15(this)),
-      Displayer(scene: MT16(this)),
-    ];
+    _mikeThread.add(Displayer(scene: MK01(this)));
+    _mikeThread.add(Displayer(scene: MK02(this)));
+    _mikeThread.add(Displayer(scene: MK03(this)));
+    _mikeThread.add(Displayer(scene: MK04(this)));
+    _mikeThread.add(Displayer(scene: MK05(this)));
+    _mikeThread.add(Displayer(scene: MK06(this)));
+    _mikeThread.add(Displayer(scene: MK07(this)));
+    _mikeThread.add(Displayer(scene: MK08(this)));
   }
 
   bool get areAllScenesLoaded {
@@ -236,6 +231,7 @@ class Gameplay extends StatelessWidget {
       val.scene.fadeOut = false;
     }
 
+    LocalSaveManager().saveGameState(GameState(_mainThreadIndex));
     _sceneController.add(true);
   }
 
@@ -344,21 +340,21 @@ class Gameplay extends StatelessWidget {
     }
   }
 
-  Displayer _initialScene() {
+  void _onInit() async {
     // Load last played scene from shared prefs
+    final state = await LocalSaveManager().loadGameState();
 
-    // In other case start with MT01
-    _mainThreadIndex = 13;
-
-    final scene = _mainThread[_mainThreadIndex];
-    return scene;
+    _mainThreadIndex = state.mainThreadIndex;
+    this.playMainThreadScene(index: _mainThreadIndex);
   }
 
-  void showStatisticsScreen() {}
+  void showStatisticsScreen() {
+    _sceneController.addError('Come back to statistics');
+  }
 
   @override
   Widget build(BuildContext context) {
-    _scene = _initialScene();
+    _onInit();
 
     return StreamBuilder(
       stream: this._sceneController.stream,
@@ -366,9 +362,9 @@ class Gameplay extends StatelessWidget {
         if (snapshot.hasData) {
           return _scene;
         } else if (snapshot.hasError) {
-          return Container();
+          return StatsScreen();
         } else {
-          return _scene;
+          return LoadingScreen();
         }
       },
     );
