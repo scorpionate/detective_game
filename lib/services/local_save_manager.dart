@@ -17,9 +17,31 @@ class LocalSaveManager {
     prefs.setString('SAVEDCHOICES', result);
   }
 
-  Future<void> clearSavedChoices() async {
+  Future<void> clearAllSavedChoices() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('SAVEDCHOICES', null);
+  }
+
+  Future<void> clearSavedChoicesForScene(String type) async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('SAVEDCHOICES');
+
+    if (data != null) {
+      Map val = json.decode(data);
+      final choices = Choices.fromJson(val);
+
+      var list = List<Choice>();
+      choices.data.forEach((element) {
+        if (element.scene != type) {
+          list.add(Choice(element.scene, element.index));
+        }
+      });
+
+      final cleared = json.encode(Choices(list).toJson());
+      prefs.setString('SAVEDCHOICES', cleared);
+    } else {
+      return;
+    }
   }
 
   Future<Choices> loadOptionalChoices() async {

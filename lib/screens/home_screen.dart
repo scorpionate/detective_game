@@ -8,9 +8,6 @@ import 'package:detective_game/game/scenes/config_resolution.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: Only for deving
-    LocalSaveManager().clearSavedChoices();
-
     return Scaffold(
       body: Stack(fit: StackFit.expand, children: <Widget>[
         // Background Layer
