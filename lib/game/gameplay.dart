@@ -89,12 +89,7 @@ class Gameplay extends StatelessWidget {
   final StreamController<bool> _sceneController =
       StreamController<bool>.broadcast();
 
-  Gameplay() {
-    _initializeFirstStage();
-    _initializeSecondStage();
-  }
-
-  void _initializeFirstStage() {
+  void _initializeMainThread() {
     _mainThread.add(Displayer(scene: MT01(this)));
     _mainThread.add(Displayer(scene: MT02(this)));
     _mainThread.add(Displayer(scene: MT03(this)));
@@ -113,7 +108,7 @@ class Gameplay extends StatelessWidget {
     _mainThread.add(Displayer(scene: MT16(this)));
   }
 
-  void _initializeSecondStage() {
+  void _initializeOtherThreads() {
     _jeffThread.add(Displayer(scene: JT01(this)));
     _jeffThread.add(Displayer(scene: JT02(this)));
     _jeffThread.add(Displayer(scene: JT03(this)));
@@ -222,6 +217,10 @@ class Gameplay extends StatelessWidget {
   }
 
   void playMainThreadScene({int index}) {
+    if (_mainThreadIndex == 10) {
+      _initializeOtherThreads();
+    }
+
     if (index == null) {
       _mainThreadIndex++;
       _scene = _mainThread[_mainThreadIndex];
@@ -341,6 +340,8 @@ class Gameplay extends StatelessWidget {
   }
 
   void _onInit() async {
+    _initializeMainThread();
+
     // Load last played scene from shared prefs
     final state = await LocalSaveManager().loadGameState();
 
