@@ -7,21 +7,18 @@ class PickResolutionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(    
+    return Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: [
           // Game Layer
-          Positioned.fill(
-            child: scene.widget
-          ),
-          
+          Positioned.fill(child: scene.widget),
+
           // UI Layer
-          Positioned.fill(child:
-           Column(
-              children: <Widget> [Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Positioned.fill(
+              child: Column(children: <Widget>[
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   RaisedButton(
                     child: Text('Previous'),
@@ -29,26 +26,22 @@ class PickResolutionScreen extends StatelessWidget {
                   ),
                   RaisedButton(
                     child: Text('Next'),
-                    onPressed: scene.nextBackground,
-                  ),
-
-                ]
-              
-          ),
-
-          RaisedButton(
-                    child: Text('Accept'),
-                    onPressed: (){
-                      scene.saveImageFactor();
-                      Navigator.pop(context);
+                    onPressed: () {
+                      print(this.scene.backgroundManager.currentBackgroundPath);
+                      scene.nextBackground();
                     },
-          ),
-
-          ]
-           ))
-      ],),
-    
+                  ),
+                ]),
+            RaisedButton(
+              child: Text('Accept'),
+              onPressed: () async {
+                await scene.saveImageFactor();
+                Navigator.pop(context);
+              },
+            ),
+          ]))
+        ],
+      ),
     );
-   }
-
+  }
 }

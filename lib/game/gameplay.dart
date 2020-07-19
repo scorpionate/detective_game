@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:detective_game/game/scene/scene.dart';
 import 'package:detective_game/model/game_state.dart';
-import 'package:detective_game/screens/loading_screen.dart';
 import 'package:detective_game/screens/stats_screen.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
@@ -60,29 +59,41 @@ import 'package:detective_game/game/scenes/main_thread/MT15.dart';
 import 'package:detective_game/game/scenes/main_thread/MT16.dart';
 
 // Manage gameplay, toggle between scenes
-class Gameplay extends StatelessWidget {
-  // Scenes
+class Gameplay extends StatefulWidget {
   final List<Displayer> _jeffThread = List<Displayer>();
+
   final List<Displayer> _kateThread = List<Displayer>();
+
   final List<Displayer> _lucaThread = List<Displayer>();
+
   final List<Displayer> _mainThread = List<Displayer>();
+
   final List<Displayer> _mikeThread = List<Displayer>();
+
   final List<Displayer> _danielThread = List<Displayer>();
 
-  // Current scene played
   int _jeffThreadIndex = 0;
+
   int _kateThreadIndex = 0;
+
   int _lucaThreadIndex = 0;
+
   int _mainThreadIndex = 0;
+
   int _mikeThreadIndex = 0;
+
   int _danielThreadIndex = 0;
 
-  // Only place where this data is not wiped after loading scene
   bool jeffButton = true;
+
   bool kateButton = true;
+
   bool lucaButton = true;
+
   bool mikeButton = true;
+
   bool danielButton = true;
+
   bool _partialsFinished = false;
 
   bool get partialsFinished {
@@ -354,36 +365,70 @@ class Gameplay extends StatelessWidget {
     }
   }
 
+  void showStatisticsScreen() {
+    sceneController.addError('Come back to statistics');
+  }
+
+  // Scenes
+  @override
+  _GameplayState createState() => _GameplayState();
+}
+
+class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
   void _onInit() async {
-    _initializeMainThread();
+    widget._initializeMainThread();
 
     // Load last played scene from shared prefs
     final state = await LocalSaveManager().loadGameState();
 
-    _mainThreadIndex = state.mainThreadIndex;
+    widget._mainThreadIndex = state.mainThreadIndex;
     //_mainThreadIndex = 10;
-    this.playMainThreadScene(index: _mainThreadIndex);
+    widget.playMainThreadScene(index: widget._mainThreadIndex);
   }
 
-  void showStatisticsScreen() {
-    sceneController.addError('Come back to statistics');
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.inactive) {
+      final scene = widget._scene.scene as Scene;
+      scene.dialogueManager.pauseDialogue();
+    }
+    if (state == AppLifecycleState.resumed) {
+      final scene = widget._scene.scene as Scene;
+      scene.dialogueManager.resumeDialogue();
+    }
+    if (state == AppLifecycleState.detached) {}
+    if (state == AppLifecycleState.paused) {}
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   Widget build(BuildContext context) {
     _onInit();
 
-    return StreamBuilder(
-      stream: this.sceneController.stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return _scene;
-        } else if (snapshot.hasError) {
-          return StatsScreen();
-        } else {
-          return LoadingScreen();
-        }
+    return WillPopScope(
+      onWillPop: () async {
+        final scene = widget._scene.scene as Scene;
+        scene.dialogueManager.stopAllSounds();
+        return true;
       },
+      child: StreamBuilder(
+        stream: widget.sceneController.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return widget._scene;
+          } else if (snapshot.hasError) {
+            return StatsScreen();
+          } else {
+            return Container();
+          }
+        },
+      ),
     );
   }
 }

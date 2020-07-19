@@ -77,7 +77,30 @@ class DialogueManager {
 
   Future<void> stopDialogue() async {
     // Stop any dialogue audio
-    if (_dlgPlayer.state == AudioPlayerState.PLAYING) await _dlgPlayer.stop();
+    if (_dlgPlayer.state == AudioPlayerState.PLAYING) {
+      await _dlgPlayer.stop();
+    }
+  }
+
+  Future<void> pauseDialogue() async {
+    // Stop any dialogue audio
+    if (_dlgPlayer.state == AudioPlayerState.PLAYING) {
+      await _dlgPlayer.pause();
+    }
+  }
+
+  Future<void> resumeDialogue() async {
+    // Stop any dialogue audio
+    if (_dlgPlayer.state == AudioPlayerState.PAUSED) {
+      await _dlgPlayer.resume();
+    }
+  }
+
+  Future<void> stopAllSounds() async {
+    await _dlgPlayer.stop();
+    await _dlgPlayer.dispose();
+    // await _dlgCache.fixedPlayer.stop();
+    _dlgCache.clearCache();
   }
 
   void _changeBackgroundIf() {

@@ -43,7 +43,7 @@ class ConfigResolution extends Scene {
     saveImageFactor();
   }
 
-  void saveImageFactor() async {
+  Future<void> saveImageFactor() async {
     String bgd = this.backgroundManager.currentBackgroundPath;
     String factor;
 
@@ -63,6 +63,6 @@ class ConfigResolution extends Scene {
 
     // Save to persistent
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('RESOLUTION', factor);
+    await prefs.setString('RESOLUTION', factor);
   }
 }
