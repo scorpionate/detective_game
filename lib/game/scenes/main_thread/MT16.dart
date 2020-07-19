@@ -7,7 +7,7 @@ import 'package:detective_game/services/local_save_manager.dart';
 class MT16 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/19',
+    'locations/main_thread/24',
   ];
 
   static List<String> dlgFiles = <String>[

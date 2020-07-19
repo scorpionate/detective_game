@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
-import 'package:flame/flame.dart';
 
 // DT01 ==> Daniel Thread (Scene) 01
 class KT06 extends Scene {

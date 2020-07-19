@@ -7,6 +7,11 @@ class MT11 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
     'locations/main_thread/15',
+    'locations/main_thread/16',
+    'locations/main_thread/17',
+    'locations/main_thread/18',
+    'locations/main_thread/19',
+    'locations/main_thread/20',
   ];
 
   static List<String> dlgFiles = <String>[
@@ -29,7 +34,7 @@ class MT11 extends Scene {
     'audio/dialogues/main_thread/11/16.mp3',
   ];
 
-  static List<int> chgBackground = <int>[];
+  static List<int> chgBackground = <int>[4, 7, 10, 12, 14];
 
   MT11(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 

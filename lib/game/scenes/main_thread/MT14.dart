@@ -8,7 +8,7 @@ class MT14 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
     'locations/main_thread/01',
-    'locations/main_thread/18',
+    'locations/main_thread/23',
   ];
 
   static List<String> dlgFiles = <String>[

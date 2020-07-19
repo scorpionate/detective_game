@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
-import 'package:detective_game/services/local_save_manager.dart';
-import 'package:flutter/rendering.dart';
 
 // MT01 ==> Main Thread (Scene) 01
 class MT01 extends Scene {

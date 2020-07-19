@@ -6,8 +6,8 @@ import 'package:detective_game/game/scene/scene.dart';
 class MT13 extends Scene {
   // Asset Paths
   static List<String> bgdImages = <String>[
-    'locations/main_thread/16',
-    'locations/main_thread/17',
+    'locations/main_thread/21',
+    'locations/main_thread/22',
   ];
 
   static List<String> dlgFiles = <String>[

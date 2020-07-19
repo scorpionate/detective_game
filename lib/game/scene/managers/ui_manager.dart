@@ -91,7 +91,6 @@ class UIManager {
     else if (dlg.contains('Wyatt: '))
       return 'assets/images/characters/avatars/Wyatt.png';
     else
-      // TODO: Supply basic image
       return 'assets/images/characters/avatars/Wyatt.png';
   }
 }
