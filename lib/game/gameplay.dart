@@ -83,10 +83,15 @@ class Gameplay extends StatelessWidget {
   bool lucaButton = true;
   bool mikeButton = true;
   bool danielButton = true;
+  bool _partialsFinished = false;
+
+  bool get partialsFinished {
+    return _partialsFinished;
+  }
 
   var _scene;
 
-  final StreamController<bool> _sceneController =
+  final StreamController<bool> sceneController =
       StreamController<bool>.broadcast();
 
   void _initializeMainThread() {
@@ -108,7 +113,7 @@ class Gameplay extends StatelessWidget {
     _mainThread.add(Displayer(scene: MT16(this)));
   }
 
-  void _initializeOtherThreads() {
+  void initializeOtherThreads() {
     _jeffThread.add(Displayer(scene: JT01(this)));
     _jeffThread.add(Displayer(scene: JT02(this)));
     _jeffThread.add(Displayer(scene: JT03(this)));
@@ -172,12 +177,22 @@ class Gameplay extends StatelessWidget {
   }
 
   void _incrementAllIndexes() {
+    _disableShorterThreads() {
+      danielButton = false;
+      jeffButton = false;
+      lucaButton = false;
+    }
+
     // Increment all
     if (_danielThread.length > _danielThreadIndex) _danielThreadIndex++;
     if (_jeffThread.length > _jeffThreadIndex) _jeffThreadIndex++;
     if (_kateThread.length > _kateThreadIndex) _kateThreadIndex++;
     if (_lucaThread.length > _lucaThreadIndex) _lucaThreadIndex++;
     if (_mikeThread.length > _mikeThreadIndex) _mikeThreadIndex++;
+
+    if (_danielThreadIndex == _danielThread.length ||
+        _lucaThreadIndex == _lucaThread.length ||
+        _jeffThreadIndex == _jeffThread.length) _disableShorterThreads();
   }
 
   bool _areThreadsEnded() {
@@ -193,6 +208,10 @@ class Gameplay extends StatelessWidget {
       return true;
     else
       return false;
+  }
+
+  bool get allPartialThreadsFinished {
+    return _areThreadsEnded();
   }
 
   bool _areAllButtonsDisabled() {
@@ -212,15 +231,11 @@ class Gameplay extends StatelessWidget {
     jeffButton = to;
     kateButton = to;
     mikeButton = to;
-    danielButton = to;
     lucaButton = to;
+    danielButton = to;
   }
 
   void playMainThreadScene({int index}) {
-    if (_mainThreadIndex == 10) {
-      _initializeOtherThreads();
-    }
-
     if (index == null) {
       _mainThreadIndex++;
       _scene = _mainThread[_mainThreadIndex];
@@ -231,11 +246,12 @@ class Gameplay extends StatelessWidget {
     }
 
     LocalSaveManager().saveGameState(GameState(_mainThreadIndex));
-    _sceneController.add(true);
+    sceneController.add(true);
   }
 
   void playDanielThreadScene() {
     if (_danielThread.length > _danielThreadIndex) {
+      this._scene.scene.uiManager.fadeIn();
       _scene = _danielThread[_danielThreadIndex];
 
       if (_danielThreadIndex == 0) {
@@ -246,17 +262,17 @@ class Gameplay extends StatelessWidget {
         //Increment all scenes
         _incrementAllIndexes();
       }
-
-      _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        playMainThreadScene();
+        this._partialsFinished = true;
+        this._scene.scene.uiManager.fadeIn();
       }
     }
   }
 
   void playMikeThreadScene() {
     if (_mikeThread.length > _mikeThreadIndex) {
+      this._scene.scene.uiManager.fadeIn();
       _scene = _mikeThread[_mikeThreadIndex];
 
       if (_mikeThreadIndex == 0) {
@@ -267,17 +283,17 @@ class Gameplay extends StatelessWidget {
         //Increment all scenes
         _incrementAllIndexes();
       }
-
-      _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        playMainThreadScene();
+        this._partialsFinished = true;
+        this._scene.scene.uiManager.fadeIn();
       }
     }
   }
 
   void playLucaThreadScene() {
     if (_lucaThread.length > _lucaThreadIndex) {
+      this._scene.scene.uiManager.fadeIn();
       _scene = _lucaThread[_lucaThreadIndex];
 
       if (_lucaThreadIndex == 0) {
@@ -288,17 +304,17 @@ class Gameplay extends StatelessWidget {
         //Increment all scenes
         _incrementAllIndexes();
       }
-
-      _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        playMainThreadScene();
+        this._partialsFinished = true;
+        this._scene.scene.uiManager.fadeIn();
       }
     }
   }
 
   void playKateThreadScene() {
     if (_kateThread.length > _kateThreadIndex) {
+      this._scene.scene.uiManager.fadeIn();
       _scene = _kateThread[_kateThreadIndex];
 
       if (_kateThreadIndex == 0) {
@@ -309,17 +325,17 @@ class Gameplay extends StatelessWidget {
         //Increment all scenes
         _incrementAllIndexes();
       }
-
-      _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        playMainThreadScene();
+        this._partialsFinished = true;
+        this._scene.scene.uiManager.fadeIn();
       }
     }
   }
 
   void playJeffThreadScene() {
     if (_jeffThread.length > _jeffThreadIndex) {
+      this._scene.scene.uiManager.fadeIn();
       _scene = _jeffThread[_jeffThreadIndex];
 
       if (_jeffThreadIndex == 0) {
@@ -330,11 +346,10 @@ class Gameplay extends StatelessWidget {
         //Increment all scenes
         _incrementAllIndexes();
       }
-
-      _sceneController.add(true);
     } else {
       if (_areThreadsEnded()) {
-        playMainThreadScene();
+        this._partialsFinished = true;
+        this._scene.scene.uiManager.fadeIn();
       }
     }
   }
@@ -346,11 +361,12 @@ class Gameplay extends StatelessWidget {
     final state = await LocalSaveManager().loadGameState();
 
     _mainThreadIndex = state.mainThreadIndex;
+    //_mainThreadIndex = 10;
     this.playMainThreadScene(index: _mainThreadIndex);
   }
 
   void showStatisticsScreen() {
-    _sceneController.addError('Come back to statistics');
+    sceneController.addError('Come back to statistics');
   }
 
   @override
@@ -358,7 +374,7 @@ class Gameplay extends StatelessWidget {
     _onInit();
 
     return StreamBuilder(
-      stream: this._sceneController.stream,
+      stream: this.sceneController.stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return _scene;

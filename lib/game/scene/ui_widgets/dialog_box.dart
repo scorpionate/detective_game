@@ -5,11 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 // Shows sentence
-class DialogBox extends StatelessWidget {
+class DialogBox extends StatefulWidget {
   final List<String> data;
   final Scene scene;
 
   DialogBox(this.scene, this.data);
+
+  @override
+  _DialogBoxState createState() => _DialogBoxState();
+}
+
+class _DialogBoxState extends State<DialogBox> {
+  bool _isButton1 = true;
+  bool _isButton2 = false;
+  bool _isButton3 = false;
+  bool _isButton4 = false;
+  bool _isButton5 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,41 +31,105 @@ class DialogBox extends StatelessWidget {
     //final width = this.scene.tileSize * 16;
 
     // Always supplied by stream
-    final dlg = data[0]; // Main dialogue
-    final avatarPath = data[1]; // Who is talking
+    final dlg = widget.data[0]; // Main dialogue
+    final avatarPath = widget.data[1]; // Who is talking
     var conditionals = List<String>();
 
     // Supplied by stream if it is conditional dialogue
-    if (data.length > 2) {
-      for (int i = 2; i < data.length; i++) {
-        conditionals.add(data[i]);
+    if (widget.data.length > 2) {
+      for (int i = 2; i < widget.data.length; i++) {
+        conditionals.add(widget.data[i]);
       }
     }
 
     // Generate buttons for MT011 scene
-    var cellButtons = this.scene is MT11 || this.scene is MT12
+    var cellButtons = this.widget.scene is MT11 || this.widget.scene is MT12
         ? Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 RaisedButton(
-                  onPressed: () => this.scene.bottomButtonClicked(id: 1),
+                  onPressed: _isButton1
+                      ? () => {
+                            if (widget.scene.dialogueManager
+                                    .currentDialogueIndex ==
+                                4)
+                              {
+                                setState(() {
+                                  _isButton1 = false;
+                                  _isButton2 = true;
+                                  this.widget.scene.bottomButtonClicked(id: 1);
+                                })
+                              }
+                          }
+                      : null,
                   child: Text('Room1'),
                 ),
                 RaisedButton(
-                  onPressed: () => this.scene.bottomButtonClicked(id: 2),
+                  onPressed: _isButton2
+                      ? () => {
+                            if (widget.scene.dialogueManager
+                                    .currentDialogueIndex ==
+                                7)
+                              {
+                                setState(() {
+                                  _isButton2 = false;
+                                  _isButton3 = true;
+                                  this.widget.scene.bottomButtonClicked(id: 2);
+                                })
+                              }
+                          }
+                      : null,
                   child: Text('Room2'),
                 ),
                 RaisedButton(
-                  onPressed: () => this.scene.bottomButtonClicked(id: 3),
+                  onPressed: _isButton3
+                      ? () => {
+                            if (widget.scene.dialogueManager
+                                    .currentDialogueIndex ==
+                                10)
+                              {
+                                setState(() {
+                                  _isButton3 = false;
+                                  _isButton4 = true;
+                                  this.widget.scene.bottomButtonClicked(id: 3);
+                                })
+                              }
+                          }
+                      : null,
                   child: Text('Room3'),
                 ),
                 RaisedButton(
-                  onPressed: () => this.scene.bottomButtonClicked(id: 4),
+                  onPressed: _isButton4
+                      ? () => {
+                            if (widget.scene.dialogueManager
+                                    .currentDialogueIndex ==
+                                12)
+                              {
+                                setState(() {
+                                  _isButton4 = false;
+                                  _isButton5 = true;
+                                  this.widget.scene.bottomButtonClicked(id: 4);
+                                })
+                              }
+                          }
+                      : null,
                   child: Text('Room4'),
                 ),
                 RaisedButton(
-                  onPressed: () => this.scene.bottomButtonClicked(id: 5),
+                  onPressed: _isButton5
+                      ? () => {
+                            if (widget.scene.dialogueManager
+                                    .currentDialogueIndex ==
+                                14)
+                              {
+                                setState(() {
+                                  _isButton5 = false;
+                                  this.widget.scene.bottomButtonClicked(id: 5);
+                                })
+                              }
+                          }
+                      : null,
                   child: Text('Room5'),
                 ),
               ],
@@ -102,7 +177,7 @@ class DialogBox extends StatelessWidget {
         // Temporary onTap invoker
         OutlineButton(
           child: Text('NEXT'),
-          onPressed: this.scene.onTap,
+          onPressed: this.widget.scene.onTap,
         ),
 
         // Buttons with optional dialogues to be choosen
@@ -123,7 +198,11 @@ class DialogBox extends StatelessWidget {
                     color: Colors.white.withOpacity(0.85),
                     onPressed: () {
                       // Send info which button was clicked
-                      this.scene.dialogueManager.optionalDialogueClicked(item);
+                      this
+                          .widget
+                          .scene
+                          .dialogueManager
+                          .optionalDialogueClicked(item);
                     },
                     child: Text(
                       _removeBraces(_removeAuthor(item)),
@@ -141,7 +220,6 @@ class DialogBox extends StatelessWidget {
     );
   }
 
-  // Use only for display in Widget
   String _removeBraces(String input) {
     if (input.contains('(conditional)')) {
       return input.replaceAll('(conditional)', '');
@@ -154,7 +232,6 @@ class DialogBox extends StatelessWidget {
     }
   }
 
-  // Use only for display in Widget
   String _removeAuthor(String input) {
     return input.substring(input.indexOf(':') + 2, input.length);
   }

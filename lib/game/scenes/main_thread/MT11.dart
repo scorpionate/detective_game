@@ -36,7 +36,10 @@ class MT11 extends Scene {
 
   static List<int> chgBackground = <int>[4, 7, 10, 12, 14];
 
-  MT11(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT11(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay) {
+    gameplay.initializeOtherThreads();
+  }
 
   @override
   void bottomButtonClicked({int id}) {

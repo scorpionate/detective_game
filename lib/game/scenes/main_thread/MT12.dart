@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
+import 'package:flame/flame.dart';
 
 // MT01 ==> Main Thread (Scene) 02
 class MT12 extends Scene {
@@ -17,8 +18,6 @@ class MT12 extends Scene {
 
   @override
   void bottomButtonClicked({int id}) {
-    //TODO: Fade in!
-
     if (id == 1) {
       this.gameplay.playDanielThreadScene();
     } else if (id == 2) {
@@ -30,6 +29,17 @@ class MT12 extends Scene {
     } else if (id == 5) {
       this.gameplay.playMikeThreadScene();
     }
+  }
+
+  @override
+  void onEnd() {
+    this.hideUI();
+    if (this.gameplay.partialsFinished) {
+      this.gameplay.playMainThreadScene();
+    } else {
+      this.gameplay.sceneController.add(true);
+    }
+    Flame.assets.clearCache();
   }
 
   @override
