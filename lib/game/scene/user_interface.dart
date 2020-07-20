@@ -39,7 +39,9 @@ class UserInterface extends StatelessWidget {
         }
         // Nothing happens - blank UI
         else {
-          return Container();
+          return Container(
+            color: Colors.black,
+          );
         }
       },
     );

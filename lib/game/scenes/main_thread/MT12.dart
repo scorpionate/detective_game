@@ -19,15 +19,15 @@ class MT12 extends Scene {
   @override
   void bottomButtonClicked({int id}) {
     if (id == 1) {
-      this.gameplay.playDanielThreadScene();
-    } else if (id == 2) {
-      this.gameplay.playJeffThreadScene();
-    } else if (id == 3) {
-      this.gameplay.playKateThreadScene();
-    } else if (id == 4) {
-      this.gameplay.playLucaThreadScene();
-    } else if (id == 5) {
       this.gameplay.playMikeThreadScene();
+    } else if (id == 2) {
+      this.gameplay.playKateThreadScene();
+    } else if (id == 3) {
+      this.gameplay.playLucaThreadScene();
+    } else if (id == 4) {
+      this.gameplay.playDanielThreadScene();
+    } else if (id == 5) {
+      this.gameplay.playJeffThreadScene();
     }
   }
 
@@ -44,6 +44,15 @@ class MT12 extends Scene {
 
   @override
   void onTap() {
-    this.uiManager.showSimpleMessage('Click to choooose between scenes');
+    if (this.gameplay.noneOfPartialsPlayed) {
+      final val =
+          "Click to choose between cameras installed in rooms. Wyatt will hear a fragment of chosen interrogation or victim's memories. In other room's there are continuous, independent interrogations so choose wisely!";
+      this.uiManager.showSimpleMessage(val);
+    } else if (this.gameplay.allPartialThreadsFinished) {
+      final val = "All interrogations ended.";
+      this.uiManager.showSimpleMessage(val);
+    } else {
+      this.uiManager.showSimpleMessage(null);
+    }
   }
 }

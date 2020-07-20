@@ -20,6 +20,7 @@ class MK08 extends Scene {
     'audio/dialogues/mike_thread/08/07.mp3',
     'audio/dialogues/mike_thread/08/08.mp3',
     'audio/dialogues/mike_thread/08/09.mp3',
+    'audio/dialogues/mike_thread/08/10.mp3',
   ];
 
   static List<int> chgBackground = <int>[];

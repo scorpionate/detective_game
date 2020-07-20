@@ -100,6 +100,21 @@ class Gameplay extends StatefulWidget {
     return _partialsFinished;
   }
 
+  bool get noneOfPartialsPlayed {
+    bool a = false, b = false, c = false, d = false, e = false;
+
+    if (_danielThreadIndex == 0) a = true;
+    if (_mikeThreadIndex == 0) b = true;
+    if (_lucaThreadIndex == 0) c = true;
+    if (_kateThreadIndex == 0) d = true;
+    if (_kateThreadIndex == 0) e = true;
+
+    if (a && b && c && d && e)
+      return true;
+    else
+      return false;
+  }
+
   var _scene;
 
   final StreamController<bool> sceneController =

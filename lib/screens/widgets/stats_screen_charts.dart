@@ -1,3 +1,4 @@
+import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
 import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
@@ -54,9 +55,8 @@ class _StatsScreenChartsState extends State<StatsScreenCharts>
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     _animController.dispose();
+    super.dispose();
   }
 
   @override
