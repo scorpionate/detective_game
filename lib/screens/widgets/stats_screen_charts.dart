@@ -48,7 +48,8 @@ class _StatsScreenChartsState extends State<StatsScreenCharts>
     _neutralness =
         Tween<double>(begin: 0.0, end: _neutPrc).animate(_animController);
 
-    _animController.forward();
+    Future.delayed(Duration(milliseconds: 500))
+        .then((value) => _animController.forward());
   }
 
   @override

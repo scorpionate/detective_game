@@ -7,7 +7,7 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SpinKitCubeGrid(
+      child: SpinKitCircle(
         color: this.color,
         size: 50.0,
       ),
