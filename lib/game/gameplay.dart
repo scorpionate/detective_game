@@ -377,6 +377,7 @@ class Gameplay extends StatefulWidget {
 class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
   void _onInit() async {
     widget._initializeMainThread();
+    widget.initializeOtherThreads();
 
     // Load last played scene from shared prefs
     final state = await LocalSaveManager().loadGameState();

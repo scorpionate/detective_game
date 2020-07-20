@@ -1,5 +1,7 @@
 import 'package:detective_game/model/game_state.dart';
 import 'package:detective_game/screens/dev_room.dart';
+import 'package:detective_game/screens/loading_screen.dart';
+import 'package:detective_game/screens/stats_screen.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/gameplay.dart';
@@ -61,6 +63,15 @@ class HomeScreen extends StatelessWidget {
                                       scene: ConfigResolution(Gameplay()))));
                         },
                         child: Text('Resolution.'),
+                      ),
+                      OutlineButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StatsScreen()));
+                        },
+                        child: Text('Stats.'),
                       ),
                     ],
                   )
