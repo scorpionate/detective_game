@@ -32,9 +32,15 @@ class MT11 extends Scene {
     'audio/dialogues/main_thread/11/14.mp3',
     'audio/dialogues/main_thread/11/15.mp3',
     'audio/dialogues/main_thread/11/16.mp3',
+    'audio/dialogues/main_thread/11/17.mp3',
+    'audio/dialogues/main_thread/11/18.mp3',
+    'audio/dialogues/main_thread/11/19.mp3',
+    'audio/dialogues/main_thread/11/20.mp3',
+    'audio/dialogues/main_thread/11/21.mp3',
+    'audio/dialogues/main_thread/11/22.mp3',
   ];
 
-  static List<int> chgBackground = <int>[4, 7, 10, 12, 14];
+  static List<int> chgBackground = <int>[5, 8, 13, 16, 19];
 
   MT11(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 
@@ -45,15 +51,19 @@ class MT11 extends Scene {
 
   @override
   void onTap({int buttonId}) {
-    if (this.dialogueManager.currentDialogueIndex == 4) {
+    if (this.dialogueManager.currentDialogueIndex == MT11.chgBackground[0]) {
       if (buttonId == 1) this.dialogueManager.playDialogue();
-    } else if (this.dialogueManager.currentDialogueIndex == 7) {
+    } else if (this.dialogueManager.currentDialogueIndex ==
+        MT11.chgBackground[1]) {
       if (buttonId == 2) this.dialogueManager.playDialogue();
-    } else if (this.dialogueManager.currentDialogueIndex == 10) {
+    } else if (this.dialogueManager.currentDialogueIndex ==
+        MT11.chgBackground[2]) {
       if (buttonId == 3) this.dialogueManager.playDialogue();
-    } else if (this.dialogueManager.currentDialogueIndex == 12) {
+    } else if (this.dialogueManager.currentDialogueIndex ==
+        MT11.chgBackground[3]) {
       if (buttonId == 4) this.dialogueManager.playDialogue();
-    } else if (this.dialogueManager.currentDialogueIndex == 14) {
+    } else if (this.dialogueManager.currentDialogueIndex ==
+        MT11.chgBackground[4]) {
       if (buttonId == 5) this.dialogueManager.playDialogue();
     } else {
       if (buttonId != 1 &&

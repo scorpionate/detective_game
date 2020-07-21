@@ -1,4 +1,5 @@
-Interrogator2: Correct me if I'm wrong. You are saying that Daniel threw a glass object through a window exactly while you were above the central park?
+Interrogator2: Correct me if I'm wrong. 
+Interrogator2: You are saying that Daniel threw a glass object through a window exactly while you were above the central park?
 Kate: This is what we concluded from our logs.
 Interrogator2: I bet my hands that thing killed that girl.
 Kate: You may be right. Check timings.

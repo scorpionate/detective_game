@@ -8,7 +8,8 @@ Interrogator3: Please, stop! The only way you can help is cooperating with us.
 Luca: You can't even find who's stolen my car's mirror, useless bastards.
 Interrogator3: Watch your language, Mr Luca. Unless you want us to become impolite. 
 Luca: Oh, I admit, impoliteness suits you. 
-Interrogator3: Fine. Cut to the point. I am going to ask you some questions. The more information you provide, the better results and situation clearance we achieve. Consider it as a mutual benefit.
+Interrogator3: Fine. Cut to the point. I am going to ask you some questions. 
+Interrogator3: The more information you provide, the better results and situation clearance we achieve. Consider it as a mutual benefit.
 Luca: Then stop talking, and ask your questions. 
 Interrogator3: Respect me, kid, because you're stepping on the loose ground. 
 Luca: I'm sorry. Shall we start?

@@ -27,6 +27,7 @@ class LT01 extends Scene {
     'audio/dialogues/luca_thread/01/12.mp3',
     'audio/dialogues/luca_thread/01/13.mp3',
     'audio/dialogues/luca_thread/01/14.mp3',
+    'audio/dialogues/luca_thread/01/15.mp3',
   ];
 
   static List<int> chgBackground = <int>[4, 6];

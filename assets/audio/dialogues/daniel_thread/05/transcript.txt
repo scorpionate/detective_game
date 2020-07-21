@@ -1,6 +1,8 @@
 Interrogator4: You guys sympathize with obeying the law, don't you?
 Daniel: As long as we pay tickets, you have nothing against us. 
 Interrogator4: You shall not be too confident, badass. Remind me the day you went to the airstrip. 
-Daniel: We hit the road in afternoon. Traffic was horrible, but we managed it. After arriving at the airstrip we met Mike and Brandon in person.
+Daniel: We hit the road in afternoon. Traffic was horrible, but we managed it. 
+Daniel: After arriving at the airstrip we met Mike and Brandon in person.
 Interrogator4: Did you complete the safety course?
-Daniel: Indeed. We checked the money. Then we proceeded to safety. It took around 30 minutes. Then we met our guide, Kate. Kate showed us the route and introduced key events.
+Daniel: Indeed. We checked the money. Then we proceeded to safety. It took around 30 minutes. 
+Daniel: Then we met our guide, Kate. Kate showed us the route and introduced key events.

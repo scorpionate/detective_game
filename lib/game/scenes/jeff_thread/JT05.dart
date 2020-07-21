@@ -21,6 +21,8 @@ class JT05 extends Scene {
     'audio/dialogues/jeff_thread/05/08.mp3',
     'audio/dialogues/jeff_thread/05/09.mp3',
     'audio/dialogues/jeff_thread/05/10.mp3',
+    'audio/dialogues/jeff_thread/05/11.mp3',
+    'audio/dialogues/jeff_thread/05/12.mp3',
   ];
 
   static List<int> chgBackground = <int>[];

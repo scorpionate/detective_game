@@ -16,6 +16,7 @@ class KT07 extends Scene {
     'audio/dialogues/kate_thread/07/03.mp3',
     'audio/dialogues/kate_thread/07/04.mp3',
     'audio/dialogues/kate_thread/07/05.mp3',
+    'audio/dialogues/kate_thread/07/06.mp3',
   ];
 
   static List<int> chgBackground = <int>[];

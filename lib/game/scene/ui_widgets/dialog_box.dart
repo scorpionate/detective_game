@@ -54,7 +54,7 @@ class _DialogBoxState extends State<DialogBox> {
               _conditionalButtons(conditionalsHeight, width, conditionals),
 
             // Buttons with scene choose
-            if (this.widget.scene is MT11 || this.widget.scene is MT12)
+            if (this.widget.scene is MT11)
               _cellButtons(width),
           ],
         )
@@ -79,7 +79,7 @@ class _DialogBoxState extends State<DialogBox> {
             onPressed: _isButton1
                 ? () => {
                       if (widget.scene.dialogueManager.currentDialogueIndex ==
-                          4)
+                          MT11.chgBackground[0])
                         {
                           setState(() {
                             _isButton1 = false;
@@ -100,7 +100,7 @@ class _DialogBoxState extends State<DialogBox> {
             onPressed: _isButton2
                 ? () => {
                       if (widget.scene.dialogueManager.currentDialogueIndex ==
-                          7)
+                          MT11.chgBackground[1])
                         {
                           setState(() {
                             _isButton2 = false;
@@ -121,7 +121,7 @@ class _DialogBoxState extends State<DialogBox> {
             onPressed: _isButton3
                 ? () => {
                       if (widget.scene.dialogueManager.currentDialogueIndex ==
-                          10)
+                          MT11.chgBackground[2])
                         {
                           setState(() {
                             _isButton3 = false;
@@ -142,7 +142,7 @@ class _DialogBoxState extends State<DialogBox> {
             onPressed: _isButton4
                 ? () => {
                       if (widget.scene.dialogueManager.currentDialogueIndex ==
-                          12)
+                          MT11.chgBackground[3])
                         {
                           setState(() {
                             _isButton4 = false;
@@ -163,7 +163,7 @@ class _DialogBoxState extends State<DialogBox> {
             onPressed: _isButton5
                 ? () => {
                       if (widget.scene.dialogueManager.currentDialogueIndex ==
-                          14)
+                          MT11.chgBackground[4])
                         {
                           setState(() {
                             _isButton5 = false;
@@ -266,7 +266,7 @@ class _DialogBoxState extends State<DialogBox> {
                 height: height,
                 child: AutoSizeText(
                   _removeBraces(dlg),
-                  minFontSize: 10,
+                  minFontSize: 7,
                   overflow: TextOverflow.fade,
                   style: TextStyle(fontSize: 20),
                 )),

@@ -18,6 +18,8 @@ class DT04 extends Scene {
     'audio/dialogues/daniel_thread/04/05.mp3',
     'audio/dialogues/daniel_thread/04/06.mp3',
     'audio/dialogues/daniel_thread/04/07.mp3',
+    'audio/dialogues/daniel_thread/04/08.mp3',
+    'audio/dialogues/daniel_thread/04/09.mp3',
   ];
 
   static List<int> chgBackground = <int>[];

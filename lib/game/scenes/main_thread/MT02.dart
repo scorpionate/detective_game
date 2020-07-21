@@ -26,16 +26,17 @@ class MT02 extends Scene {
     'audio/dialogues/main_thread/02/07.mp3',
     'audio/dialogues/main_thread/02/08.mp3',
     'audio/dialogues/main_thread/02/09.mp3',
-    'audio/dialogues/main_thread/02/10_a.mp3',
-    'audio/dialogues/main_thread/02/10_b.mp3',
-    'audio/dialogues/main_thread/02/10_c.mp3',
+    'audio/dialogues/main_thread/02/10.mp3',
     'audio/dialogues/main_thread/02/11_a.mp3',
     'audio/dialogues/main_thread/02/11_b.mp3',
     'audio/dialogues/main_thread/02/11_c.mp3',
-    'audio/dialogues/main_thread/02/12.mp3',
+    'audio/dialogues/main_thread/02/12_a.mp3',
+    'audio/dialogues/main_thread/02/12_b.mp3',
+    'audio/dialogues/main_thread/02/12_c.mp3',
+    'audio/dialogues/main_thread/02/13.mp3',
   ];
 
-  static List<int> chgBackground = <int>[20];
+  static List<int> chgBackground = <int>[21];
 
   MT02(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 

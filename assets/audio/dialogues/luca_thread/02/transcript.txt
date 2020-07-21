@@ -1,7 +1,8 @@
 Interrogator3: Let's start from the beginning. Tell me about your job.
 Luca: I used to be a pizza delivery guy.
 Interrogator3: In love with details, huh?
-Luca: I started when I left university. I've never wanted to be a medical doctor. I decided to gain money and emigrate or start something on my own.
+Luca: I started when I left university. I've never wanted to be a medical doctor. 
+Luca: I decided to gain money and emigrate or start something on my own.
 Interrogator3: Did you plan to follow your dream?
 Luca: Exactly.
 Interrogator3: How did you meet your girlfriend?

@@ -24,10 +24,12 @@ class MT10 extends Scene {
     'audio/dialogues/main_thread/10/07.mp3',
     'audio/dialogues/main_thread/10/08.mp3',
     'audio/dialogues/main_thread/10/09.mp3',
-    'audio/dialogues/main_thread/10/10_a.mp3',
-    'audio/dialogues/main_thread/10/10_b.mp3',
-    'audio/dialogues/main_thread/10/10_c.mp3',
+    'audio/dialogues/main_thread/10/10.mp3',
     'audio/dialogues/main_thread/10/11.mp3',
+    'audio/dialogues/main_thread/10/12_a.mp3',
+    'audio/dialogues/main_thread/10/12_b.mp3',
+    'audio/dialogues/main_thread/10/12_c.mp3',
+    'audio/dialogues/main_thread/10/13.mp3',
   ];
 
   static List<int> chgBackground = <int>[7];

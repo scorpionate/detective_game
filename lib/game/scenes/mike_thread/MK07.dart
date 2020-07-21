@@ -22,9 +22,12 @@ class MK07 extends Scene {
     'audio/dialogues/mike_thread/07/08.mp3',
     'audio/dialogues/mike_thread/07/09.mp3',
     'audio/dialogues/mike_thread/07/10.mp3',
+    'audio/dialogues/mike_thread/07/11.mp3',
+    'audio/dialogues/mike_thread/07/12.mp3',
+    'audio/dialogues/mike_thread/07/13.mp3',
   ];
 
-  static List<int> chgBackground = <int>[8];
+  static List<int> chgBackground = <int>[9];
 
   MK07(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 

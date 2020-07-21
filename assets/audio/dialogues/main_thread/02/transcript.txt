@@ -9,7 +9,8 @@ Wyatt: You turned off before the break, didn't you?
 Jenny: I was scheduling the next audio recording and needed to proceed with all these technical things, and finally...
 Wyatt: You did.
 Jenny: Never mind, cut to the end.
-Wyatt: Once the judge was announcing the break, he starred on me. I know him for many years. In a very tiny period, I saw uncertainty in his eyes. There is no doubt for me his final decision will mostly rely on my conclusions.
+Wyatt: Once the judge was announcing the break, he starred on me. I know him for many years. In a very tiny period, I saw uncertainty in his eyes. 
+Wyatt: There is no doubt for me his final decision will mostly rely on my conclusions.
 (conditional)Jenny: Boys, I am not looking in your charming eyes in the courtroom. I am supposed to record speeches.
 (optional)Wyatt: Don't be afraid to have a little rest from the audio console.
 (optional)Wyatt: A professional is always a professional.

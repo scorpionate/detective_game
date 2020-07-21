@@ -28,18 +28,18 @@ class StatsScreen extends StatelessWidget {
           confidence += 1;
           awkwardness += 2;
           neutral += 2;
-        } else if (element.index == 14) {
-          // 14: c+3, a+1, i+1, n+0
+        } else if (element.index == 15) {
+          // 15: c+3, a+1, i+1, n+0
           confidence += 3;
           awkwardness += 1;
           impolitness += 1;
-        } else if (element.index == 15) {
-          //15: c+2, a+1, i+0, n+1
+        } else if (element.index == 16) {
+          //16: c+2, a+1, i+0, n+1
           confidence += 2;
           awkwardness += 1;
           neutral += 1;
-        } else if (element.index == 16) {
-          //16: c+1. a+2, i+0, n+1
+        } else if (element.index == 17) {
+          //17: c+1. a+2, i+0, n+1
           confidence += 1;
           awkwardness += 2;
           neutral += 1;
@@ -79,19 +79,19 @@ class StatsScreen extends StatelessWidget {
           impolitness += 1;
         }
       } else if (element.scene == 'MT05') {
-        if (element.index == 5) {
-          // 5: c+3, a+1, i+3, n+0
+        if (element.index == 7) {
+          // 7: c+3, a+1, i+3, n+0
           confidence += 3;
           awkwardness += 1;
           impolitness += 3;
-        } else if (element.index == 6) {
-          // 6: c+1, a+3, i+1, n+2
+        } else if (element.index == 8) {
+          // 8: c+1, a+3, i+1, n+2
           confidence += 1;
           awkwardness += 3;
           impolitness += 1;
           neutral += 2;
-        } else if (element.index == 7) {
-          // 7: c+1, a+3, i+0, n+3
+        } else if (element.index == 9) {
+          // 9: c+1, a+3, i+0, n+3
           confidence += 1;
           awkwardness += 3;
           neutral += 3;
@@ -132,18 +132,18 @@ class StatsScreen extends StatelessWidget {
           confidence += 1;
           awkwardness += 3;
           impolitness += 3;
-        } else if (element.index == 12) {
-          // 12: c+3, a+1, i+1, n+0
+        } else if (element.index == 14) {
+          // 14: c+3, a+1, i+1, n+0
           confidence += 3;
           awkwardness += 1;
           impolitness += 1;
-        } else if (element.index == 13) {
-          // 13: c+2, a+2, i+0, n+2
+        } else if (element.index == 15) {
+          // 15: c+2, a+2, i+0, n+2
           confidence += 2;
           awkwardness += 2;
           neutral += 2;
-        } else if (element.index == 14) {
-          // 14: c+1, a+3, i+0, n+1
+        } else if (element.index == 16) {
+          // 16: c+1, a+3, i+0, n+1
           confidence += 1;
           awkwardness += 3;
           neutral += 1;

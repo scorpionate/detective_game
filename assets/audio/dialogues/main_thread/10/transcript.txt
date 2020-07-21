@@ -6,8 +6,10 @@ Wyatt: We are proceeding to the second plan.
 Susy: I'll arrange everything.
 Roger: You are here, Wyatt.
 Wyatt: Changing plans, Roger. I would like if our CCTV installation managed to record everything. Not happening. We have only the live stream.
-Roger: Don't joke to me, we're time-limited. We gave our word they're going to be in the court's official health centre until afternoon. The only chance for you to hear from everybody was to record them. We cannot interrogate them one by one or create logs.
-Wyatt: I know! Here's what we do. Interrogations proceed as planned. In the technician room, I hear and watch everybody at the same time via the live stream. Prepare your boys.
+Roger: Don't joke to me, we're time-limited. We gave our word they're going to be in the court's official health centre until afternoon.
+Roger: The only chance for you to hear from everybody was to record them. We cannot interrogate them one by one or create logs.
+Wyatt: I know! Here's what we do. Interrogations proceed as planned. 
+Wyatt: In the technician room, I hear and watch everybody at the same time via the live stream. Prepare your boys.
 (conditional)Roger: You realize you're not a machine, right? There are 5 people to hear.
 (optional)Wyatt: Leave it to me. I know what I'm doing.
 (optional)Wyatt: Maybe this craziness pays off. 

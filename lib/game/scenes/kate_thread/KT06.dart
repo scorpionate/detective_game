@@ -22,7 +22,7 @@ class KT06 extends Scene {
     'audio/dialogues/kate_thread/06/06.mp3',
   ];
 
-  static List<int> chgBackground = <int>[3, 5, 6];
+  static List<int> chgBackground = <int>[3, 4, 5];
 
   KT06(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 

@@ -3,6 +3,9 @@ Mike: I am glad. It's making my sleep really bad.
 Interrogator1: I understand. This case is overwhelming not only for you. Please try to clarify everything as good as you can.
 Mike: No problem. Do you want me to tell everything?
 Interrogator1: Correct. Start with describing your friend.
-Mike: We know each other since a mid-school. Brandon was always that guy searching for another adrenaline dosage. We loved to hit dirt tracks with our bikes. Once we got older, he started to become an aviation fan. He began participating in courses, soon after achieving his first license allowing him to pilot the glider.
+Mike: We know each other since a mid-school. Brandon was always that guy searching for another adrenaline dosage. 
+Mike: We loved to hit dirt tracks with our bikes. Once we got older, he started to become an aviation fan. 
+Mike: He began participating in courses, soon after achieving his first license allowing him to pilot the glider.
 Interrogator1: Were you following him with his adventures?
-Mike: I liked it, but not as much as he did. I mean, I fear heights. So I just stayed on the ground. But we still were meeting each other.
+Mike: I liked it, but not as much as he did. I mean, I fear heights. So I just stayed on the ground. 
+Mike: But we still were meeting each other.

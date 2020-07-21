@@ -20,9 +20,10 @@ class LT02 extends Scene {
     'audio/dialogues/luca_thread/02/06.mp3',
     'audio/dialogues/luca_thread/02/07.mp3',
     'audio/dialogues/luca_thread/02/08.mp3',
+    'audio/dialogues/luca_thread/02/09.mp3',
   ];
 
-  static List<int> chgBackground = <int>[8];
+  static List<int> chgBackground = <int>[9];
 
   LT02(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
 

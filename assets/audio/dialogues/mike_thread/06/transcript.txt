@@ -1,6 +1,8 @@
 Interrogator1: Wait, threw something?
 Mike: I believe he crushed some bottle aiming at my head. I don't remember it precisely. We had a terrible fight. 
-Interrogator1: Mr Mike, do you know we are here because we found the dead girl with a crashed glass next to her in the central park? That girl met Brandon too.
-Mike: Yes, but she was a potential client and what's more important she wasn't his friend. He would not get angry at her. He was very friendly to strangers. He was very friendly at all. 
+Interrogator1: Mr Mike, do you know we are here because we found the dead girl with a crashed glass next to her in the central park? 
+Interrogator1: That girl met Brandon too.
+Mike: Yes, but she was a potential client and what's more important she wasn't his friend. He would not get angry at her. 
+Mike: He was very friendly to strangers. He was very friendly at all. 
 Interrogator1: Can you tell more?
 Mike: Yes, I am going.
