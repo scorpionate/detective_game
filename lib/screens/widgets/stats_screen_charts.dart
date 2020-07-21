@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
@@ -61,41 +62,79 @@ class _StatsScreenChartsState extends State<StatsScreenCharts>
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.vertical,
+    final width = MediaQuery.of(context).size.width / 2;
+    final progressHeight = 50.0;
+
+    return Row(
       children: <Widget>[
-        Column(children: <Widget>[
-          RoundedProgressBar(
-            childLeft: Text('Confidence'),
-            childRight: Text(_confidence.value.floor().toString()),
-            style: RoundedProgressBarStyle(colorProgress: Colors.red),
-            percent: _confidence.value,
+        Container(
+          padding: EdgeInsets.all(10),
+          width: width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              AutoSizeText(
+                "Basing on your in-game choices, we concluded your Wyatt's character.",
+                minFontSize: 7,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
           ),
-          RoundedProgressBar(
-            childLeft: Text('Awkwardness'),
-            childRight: Text(_awkwardness.value.floor().toString()),
-            style: RoundedProgressBarStyle(colorProgress: Colors.yellow),
-            percent: _awkwardness.value,
+        ),
+
+        // s
+        Container(
+          width: width,
+          alignment: Alignment.center,
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
+              Column(children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 2.5),
+                  child: RoundedProgressBar(
+                    height: progressHeight,
+                    childLeft: Text('Confidence'),
+                    childRight: Text(_confidence.value.floor().toString()),
+                    theme: RoundedProgressBarTheme.red,
+                    percent: _confidence.value,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 2.5, 5, 2.5),
+                  child: RoundedProgressBar(
+                    height: progressHeight,
+                    childLeft: Text('Awkwardness'),
+                    childRight: Text(_awkwardness.value.floor().toString()),
+                    theme: RoundedProgressBarTheme.yellow,
+                    percent: _awkwardness.value,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 2.5, 5, 2.5),
+                  child: RoundedProgressBar(
+                    height: progressHeight,
+                    childLeft: Text('Impolitness'),
+                    childRight: Text(_impolitness.value.floor().toString()),
+                    theme: RoundedProgressBarTheme.blue,
+                    percent: _impolitness.value,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 2.5, 5, 2.5),
+                  child: RoundedProgressBar(
+                    height: progressHeight,
+                    childLeft: Text('Neutralness'),
+                    childRight: Text(_neutralness.value.floor().toString()),
+                    theme: RoundedProgressBarTheme.green,
+                    percent: _neutralness.value,
+                  ),
+                ),
+              ]),
+            ],
           ),
-          RoundedProgressBar(
-            childLeft: Text('Impolitness'),
-            childRight: Text(_impolitness.value.floor().toString()),
-            style: RoundedProgressBarStyle(colorProgress: Colors.orange),
-            percent: _impolitness.value,
-          ),
-          RoundedProgressBar(
-            childLeft: Text('Neutralness'),
-            childRight: Text(_neutralness.value.floor().toString()),
-            style: RoundedProgressBarStyle(colorProgress: Colors.green),
-            percent: _neutralness.value,
-          ),
-          Text('XD'),
-          Text('XD'),
-          Text('XD'),
-          Text('XD'),
-          Text('XD'),
-          Text('XD'),
-        ]),
+        ),
       ],
     );
   }

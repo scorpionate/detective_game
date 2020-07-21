@@ -177,7 +177,10 @@ class StatsScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('HERE YOU GO TO THE END'),
+          title: Text(
+            'Your statistics',
+          ),
+          backgroundColor: Colors.black54,
           centerTitle: true,
         ),
         body: StreamBuilder<Object>(

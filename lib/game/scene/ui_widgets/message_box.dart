@@ -30,6 +30,7 @@ class MessageBox extends StatelessWidget {
                         this.message,
                         minFontSize: 10,
                         overflow: TextOverflow.fade,
+                        textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       )),
                 ),
