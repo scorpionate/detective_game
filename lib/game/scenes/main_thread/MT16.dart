@@ -3,9 +3,19 @@ import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 
-// MT01 ==> Main Thread (Scene) 02
 class MT16 extends Scene {
-  // Asset Paths
+  // MT16 ==> Main Thread (Scene) 16
+  // bgdImages: contains background images paths SHOULDNT BE EMPTY
+  //
+  // dlgFiles: contains dialogues music files paths SHOULDNT BE EMPTY
+  // List start from path to file with dialogues saved in txt. Basing on that file,
+  // the UI is generated. Scene automatically plays dialogues starting from index 1
+  // Transcript.txt should have the number of lines equals dlgFiles.length-1
+  //
+  // chgBackground: contains int's saying at which dialogue(it's index)
+  // scene should change background to the following ones listed in bgdImages MAY BE EMPTY
+  // ambient: contains path to ambient backgorund of scene If not null it will be played(in loop)
+  // automatically when scene starts and automatically stopped when scene ends
   static List<String> bgdImages = <String>[
     'locations/main_thread/24',
   ];
@@ -33,6 +43,11 @@ class MT16 extends Scene {
   MT16(Gameplay gameplay)
       : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
+  // Additional properties
+  // ForcedDLGindexes reducesdlgFiles, because some of dlgFiles dialogues
+  // are optional and dependent. basing on user previous decisions
+  // Dlgfiles will be transfered to forceddlgfiles and dialogue
+  // manager will play forced list instead of standard. Index controls which dialogue is played
   List<int> forcedDlgIndexes = <int>[];
   int index = 0;
 
@@ -42,11 +57,10 @@ class MT16 extends Scene {
   }
 
   void _onStart() async {
-    await LocalSaveManager()
-        .clearSavedChoicesForScene(this.runtimeType.toString());
-
+    await LocalSaveManager().clearSavedChoicesForScene(this.runtimeType);
     final choices = await LocalSaveManager().loadOptionalChoices();
 
+    // Detect choices made for scene MT14(only them are important)
     var choosen = List<int>();
     choices.data.forEach((element) {
       if (element.scene == 'MT14') {
@@ -56,6 +70,7 @@ class MT16 extends Scene {
 
     choosen.sort();
 
+    // Decide which dialogue to reduce into forcedDLG
     int first = choosen[0] - 3;
     int second = choosen[1] - 10;
     int third;
@@ -90,16 +105,22 @@ class MT16 extends Scene {
       third = 13;
     else if (first == 6 && second == 10) third = 13;
 
+    // Prepare forcedDLGIndexes
     var list = this.forcedDlgIndexes;
     list.add(first);
     list.add(7);
     list.add(second);
     list.add(third);
+
+    // Ready to play by managers
   }
 
   @override
   void onTap() {
     if (this.dialogueManager.currentDialogueIndex > 1) {
+      // Forced DLG contains prepared index to be passed to manager to be played
+      // Indexes are limited and chosen from dlgFiles
+      // This supplies them to dialogue manager
       this.dialogueManager.currentDialogueIndex = this.forcedDlgIndexes[index];
       if (this.forcedDlgIndexes.length - 1 > index)
         index++;
@@ -111,7 +132,7 @@ class MT16 extends Scene {
 
   @override
   void nextScene() {
-    // Show stats
+    // Game ends - show User walkthrough statistics
     this.gameplay.showStatisticsScreen();
   }
 }

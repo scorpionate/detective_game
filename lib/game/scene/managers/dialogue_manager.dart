@@ -6,21 +6,26 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:detective_game/game/scene/scene.dart';
 
 class DialogueManager {
+  // Plays dialogues from provided paths
   final Scene _scene;
   var _dlgCache = AudioCache();
   var _dlgPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
   final List<String> _dlgFiles; // Dialogues audio paths
-  final List<int> _changeBackgorund;
+  final List<int> _changeBackground;
   List<String> _dlgText; // Dialogues texts
   bool _isReady = false; // Loading assets indicator => true = assets loaded
 
-  // Dlg management
+  // Dlg management properties
+  // Because transcript.txt is in _dlgFiles at first, index starts from 1
   int _dlgTextIndex = 1; // Current dialogue to play
-  bool _isConditional = false; //
+  // Has dialogue conditional answers for user to choose?
+  bool _isConditional = false;
   int _optionalsCount = 0;
+  // Has dialogue conditional answers for user's choice ?
   bool _hasAnswers = false;
 
   List<String> get dialogues {
+    // return list of mp3 file paths
     return _dlgFiles;
   }
 
@@ -29,6 +34,7 @@ class DialogueManager {
   }
 
   bool get isReady {
+    // Are assets in cache
     return _isReady;
   }
 
@@ -40,7 +46,7 @@ class DialogueManager {
     this._dlgTextIndex = val;
   }
 
-  DialogueManager(this._scene, this._dlgFiles, this._changeBackgorund) {
+  DialogueManager(this._scene, this._dlgFiles, this._changeBackground) {
     _initialize();
   }
 
@@ -66,17 +72,19 @@ class DialogueManager {
   }
 
   void optionalDialogueClicked(String dlg) {
+    // After optional dialogu choose
     _dlgTextIndex = _dlgText.indexOf(dlg);
 
+    // Save user's choice to sharedpreferences
     LocalSaveManager().addToOptionalChoices(
         this._scene.runtimeType.toString(), _dlgTextIndex);
 
+    // Reset state and continue with next dialogue
     _isConditional = false;
     playDialogue();
   }
 
   Future<void> stopDialogue() async {
-    // Stop any dialogue audio
     try {
       if (_dlgPlayer?.state == AudioPlayerState.PLAYING) {
         await _dlgPlayer.stop();
@@ -87,7 +95,6 @@ class DialogueManager {
   }
 
   Future<void> pauseDialogue() async {
-    // Stop any dialogue audio
     try {
       if (_dlgPlayer?.state == AudioPlayerState.PLAYING) {
         await _dlgPlayer.pause();
@@ -98,7 +105,6 @@ class DialogueManager {
   }
 
   Future<void> resumeDialogue() async {
-    // Stop any dialogue audio
     try {
       if (_dlgPlayer?.state == AudioPlayerState.PAUSED) {
         await _dlgPlayer?.resume();
@@ -118,36 +124,41 @@ class DialogueManager {
   }
 
   void _changeBackgroundIf() {
-    this._changeBackgorund.forEach((element) {
+    // If dialogue index is equal to one of index provided in static vals
+    // of scene declaration, increment background
+    this._changeBackground.forEach((element) {
       if (element == _dlgTextIndex) {
         this._scene.backgroundManager.nextBackground();
       }
     });
   }
 
-  Future<void> playDialogue() async {
-    _changeBackgroundIf();
-
-    _showDialogBox();
-
-    stopDialogue();
-
+  void _play() async {
     // Play current audio
     try {
-      _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]); // Throws!
+      _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]);
     } catch (e) {
       print(e);
     }
-    // Shuffle audio; Index operation
+  }
+
+  Future<void> playDialogue() async {
+    // Play dialogue procedure with changing states and index operations
+    _changeBackgroundIf();
+    _showDialogBox();
+    stopDialogue();
+    _play();
     _nextDialogue();
   }
 
   void _showDialogBox() {
-    // Dialog has multpile optional answers, show complex dialogue
+    // Shows dialog box with transcript of dialogue
+    // Interprets transcript.txt
+    // If line of transcript contains (conditional):
     if (_dlgText[_dlgTextIndex].contains('(conditional)')) {
       _isConditional = true;
 
-      // Zero
+      // Reset state
       this._optionalsCount = 0;
       this._hasAnswers = false;
 

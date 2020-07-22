@@ -1,30 +1,36 @@
 import 'dart:ui';
-import 'package:detective_game/game/gameplay.dart';
-import 'package:flutter/material.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game/game.dart';
+import 'package:flutter/material.dart';
+import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/managers/ui_manager.dart';
 import 'package:detective_game/game/scene/managers/background_manager.dart';
 import 'package:detective_game/game/scene/managers/dialogue_manager.dart';
 import 'package:detective_game/game/scene/managers/background_ambient_manager.dart';
 
+// Construct for specific scenes. Manages flow in single scene and handles
+// showing background, playing dialogues, etc. Implemets Flame engine methods
 abstract class Scene extends Game {
-  // Screen properties
+  // Engine properties - Screen properties
+  // Screen is dived on tiles to display content in calculated ratio: here x:9(prefferably x = 16 or more)
   Size screenSize;
   double tileSize;
 
   // State
+  // Allows scene to be finished once update detects it - shows fade in
   bool _finished = false;
+  // Allows scene to begin with fading out and first dialogue, triggers
   bool _fadeOut = false;
 
+  // Background music's path to be played during the scene
   final String ambientPath;
 
   // Components
   final Gameplay _gameplay;
-  final UIManager _uiManager = UIManager(); // Needs to be here
-  final _bgdAmbManager = BackgroundAmbientManager();
   DialogueManager _dlgManager;
   BackgroundManager _bgdManager;
+  final _uiManager = UIManager(); // Needs to be here, throws null
+  final _bgdAmbManager = BackgroundAmbientManager();
 
   Gameplay get gameplay {
     return this._gameplay;
@@ -79,55 +85,41 @@ abstract class Scene extends Game {
     this._dlgManager = DialogueManager(this, dlgFiles, changeBackground);
   }
 
-  // Lifecycle func
   void nextScene() {
-    // By default
-    this._gameplay.playMainThreadScene();
+    // By default, sometimes needs override
+    this._gameplay.data.playMainThreadScene();
   }
 
   void onTap() {
-    // Casual =>
+    // By default, sometimes needs override
+    // Disables 'Next' button when optionals dialogues are presented
     if (!this._dlgManager.isConditional) {
       _dlgManager.playDialogue();
     }
   }
 
-  void bottomButtonClicked({@required int id}) {}
-
-  // Background management
-  void nextBackground() {
-    _bgdManager.nextBackground();
+  void bottomButtonClicked({@required int id}) {
+    // To be passed to UI bottom's buttons
   }
 
-  void previousBackgound() {
-    _bgdManager.previousBackground();
-  }
-
-  void showDialogueWithOptionalAnswers(List<String> data) {
-    this._uiManager.showDialogueWithOptionalAnswers(data);
-  }
-
-  void showSimpleDialogue(String val) {
-    this._uiManager.showSimpleDialogue(val);
-  }
-
-  void hideUI() {
-    this._uiManager.hideUI();
-  }
-
-  void onStart() {}
-
-  // Engine funcs
-  Future<void> _resize() async {
-    screenSize = await Flame.util.initialDimensions();
-    tileSize = screenSize.height /
-        9; // Landscape mode inverts width with height, scale to 16:9 ratio
+  void onStart() {
+    // Code executed before fading out from black screen to transparent, to be overriden
   }
 
   void onEnd() {
+    // Code executed at the scene's end - after view fades into black screen
+    // Method is passed to FADEINBOX where placed at the end of animation
     this.nextScene();
-    this.hideUI();
+    this._uiManager.hideUI();
     Flame.assets.clearCache();
+  }
+
+  // Engine funcs
+  Future<void> _resize() async {
+    // Default ratio is set to 16:9
+    screenSize = await Flame.util.initialDimensions();
+    // Landscape mode inverts width with height, scale to 16:9 ratio
+    tileSize = screenSize.height / 9;
   }
 
   @override
@@ -135,21 +127,20 @@ abstract class Scene extends Game {
     if (this.assetsLoaded) {
       _bgdManager.render(canvas);
     }
-    // else:  Maybe show some loading??
   }
 
   @override
   void update(double t) {
-    // only once
-    if (this.gameplay.areAllScenesLoaded && !this._fadeOut) {
-      this.onStart();
-      if (this.ambientPath != null) {
-        this._bgdAmbManager.playAmbientBackground(this.ambientPath);
-      }
+    // Only once at the beggining
+    // All scenes loaded and fade out not done
+    if (this.gameplay.data.areAllScenesLoaded && !this._fadeOut) {
+      this.onStart(); // Leaves place for additional code
+      this._bgdAmbManager.playAmbientBackground(this.ambientPath);
       this._fadeOut = true;
       this._uiManager.fadeOut();
     }
 
+    // Only once at the end
     if (this._dlgManager.isDialogueFinished() && this.isFinished) {
       this._bgdAmbManager.stopAmbientBackground();
       this._uiManager.fadeIn();

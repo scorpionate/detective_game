@@ -1,11 +1,10 @@
 import 'dart:ui';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:detective_game/services/local_save_manager.dart';
 
-// MT01 ==> Main Thread (Scene) 00
 class ConfigResolution extends Scene {
-  // Asset Paths
+//Scene prepared for displaying custom resolution and saving user preference
   static List<String> bgdImages = <String>[
     'configuration_set/0.75x.png',
     'configuration_set/1x.png',
@@ -15,8 +14,8 @@ class ConfigResolution extends Scene {
     'configuration_set/4x.png',
   ];
 
+  // Needed because ITS SCENE
   static List<String> dlgFiles = <String>[];
-
   static List<int> chgBackground = <int>[];
   static String ambient;
 
@@ -43,6 +42,7 @@ class ConfigResolution extends Scene {
     String bgd = this.backgroundManager.currentBackgroundPath;
     String factor;
 
+    // Shrink file path
     if (bgd.contains('0.75x')) {
       factor = '@0.75x';
     } else if (bgd.contains('1x')) {
@@ -58,7 +58,6 @@ class ConfigResolution extends Scene {
     }
 
     // Save to persistent
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('RESOLUTION', factor);
+    LocalSaveManager().saveResolution(factor);
   }
 }

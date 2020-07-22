@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 
-import 'package:detective_game/game/scene/scene.dart';
 import 'package:detective_game/model/game_state.dart';
 import 'package:detective_game/screens/stats_screen.dart';
 import 'package:detective_game/services/local_save_manager.dart';
-import 'package:flutter/material.dart';
+import 'package:detective_game/game/scene/scene.dart';
 import 'package:detective_game/game/scene/displayer.dart';
+import 'package:detective_game/game/scene/managers/background_ambient_manager.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT01.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT02.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT03.dart';
@@ -56,60 +57,133 @@ import 'package:detective_game/game/scenes/main_thread/MT13.dart';
 import 'package:detective_game/game/scenes/main_thread/MT14.dart';
 import 'package:detective_game/game/scenes/main_thread/MT15.dart';
 import 'package:detective_game/game/scenes/main_thread/MT16.dart';
-import 'package:detective_game/game/scene/managers/background_ambient_manager.dart';
 
-// Manage gameplay, toggle between scenes
-class Gameplay extends StatefulWidget {
-  final List<Displayer> _jeffThread = List<Displayer>();
+enum PartialScene { luca, daniel, jeff, kate, mike }
 
-  final List<Displayer> _kateThread = List<Displayer>();
-
-  final List<Displayer> _lucaThread = List<Displayer>();
-
-  final List<Displayer> _mainThread = List<Displayer>();
-
-  final List<Displayer> _mikeThread = List<Displayer>();
-
-  final List<Displayer> _danielThread = List<Displayer>();
-
+class _GamePlayData {
+// This is Gameplay, which controls... gameplay!
+// Gameplay data contains all references to scenes, controls and get&set
+// Gameplay is widget displayng specific scene to the user
+// Gameplay manages flow and order of scenes
+// Gameplay provides methods for changing scenes
+  final StreamController<bool> controller = StreamController<bool>.broadcast();
   final ambient = BackgroundAmbientManager();
 
-  int _jeffThreadIndex = 0;
+  // List with prepared scenes ready to be played
+  final List<Displayer> jeffThread = List<Displayer>();
+  final List<Displayer> kateThread = List<Displayer>();
+  final List<Displayer> lucaThread = List<Displayer>();
+  final List<Displayer> mainThread = List<Displayer>();
+  final List<Displayer> mikeThread = List<Displayer>();
+  final List<Displayer> danielThread = List<Displayer>();
 
-  int _kateThreadIndex = 0;
+  // Indexes to control scenes
+  int jeffThreadIndex = 0;
+  int kateThreadIndex = 0;
+  int lucaThreadIndex = 0;
+  int mainThreadIndex = 0;
+  int mikeThreadIndex = 0;
+  int danielThreadIndex = 0;
 
-  int _lucaThreadIndex = 0;
-
-  int _mainThreadIndex = 0;
-
-  int _mikeThreadIndex = 0;
-
-  int _danielThreadIndex = 0;
-
+  // Bottom buttons state required for scene MT11 & MT12
+  // Needs to stare state here
   bool jeffButton = true;
-
   bool kateButton = true;
-
   bool lucaButton = true;
-
   bool mikeButton = true;
-
   bool danielButton = true;
 
-  bool _partialsFinished = false;
+  // Current scene
+  var scene;
+  bool partialsThreadsEndedTrigger = false;
 
-  bool get partialsFinished {
-    return _partialsFinished;
+  void initializeMainThread(Gameplay obj) {
+    // Initializes scenes and preload assets
+    mainThread.add(Displayer(scene: MT01(obj)));
+    mainThread.add(Displayer(scene: MT02(obj)));
+    mainThread.add(Displayer(scene: MT03(obj)));
+    mainThread.add(Displayer(scene: MT04(obj)));
+    mainThread.add(Displayer(scene: MT05(obj)));
+    mainThread.add(Displayer(scene: MT06(obj)));
+    mainThread.add(Displayer(scene: MT07(obj)));
+    mainThread.add(Displayer(scene: MT08(obj)));
+    mainThread.add(Displayer(scene: MT09(obj)));
+    mainThread.add(Displayer(scene: MT10(obj)));
+    mainThread.add(Displayer(scene: MT11(obj)));
+    mainThread.add(Displayer(scene: MT12(obj)));
+    mainThread.add(Displayer(scene: MT13(obj)));
+    mainThread.add(Displayer(scene: MT14(obj)));
+    mainThread.add(Displayer(scene: MT15(obj)));
+    mainThread.add(Displayer(scene: MT16(obj)));
   }
 
-  bool get noneOfPartialsPlayed {
+  void initializeOtherThreads(Gameplay obj) {
+    // Initializes scenes and preload assets
+    jeffThread.add(Displayer(scene: JT01(obj)));
+    jeffThread.add(Displayer(scene: JT02(obj)));
+    jeffThread.add(Displayer(scene: JT03(obj)));
+    jeffThread.add(Displayer(scene: JT04(obj)));
+    jeffThread.add(Displayer(scene: JT05(obj)));
+    jeffThread.add(Displayer(scene: JT06(obj)));
+
+    lucaThread.add(Displayer(scene: LT01(obj)));
+    lucaThread.add(Displayer(scene: LT02(obj)));
+    lucaThread.add(Displayer(scene: LT03(obj)));
+    lucaThread.add(Displayer(scene: LT04(obj)));
+    lucaThread.add(Displayer(scene: LT05(obj)));
+    lucaThread.add(Displayer(scene: LT06(obj)));
+
+    danielThread.add(Displayer(scene: DT01(obj)));
+    danielThread.add(Displayer(scene: DT02(obj)));
+    danielThread.add(Displayer(scene: DT03(obj)));
+    danielThread.add(Displayer(scene: DT04(obj)));
+    danielThread.add(Displayer(scene: DT05(obj)));
+    danielThread.add(Displayer(scene: DT06(obj)));
+
+    kateThread.add(Displayer(scene: KT01(obj)));
+    kateThread.add(Displayer(scene: KT02(obj)));
+    kateThread.add(Displayer(scene: KT03(obj)));
+    kateThread.add(Displayer(scene: KT04(obj)));
+    kateThread.add(Displayer(scene: KT05(obj)));
+    kateThread.add(Displayer(scene: KT06(obj)));
+    kateThread.add(Displayer(scene: KT07(obj)));
+    kateThread.add(Displayer(scene: KT08(obj)));
+
+    mikeThread.add(Displayer(scene: MK01(obj)));
+    mikeThread.add(Displayer(scene: MK02(obj)));
+    mikeThread.add(Displayer(scene: MK03(obj)));
+    mikeThread.add(Displayer(scene: MK04(obj)));
+    mikeThread.add(Displayer(scene: MK05(obj)));
+    mikeThread.add(Displayer(scene: MK06(obj)));
+    mikeThread.add(Displayer(scene: MK07(obj)));
+    mikeThread.add(Displayer(scene: MK08(obj)));
+  }
+
+  bool get areAllScenesLoaded {
+    for (int i = 0; i < jeffThread.length; i++)
+      if (!jeffThread[i].scene.assetsLoaded) return false;
+    for (int i = 0; i < lucaThread.length; i++)
+      if (!lucaThread[i].scene.assetsLoaded) return false;
+    for (int i = 0; i < danielThread.length; i++)
+      if (!danielThread[i].scene.assetsLoaded) return false;
+    for (int i = 0; i < kateThread.length; i++)
+      if (!kateThread[i].scene.assetsLoaded) return false;
+    for (int i = 0; i < mikeThread.length; i++)
+      if (!mikeThread[i].scene.assetsLoaded) return false;
+    for (int i = 0; i < mainThread.length; i++)
+      if (!mainThread[i].scene.assetsLoaded) return false;
+
+    return true;
+  }
+
+  bool get arePartialThreadsEnded {
     bool a = false, b = false, c = false, d = false, e = false;
 
-    if (_danielThreadIndex == 0) a = true;
-    if (_mikeThreadIndex == 0) b = true;
-    if (_lucaThreadIndex == 0) c = true;
-    if (_kateThreadIndex == 0) d = true;
-    if (_kateThreadIndex == 0) e = true;
+    if (danielThread.length <= danielThreadIndex) a = true;
+    if (mikeThread.length <= mikeThreadIndex) b = true;
+    if (lucaThread.length <= lucaThreadIndex) c = true;
+    if (kateThread.length <= kateThreadIndex) d = true;
+    if (kateThread.length <= kateThreadIndex) e = true;
 
     if (a && b && c && d && e)
       return true;
@@ -117,132 +191,56 @@ class Gameplay extends StatefulWidget {
       return false;
   }
 
-  var _scene;
+  bool get arePartialThreadsAtStart {
+    bool a = false, b = false, c = false, d = false, e = false;
 
-  final StreamController<bool> sceneController =
-      StreamController<bool>.broadcast();
+    if (danielThreadIndex == 0) a = true;
+    if (mikeThreadIndex == 0) b = true;
+    if (lucaThreadIndex == 0) c = true;
+    if (kateThreadIndex == 0) d = true;
+    if (jeffThreadIndex == 0) e = true;
 
-  void _initializeMainThread() {
-    _mainThread.add(Displayer(scene: MT01(this)));
-    _mainThread.add(Displayer(scene: MT02(this)));
-    _mainThread.add(Displayer(scene: MT03(this)));
-    _mainThread.add(Displayer(scene: MT04(this)));
-    _mainThread.add(Displayer(scene: MT05(this)));
-    _mainThread.add(Displayer(scene: MT06(this)));
-    _mainThread.add(Displayer(scene: MT07(this)));
-    _mainThread.add(Displayer(scene: MT08(this)));
-    _mainThread.add(Displayer(scene: MT09(this)));
-    _mainThread.add(Displayer(scene: MT10(this)));
-    _mainThread.add(Displayer(scene: MT11(this)));
-    _mainThread.add(Displayer(scene: MT12(this)));
-    _mainThread.add(Displayer(scene: MT13(this)));
-    _mainThread.add(Displayer(scene: MT14(this)));
-    _mainThread.add(Displayer(scene: MT15(this)));
-    _mainThread.add(Displayer(scene: MT16(this)));
+    if (a && b && c && d && e)
+      return true;
+    else
+      return false;
   }
 
-  void initializeOtherThreads() {
-    _jeffThread.add(Displayer(scene: JT01(this)));
-    _jeffThread.add(Displayer(scene: JT02(this)));
-    _jeffThread.add(Displayer(scene: JT03(this)));
-    _jeffThread.add(Displayer(scene: JT04(this)));
-    _jeffThread.add(Displayer(scene: JT05(this)));
-    _jeffThread.add(Displayer(scene: JT06(this)));
-
-    _lucaThread.add(Displayer(scene: LT01(this)));
-    _lucaThread.add(Displayer(scene: LT02(this)));
-    _lucaThread.add(Displayer(scene: LT03(this)));
-    _lucaThread.add(Displayer(scene: LT04(this)));
-    _lucaThread.add(Displayer(scene: LT05(this)));
-    _lucaThread.add(Displayer(scene: LT06(this)));
-
-    _danielThread.add(Displayer(scene: DT01(this)));
-    _danielThread.add(Displayer(scene: DT02(this)));
-    _danielThread.add(Displayer(scene: DT03(this)));
-    _danielThread.add(Displayer(scene: DT04(this)));
-    _danielThread.add(Displayer(scene: DT05(this)));
-    _danielThread.add(Displayer(scene: DT06(this)));
-
-    _kateThread.add(Displayer(scene: KT01(this)));
-    _kateThread.add(Displayer(scene: KT02(this)));
-    _kateThread.add(Displayer(scene: KT03(this)));
-    _kateThread.add(Displayer(scene: KT04(this)));
-    _kateThread.add(Displayer(scene: KT05(this)));
-    _kateThread.add(Displayer(scene: KT06(this)));
-    _kateThread.add(Displayer(scene: KT07(this)));
-    _kateThread.add(Displayer(scene: KT08(this)));
-
-    _mikeThread.add(Displayer(scene: MK01(this)));
-    _mikeThread.add(Displayer(scene: MK02(this)));
-    _mikeThread.add(Displayer(scene: MK03(this)));
-    _mikeThread.add(Displayer(scene: MK04(this)));
-    _mikeThread.add(Displayer(scene: MK05(this)));
-    _mikeThread.add(Displayer(scene: MK06(this)));
-    _mikeThread.add(Displayer(scene: MK07(this)));
-    _mikeThread.add(Displayer(scene: MK08(this)));
-  }
-
-  bool get areAllScenesLoaded {
-    for (int i = 0; i < _jeffThread.length; i++)
-      if (!_jeffThread[i].scene.assetsLoaded) return false;
-
-    for (int i = 0; i < _lucaThread.length; i++)
-      if (!_lucaThread[i].scene.assetsLoaded) return false;
-
-    for (int i = 0; i < _danielThread.length; i++)
-      if (!_danielThread[i].scene.assetsLoaded) return false;
-
-    for (int i = 0; i < _kateThread.length; i++)
-      if (!_kateThread[i].scene.assetsLoaded) return false;
-
-    for (int i = 0; i < _mikeThread.length; i++)
-      if (!_mikeThread[i].scene.assetsLoaded) return false;
-
-    for (int i = 0; i < _mainThread.length; i++)
-      if (!_mainThread[i].scene.assetsLoaded) return false;
-
-    return true;
-  }
-
-  void _incrementAllIndexes() {
+  void incrementAllIndexes() {
     _disableShorterThreads() {
       danielButton = false;
       jeffButton = false;
       lucaButton = false;
     }
 
-    // Increment all
-    if (_danielThread.length > _danielThreadIndex) _danielThreadIndex++;
-    if (_jeffThread.length > _jeffThreadIndex) _jeffThreadIndex++;
-    if (_kateThread.length > _kateThreadIndex) _kateThreadIndex++;
-    if (_lucaThread.length > _lucaThreadIndex) _lucaThreadIndex++;
-    if (_mikeThread.length > _mikeThreadIndex) _mikeThreadIndex++;
+    // Increment all indexes
+    if (danielThread.length > danielThreadIndex) danielThreadIndex++;
+    if (jeffThread.length > jeffThreadIndex) jeffThreadIndex++;
+    if (kateThread.length > kateThreadIndex) kateThreadIndex++;
+    if (lucaThread.length > lucaThreadIndex) lucaThreadIndex++;
+    if (mikeThread.length > mikeThreadIndex) mikeThreadIndex++;
 
-    if (_danielThreadIndex == _danielThread.length ||
-        _lucaThreadIndex == _lucaThread.length ||
-        _jeffThreadIndex == _jeffThread.length) _disableShorterThreads();
+    // This threads are shorter - need to disable buttons in UI
+    if (danielThreadIndex == danielThread.length ||
+        lucaThreadIndex == lucaThread.length ||
+        jeffThreadIndex == jeffThread.length) _disableShorterThreads();
   }
 
-  bool _areThreadsEnded() {
-    bool a = false, b = false, c = false, d = false, e = false;
-
-    if (_danielThread.length <= _danielThreadIndex) a = true;
-    if (_mikeThread.length <= _mikeThreadIndex) b = true;
-    if (_lucaThread.length <= _lucaThreadIndex) c = true;
-    if (_kateThread.length <= _kateThreadIndex) d = true;
-    if (_kateThread.length <= _kateThreadIndex) e = true;
-
-    if (a && b && c && d && e)
-      return true;
-    else
-      return false;
+  void incrementIndex(PartialScene who) {
+    if (who == PartialScene.daniel) {
+      danielThreadIndex++;
+    } else if (who == PartialScene.jeff) {
+      jeffThreadIndex++;
+    } else if (who == PartialScene.kate) {
+      kateThreadIndex++;
+    } else if (who == PartialScene.luca) {
+      lucaThreadIndex++;
+    } else if (who == PartialScene.mike) {
+      mikeThreadIndex++;
+    }
   }
 
-  bool get allPartialThreadsFinished {
-    return _areThreadsEnded();
-  }
-
-  bool _areAllButtonsDisabled() {
+  bool get areAllButtonsDisabled {
     bool a = danielButton ? true : false;
     bool b = mikeButton ? true : false;
     bool c = jeffButton ? true : false;
@@ -255,7 +253,21 @@ class Gameplay extends StatefulWidget {
       return false;
   }
 
-  void _setAllButtons({bool to}) {
+  void setButton(PartialScene who, val) {
+    if (who == PartialScene.daniel) {
+      danielButton = val;
+    } else if (who == PartialScene.jeff) {
+      jeffButton = val;
+    } else if (who == PartialScene.kate) {
+      kateButton = val;
+    } else if (who == PartialScene.luca) {
+      lucaButton = val;
+    } else if (who == PartialScene.mike) {
+      mikeButton = val;
+    }
+  }
+
+  set setAllButtonsTo(bool to) {
     jeffButton = to;
     kateButton = to;
     mikeButton = to;
@@ -264,165 +276,79 @@ class Gameplay extends StatefulWidget {
   }
 
   void playMainThreadScene({int index}) {
+    // Index is optional, may be not provided
     if (index == null) {
-      _mainThreadIndex++;
-      _scene = _mainThread[_mainThreadIndex];
+      mainThreadIndex++;
+      scene = mainThread[mainThreadIndex];
     } else {
-      _scene = _mainThread[index];
-      final val = _scene as Displayer;
+      scene = mainThread[index];
+      final val = scene as Displayer;
       val.scene.fadeOut = false;
     }
 
-    LocalSaveManager().saveGameState(GameState(_mainThreadIndex));
-    sceneController.add(true);
+    LocalSaveManager().saveGameState(GameState(mainThreadIndex));
+    controller.add(true);
   }
 
-  void playDanielThreadScene() {
-    if (_danielThread.length > _danielThreadIndex) {
-      this._scene.scene.uiManager.fadeIn();
-      _scene = _danielThread[_danielThreadIndex];
+  void playPartialScene(PartialScene who) {
+    var list;
+    var index;
 
-      if (_danielThreadIndex == 0) {
-        _danielThreadIndex++;
-        danielButton = false;
-        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
+    // Decide which thread is playing
+    if (who == PartialScene.daniel) {
+      list = danielThread;
+      index = danielThreadIndex;
+    } else if (who == PartialScene.jeff) {
+      list = jeffThread;
+      index = jeffThreadIndex;
+    } else if (who == PartialScene.kate) {
+      list = kateThread;
+      index = kateThreadIndex;
+    } else if (who == PartialScene.luca) {
+      list = lucaThread;
+      index = lucaThreadIndex;
+    } else if (who == PartialScene.mike) {
+      list = mikeThread;
+      index = mikeThreadIndex;
+    }
+
+    // Play scene
+    if (list.length > index) {
+      this.scene.scene.uiManager.fadeIn();
+      this.scene = list[index];
+
+      // First sequence is mandatory for each thread
+      // This provides user from going further unless he
+      // plays first scene from each thread
+      if (index == 0) {
+        this.incrementIndex(who);
+        this.setButton(who, false);
+        if (this.areAllButtonsDisabled) this.setAllButtonsTo = true;
       } else {
-        //Increment all scenes
-        _incrementAllIndexes();
+        incrementAllIndexes();
       }
     } else {
-      if (_areThreadsEnded()) {
-        this._partialsFinished = true;
-        this._scene.scene.uiManager.fadeIn();
+      if (this.arePartialThreadsEnded) {
+        // Proceed to next Main Thread Scene after animation
+        this.partialsThreadsEndedTrigger = true;
+        this.scene.scene.uiManager.fadeIn();
       }
     }
   }
+}
 
-  void playMikeThreadScene() {
-    if (_mikeThread.length > _mikeThreadIndex) {
-      this._scene.scene.uiManager.fadeIn();
-      _scene = _mikeThread[_mikeThreadIndex];
+class Gameplay extends StatefulWidget {
+// Manage gameplay, toggle between scenes
+  final data = _GamePlayData();
 
-      if (_mikeThreadIndex == 0) {
-        _mikeThreadIndex++;
-        mikeButton = false;
-        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
-      } else {
-        //Increment all scenes
-        _incrementAllIndexes();
-      }
-    } else {
-      if (_areThreadsEnded()) {
-        this._partialsFinished = true;
-        this._scene.scene.uiManager.fadeIn();
-      }
-    }
-  }
+  void showStatisticsScreen() =>
+      data.controller.addError('Come back to statistics');
 
-  void playLucaThreadScene() {
-    if (_lucaThread.length > _lucaThreadIndex) {
-      this._scene.scene.uiManager.fadeIn();
-      _scene = _lucaThread[_lucaThreadIndex];
-
-      if (_lucaThreadIndex == 0) {
-        _lucaThreadIndex++;
-        lucaButton = false;
-        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
-      } else {
-        //Increment all scenes
-        _incrementAllIndexes();
-      }
-    } else {
-      if (_areThreadsEnded()) {
-        this._partialsFinished = true;
-        this._scene.scene.uiManager.fadeIn();
-      }
-    }
-  }
-
-  void playKateThreadScene() {
-    if (_kateThread.length > _kateThreadIndex) {
-      this._scene.scene.uiManager.fadeIn();
-      _scene = _kateThread[_kateThreadIndex];
-
-      if (_kateThreadIndex == 0) {
-        _kateThreadIndex++;
-        kateButton = false;
-        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
-      } else {
-        //Increment all scenes
-        _incrementAllIndexes();
-      }
-    } else {
-      if (_areThreadsEnded()) {
-        this._partialsFinished = true;
-        this._scene.scene.uiManager.fadeIn();
-      }
-    }
-  }
-
-  void playJeffThreadScene() {
-    if (_jeffThread.length > _jeffThreadIndex) {
-      this._scene.scene.uiManager.fadeIn();
-      _scene = _jeffThread[_jeffThreadIndex];
-
-      if (_jeffThreadIndex == 0) {
-        _jeffThreadIndex++;
-        jeffButton = false;
-        if (_areAllButtonsDisabled()) _setAllButtons(to: true);
-      } else {
-        //Increment all scenes
-        _incrementAllIndexes();
-      }
-    } else {
-      if (_areThreadsEnded()) {
-        this._partialsFinished = true;
-        this._scene.scene.uiManager.fadeIn();
-      }
-    }
-  }
-
-  void showStatisticsScreen() {
-    sceneController.addError('Come back to statistics');
-  }
-
-  // Scenes
   @override
   _GameplayState createState() => _GameplayState();
 }
 
 class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
-  void _onInit() async {
-    widget._initializeMainThread();
-    widget.initializeOtherThreads();
-
-    // Load last played scene from shared prefs
-    final state = await LocalSaveManager().loadGameState();
-
-    widget._mainThreadIndex = state.mainThreadIndex;
-    widget.playMainThreadScene(index: widget._mainThreadIndex);
-    widget.ambient.playAmbientBackground('audio/effects/background_theme.mp3');
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    if (state == AppLifecycleState.inactive) {
-      final scene = widget._scene.scene as Scene;
-      scene.dialogueManager.pauseDialogue();
-      scene.backgroundAmbientManager.pauseAmbientBackground();
-      widget.ambient.pauseAmbientBackground();
-    }
-    if (state == AppLifecycleState.resumed) {
-      final scene = widget._scene.scene as Scene;
-      scene.dialogueManager.resumeDialogue();
-      scene.backgroundAmbientManager.resumeAmbientBackground();
-      widget.ambient.resumeAmbientBackground();
-    }
-    if (state == AppLifecycleState.detached) {}
-    if (state == AppLifecycleState.paused) {}
-  }
-
   @override
   void initState() {
     super.initState();
@@ -431,8 +357,22 @@ class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    widget.ambient.stopAmbientBackground();
+    // Stop Background's theme
+    widget.data.ambient.stopAmbientBackground();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.inactive) {
+      _onInactive();
+    }
+    if (state == AppLifecycleState.resumed) {
+      _onResumed();
+    }
+    if (state == AppLifecycleState.detached) {}
+    if (state == AppLifecycleState.paused) {}
   }
 
   @override
@@ -441,17 +381,17 @@ class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
 
     return WillPopScope(
       onWillPop: () async {
-        final scene = widget._scene.scene as Scene;
+        final scene = widget.data.scene.scene as Scene;
         scene.backgroundAmbientManager.stopAmbientBackground();
         scene.dialogueManager.stopAllSounds();
-        widget.ambient.stopAmbientBackground();
+        widget.data.ambient.stopAmbientBackground();
         return true;
       },
       child: StreamBuilder(
-        stream: widget.sceneController.stream,
+        stream: widget.data.controller.stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return widget._scene;
+            return widget.data.scene;
           } else if (snapshot.hasError) {
             return StatsScreen();
           } else {
@@ -460,5 +400,34 @@ class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
         },
       ),
     );
+  }
+
+  void _onInit() async {
+    // Preload scenes
+    widget.data.initializeMainThread(widget);
+    widget.data.initializeOtherThreads(widget);
+
+    // Load last played scene from shared prefs
+    final state = await LocalSaveManager().loadGameState();
+    widget.data.mainThreadIndex = state.mainThreadIndex; // Neccessary!
+
+    //Play Scene and background theme
+    widget.data.playMainThreadScene(index: widget.data.mainThreadIndex);
+    widget.data.ambient
+        .playAmbientBackground('audio/effects/background_theme.mp3');
+  }
+
+  void _onInactive() {
+    final scene = widget.data.scene.scene as Scene;
+    scene.dialogueManager.pauseDialogue();
+    scene.backgroundAmbientManager.pauseAmbientBackground();
+    widget.data.ambient.pauseAmbientBackground();
+  }
+
+  void _onResumed() {
+    final scene = widget.data.scene.scene as Scene;
+    scene.dialogueManager.resumeDialogue();
+    scene.backgroundAmbientManager.resumeAmbientBackground();
+    widget.data.ambient.resumeAmbientBackground();
   }
 }

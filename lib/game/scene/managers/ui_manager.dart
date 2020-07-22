@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'package:detective_game/game/scene/user_interface.dart';
 
+// Communicator between game layer =>  ui layer
+// Send data to be displayed in UI(dialogues, messages, buttons)
 class UIManager {
   // Sends dialogue and path to author's image to UI widget
   final StreamController<List<String>> controller =
@@ -11,7 +14,6 @@ class UIManager {
     // [1]: Path to the author's avatar picture
 
     final toSend = List<String>()..add(val)..add(_assignAvatar(val));
-
     controller.add(toSend);
   }
 
@@ -28,25 +30,35 @@ class UIManager {
   }
 
   void showSimpleMessage(String message) {
-    final toSend = List<String>()..add('#MESSAGEBOX')..add(message);
+    // Structure to send:
+    // [0]: Key
+    // [1]: Message(without author - it's not a dialogue)
+    final toSend = List<String>()..add(UIKeys.messageBox)..add(message);
     controller.add(toSend);
   }
 
   void fadeOut() {
-    final toSend = List<String>()..add('#FADEOUT');
+    // Structure to send:
+    // [0]: Key
+    final toSend = List<String>()..add(UIKeys.fadeOut);
     controller.add(toSend);
   }
 
   void fadeIn() {
-    final toSend = List<String>()..add('#FADEIN');
+    // Structure to send:
+    // [0]: Key
+    final toSend = List<String>()..add(UIKeys.fadeIn);
     controller.add(toSend);
   }
 
   void hideUI() {
-    final toSend = List<String>()..add('#HIDE');
+    // Structure to send:
+    // [0]: Key
+    final toSend = List<String>()..add(UIKeys.hideUI);
     controller.add(toSend);
   }
 
+  // Detects author name in dialogue and chooses appropiate file path
   String _assignAvatar(String dlg) {
     if (dlg.contains('Anton: '))
       return 'assets/images/characters/avatars/Anton.png';

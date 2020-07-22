@@ -2,9 +2,19 @@ import 'dart:ui';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/game/scene/scene.dart';
 
-// MT01 ==> Main Thread (Scene) 02
 class MT11 extends Scene {
-  // Asset Paths
+  // MT01 ==> Main Thread (Scene) 01
+  // bgdImages: contains background images paths SHOULDNT BE EMPTY
+  //
+  // dlgFiles: contains dialogues music files paths SHOULDNT BE EMPTY
+  // List start from path to file with dialogues saved in txt. Basing on that file,
+  // the UI is generated. Scene automatically plays dialogues starting from index 1
+  // Transcript.txt should have the number of lines equals dlgFiles.length-1
+  //
+  // chgBackground: contains int's saying at which dialogue(it's index)
+  // scene should change background to the following ones listed in bgdImages MAY BE EMPTY
+  // ambient: contains path to ambient backgorund of scene If not null it will be played(in loop)
+  // automatically when scene starts and automatically stopped when scene ends
   static List<String> bgdImages = <String>[
     'locations/main_thread/15',
     'locations/main_thread/16',
@@ -46,6 +56,9 @@ class MT11 extends Scene {
   MT11(Gameplay gameplay)
       : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
+  // This scene uses custom buttom buttons
+  // Since scene doesnt know about UIManager it is required to prepare
+  // funcs for following buttons
   @override
   void bottomButtonClicked({int id}) {
     onTap(buttonId: id);

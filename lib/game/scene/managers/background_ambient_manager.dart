@@ -1,18 +1,22 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
 
+// SFX background player
+// Should play sounds like traffic, noises, etc
 class BackgroundAmbientManager {
   AudioCache _cache = AudioCache();
   AudioPlayer _player = AudioPlayer();
 
   void playAmbientBackground(String path) async {
-    try {
-      if (_player.state != AudioPlayerState.PLAYING) {
-        _player = await _cache.loop(path);
-        _player.setVolume(0.8);
+    if (path != null) {
+      try {
+        if (_player.state != AudioPlayerState.PLAYING) {
+          _player = await _cache.loop(path);
+          _player.setVolume(0.8);
+        }
+      } catch (e) {
+        print(e);
       }
-    } catch (e) {
-      print(e);
     }
   }
 

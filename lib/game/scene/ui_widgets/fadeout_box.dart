@@ -1,8 +1,10 @@
-import 'package:detective_game/game/scene/scene.dart';
-import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
+import 'package:flame/flame.dart';
+import 'package:detective_game/game/scene/scene.dart';
 
 class FadeOutBox extends StatefulWidget {
+// Shows over UI, when triggered, animates from black screen into transparent screen
+// Plays when scene starts
   final Scene scene;
   FadeOutBox(this.scene);
   @override
@@ -18,33 +20,37 @@ class _FadeOutBox extends State<FadeOutBox>
   @override
   void initState() {
     super.initState();
+    _animationConfig();
+  }
 
-    // Animation configuration
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.black.withOpacity(_opacity.value));
+  }
+
+  void _onAnimationEnd() {
+    widget.scene.onTap();
+  }
+
+  void _animationConfig() {
     _animController =
         AnimationController(duration: this._animationDuration, vsync: this);
     _opacity = Tween<double>(begin: 1.0, end: 0.0).animate(_animController)
       ..addListener(() => setState(() {}))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          widget.scene.onTap();
+          _onAnimationEnd();
         }
       });
 
     _animController.forward();
 
     Flame.audio.play('effects/fade.mp3');
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _animController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black.withOpacity(_opacity.value),
-    );
   }
 }

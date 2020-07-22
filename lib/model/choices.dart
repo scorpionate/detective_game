@@ -6,6 +6,8 @@ part 'choices.g.dart';
 /// An annotation for the code generator to know that this class needs the
 /// JSON serialization logic to be generated.
 @JsonSerializable(explicitToJson: true)
+// Model represents list of choices made by player, saved into shared persistance
+// as one String
 class Choices {
   final List<Choice> data;
 

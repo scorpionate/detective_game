@@ -1,18 +1,55 @@
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:detective_game/model/game_state.dart';
 import 'package:detective_game/screens/loading_screen.dart';
-import 'package:detective_game/screens/widgets/stats_screen_charts.dart';
 import 'package:detective_game/services/local_save_manager.dart';
-import 'package:flutter/material.dart';
+import 'package:detective_game/screens/widgets/stats_screen_charts.dart';
 
 class StatsScreen extends StatelessWidget {
-  final controller = StreamController<Map<String, int>>.broadcast();
+// Shows statistics after last scene of gameplay
+// Shows credits of some free assets used while developmnent
+  final _controller = StreamController<Map<String, int>>.broadcast();
+
+  @override
+  Widget build(BuildContext context) {
+    _calculateStats();
+
+    return WillPopScope(
+        onWillPop: () async {
+          // TODO: Uncomment
+          // await LocalSaveManager().clearAllSavedChoices();
+          // await LocalSaveManager().saveGameState(GameState(0));
+          return true;
+        },
+        child: Scaffold(
+            appBar: AppBar(
+                title: Text('Your statistics'),
+                backgroundColor: Colors.black54,
+                centerTitle: true),
+            body: StreamBuilder<Object>(
+                stream: _controller.stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData)
+                    return StatsScreenCharts(snapshot.data);
+                  else
+                    return LoadingScreen(Colors.black);
+                })));
+  }
+
+  Future<void> _calculateStats() async {
+    final map = await loadData();
+    this._controller.add(map);
+  }
 
   Future<Map<String, int>> loadData() async {
+    // Load saved choices
+    // Should contain saves from every scene with optionals
     final choices = await LocalSaveManager().loadOptionalChoices();
-    int confidence = 0, awkwardness = 0, impolitness = 0, neutral = 0;
 
+    // Process data
+    // Index of optionals are declared in transcripts
+    // Each optional choice has assigned value in points
+    int confidence = 0, awkwardness = 0, impolitness = 0, neutral = 0;
     choices.data.forEach((element) {
       if (element.scene == 'MT02') {
         if (element.index == 2) {
@@ -152,6 +189,11 @@ class StatsScreen extends StatelessWidget {
       }
     });
 
+    // Transfer to percents
+    // Max confidence = 23
+    // Max awkwardness = 21
+    // Max impolitness = 14
+    // Max neutralness = 18
     final confInPrc = ((confidence.toDouble() / 23.0) * 100.0).floor();
     final awkwInPrc = ((awkwardness.toDouble() / 21.0) * 100.0).floor();
     final impoInPrc = ((impolitness.toDouble() / 14.0) * 100.0).floor();
@@ -165,41 +207,5 @@ class StatsScreen extends StatelessWidget {
     };
 
     return Future.value(map);
-  }
-
-  Future<void> _calculateStats() async {
-    final map = await loadData();
-    this.controller.add(map);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    _calculateStats();
-
-    return WillPopScope(
-      onWillPop: () async {
-        // TODO: Uncomment
-        // await LocalSaveManager().clearAllSavedChoices();
-        // await LocalSaveManager().saveGameState(GameState(0));
-        return true;
-      },
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Your statistics',
-            ),
-            backgroundColor: Colors.black54,
-            centerTitle: true,
-          ),
-          body: StreamBuilder<Object>(
-              stream: controller.stream,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return StatsScreenCharts(snapshot.data);
-                } else {
-                  return LoadingScreen(Colors.black);
-                }
-              })),
-    );
   }
 }

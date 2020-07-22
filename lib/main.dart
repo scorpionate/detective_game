@@ -1,6 +1,6 @@
-import 'package:detective_game/screens/home_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:detective_game/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +19,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Multithreaded detective game.',
-      //showPerformanceOverlay: true,
       theme: ThemeData(
-        fontFamily: 'Quicksand',
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          fontFamily: 'Quicksand',
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          buttonTheme: ButtonThemeData(
+            buttonColor: Colors.white.withOpacity(0.95),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          )),
       home: HomeScreen(),
     );
   }
