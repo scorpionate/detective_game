@@ -18,9 +18,10 @@ class ConfigResolution extends Scene {
   static List<String> dlgFiles = <String>[];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
   ConfigResolution(Gameplay gameplay)
-      : super(bgdImages, dlgFiles, chgBackground, gameplay);
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void update(double t) {

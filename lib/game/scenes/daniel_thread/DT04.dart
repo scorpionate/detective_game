@@ -23,8 +23,10 @@ class DT04 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
-  DT04(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  DT04(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void nextScene() {

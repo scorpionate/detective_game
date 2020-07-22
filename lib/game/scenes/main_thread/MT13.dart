@@ -21,6 +21,8 @@ class MT13 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[3];
+  static String ambient = 'audio/effects/busy_place.mp3';
 
-  MT13(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT13(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 }

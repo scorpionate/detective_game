@@ -77,30 +77,44 @@ class DialogueManager {
 
   Future<void> stopDialogue() async {
     // Stop any dialogue audio
-    if (_dlgPlayer.state == AudioPlayerState.PLAYING) {
-      await _dlgPlayer.stop();
+    try {
+      if (_dlgPlayer?.state == AudioPlayerState.PLAYING) {
+        await _dlgPlayer.stop();
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
   Future<void> pauseDialogue() async {
     // Stop any dialogue audio
-    if (_dlgPlayer.state == AudioPlayerState.PLAYING) {
-      await _dlgPlayer.pause();
+    try {
+      if (_dlgPlayer?.state == AudioPlayerState.PLAYING) {
+        await _dlgPlayer.pause();
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
   Future<void> resumeDialogue() async {
     // Stop any dialogue audio
-    if (_dlgPlayer.state == AudioPlayerState.PAUSED) {
-      await _dlgPlayer.resume();
+    try {
+      if (_dlgPlayer?.state == AudioPlayerState.PAUSED) {
+        await _dlgPlayer?.resume();
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
   Future<void> stopAllSounds() async {
-    await _dlgPlayer.stop();
-    await _dlgPlayer.dispose();
-    // await _dlgCache.fixedPlayer.stop();
-    _dlgCache.clearCache();
+    try {
+      await _dlgPlayer?.stop();
+      _dlgCache.clearCache();
+    } catch (e) {
+      print(e);
+    }
   }
 
   void _changeBackgroundIf() {
@@ -119,8 +133,11 @@ class DialogueManager {
     stopDialogue();
 
     // Play current audio
-    _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]); // Throws!
-
+    try {
+      _dlgPlayer = await _dlgCache.play(_dlgFiles[_dlgTextIndex]); // Throws!
+    } catch (e) {
+      print(e);
+    }
     // Shuffle audio; Index operation
     _nextDialogue();
   }
@@ -204,6 +221,6 @@ class DialogueManager {
   }
 
   bool isDialogueFinished() {
-    return _dlgPlayer.state == AudioPlayerState.COMPLETED ? true : false;
+    return _dlgPlayer?.state == AudioPlayerState.COMPLETED ? true : false;
   }
 }

@@ -15,6 +15,8 @@ class MT06 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
-  MT06(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT06(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 }

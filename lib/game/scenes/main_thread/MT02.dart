@@ -37,8 +37,10 @@ class MT02 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[21];
+  static String ambient = 'audio/effects/busy_place.mp3';
 
-  MT02(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT02(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void onStart() {

@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   // Title
-                  Text('THE GAME',
+                  Text("Wyatt's Story",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 50,

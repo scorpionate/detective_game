@@ -31,8 +31,10 @@ class LT01 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[4, 6];
+  static String ambient;
 
-  LT01(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  LT01(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void nextScene() {

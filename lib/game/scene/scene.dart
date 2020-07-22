@@ -6,6 +6,7 @@ import 'package:flame/game/game.dart';
 import 'package:detective_game/game/scene/managers/ui_manager.dart';
 import 'package:detective_game/game/scene/managers/background_manager.dart';
 import 'package:detective_game/game/scene/managers/dialogue_manager.dart';
+import 'package:detective_game/game/scene/managers/background_ambient_manager.dart';
 
 abstract class Scene extends Game {
   // Screen properties
@@ -16,11 +17,14 @@ abstract class Scene extends Game {
   bool _finished = false;
   bool _fadeOut = false;
 
+  final String ambientPath;
+
   // Components
-  Gameplay _gameplay;
+  final Gameplay _gameplay;
+  final UIManager _uiManager = UIManager(); // Needs to be here
+  final _bgdAmbManager = BackgroundAmbientManager();
   DialogueManager _dlgManager;
   BackgroundManager _bgdManager;
-  UIManager _uiManager = UIManager(); // Needs to be here
 
   Gameplay get gameplay {
     return this._gameplay;
@@ -36,6 +40,10 @@ abstract class Scene extends Game {
 
   UIManager get uiManager {
     return this._uiManager;
+  }
+
+  BackgroundAmbientManager get backgroundAmbientManager {
+    return this._bgdAmbManager;
   }
 
   bool get isFinished {
@@ -60,7 +68,7 @@ abstract class Scene extends Game {
 
   // Initializers
   Scene(List<String> backgroundImages, List<String> dialogues,
-      List<int> changeBackground, this._gameplay) {
+      List<int> changeBackground, this._gameplay, this.ambientPath) {
     _initialize(backgroundImages, dialogues, changeBackground);
   }
 
@@ -135,11 +143,15 @@ abstract class Scene extends Game {
     // only once
     if (this.gameplay.areAllScenesLoaded && !this._fadeOut) {
       this.onStart();
+      if (this.ambientPath != null) {
+        this._bgdAmbManager.playAmbientBackground(this.ambientPath);
+      }
       this._fadeOut = true;
       this._uiManager.fadeOut();
     }
 
     if (this._dlgManager.isDialogueFinished() && this.isFinished) {
+      this._bgdAmbManager.stopAmbientBackground();
       this._uiManager.fadeIn();
     }
   }

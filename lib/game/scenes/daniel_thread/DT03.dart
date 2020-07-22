@@ -25,8 +25,10 @@ class DT03 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient = 'audio/effects/traffic.mp3';
 
-  DT03(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  DT03(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void nextScene() {

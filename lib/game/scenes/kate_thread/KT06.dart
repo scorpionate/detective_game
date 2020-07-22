@@ -23,8 +23,10 @@ class KT06 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[3, 4, 5];
+  static String ambient = 'audio/effects/plane.mp3';
 
-  KT06(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  KT06(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void nextScene() {

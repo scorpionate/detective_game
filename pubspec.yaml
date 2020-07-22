@@ -105,6 +105,9 @@ flutter:
      - assets/audio/dialogues/mike_thread/07/
      - assets/audio/dialogues/mike_thread/08/
 
+     # SFX
+     - assets/audio/effects/
+
   fonts:
     - family: Quicksand
       fonts:

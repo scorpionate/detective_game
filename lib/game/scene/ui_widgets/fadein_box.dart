@@ -1,4 +1,5 @@
 import 'package:detective_game/game/scene/scene.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 
 class FadeInBox extends StatefulWidget {
@@ -30,6 +31,7 @@ class _FadeInBoxState extends State<FadeInBox>
       });
 
     _animController.forward();
+    Flame.audio.play('effects/fade.mp3');
   }
 
   @override

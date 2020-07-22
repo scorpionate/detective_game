@@ -21,8 +21,10 @@ class JT04 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
-  JT04(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  JT04(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void nextScene() {

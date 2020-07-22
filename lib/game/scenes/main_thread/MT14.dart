@@ -41,8 +41,10 @@ class MT14 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[2];
+  static String ambient = 'audio/effects/whispering.mp3';
 
-  MT14(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT14(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void onStart() {

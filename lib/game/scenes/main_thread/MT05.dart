@@ -30,8 +30,10 @@ class MT05 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient = 'audio/effects/electric_noise.mp3';
 
-  MT05(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT05(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void onStart() {

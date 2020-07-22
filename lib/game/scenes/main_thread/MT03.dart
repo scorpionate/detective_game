@@ -15,6 +15,8 @@ class MT03 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
-  MT03(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT03(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 }

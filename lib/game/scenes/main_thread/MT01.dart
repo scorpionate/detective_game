@@ -18,5 +18,8 @@ class MT01 extends Scene {
 
   static List<int> chgBackground = <int>[2];
 
-  MT01(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  static String ambient = 'audio/effects/whispering.mp3';
+
+  MT01(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 }

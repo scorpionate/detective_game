@@ -33,8 +33,10 @@ class MT10 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[7];
+  static String ambient;
 
-  MT10(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT10(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void onStart() {

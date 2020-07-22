@@ -1,6 +1,5 @@
 import 'package:detective_game/game/scene/scene.dart';
 import 'package:detective_game/game/scenes/main_thread/MT11.dart';
-import 'package:detective_game/game/scenes/main_thread/MT12.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 

@@ -6,7 +6,6 @@ import 'package:detective_game/screens/stats_screen.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/scene/displayer.dart';
-import 'package:detective_game/game/scenes/config_resolution.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT01.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT02.dart';
 import 'package:detective_game/game/scenes/daniel_thread/DT03.dart';
@@ -57,6 +56,7 @@ import 'package:detective_game/game/scenes/main_thread/MT13.dart';
 import 'package:detective_game/game/scenes/main_thread/MT14.dart';
 import 'package:detective_game/game/scenes/main_thread/MT15.dart';
 import 'package:detective_game/game/scenes/main_thread/MT16.dart';
+import 'package:detective_game/game/scene/managers/background_ambient_manager.dart';
 
 // Manage gameplay, toggle between scenes
 class Gameplay extends StatefulWidget {
@@ -71,6 +71,8 @@ class Gameplay extends StatefulWidget {
   final List<Displayer> _mikeThread = List<Displayer>();
 
   final List<Displayer> _danielThread = List<Displayer>();
+
+  final ambient = BackgroundAmbientManager();
 
   int _jeffThreadIndex = 0;
 
@@ -398,8 +400,8 @@ class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
     final state = await LocalSaveManager().loadGameState();
 
     widget._mainThreadIndex = state.mainThreadIndex;
-    //_mainThreadIndex = 10;
     widget.playMainThreadScene(index: widget._mainThreadIndex);
+    widget.ambient.playAmbientBackground('audio/effects/background_theme.mp3');
   }
 
   @override
@@ -408,10 +410,14 @@ class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
     if (state == AppLifecycleState.inactive) {
       final scene = widget._scene.scene as Scene;
       scene.dialogueManager.pauseDialogue();
+      scene.backgroundAmbientManager.pauseAmbientBackground();
+      widget.ambient.pauseAmbientBackground();
     }
     if (state == AppLifecycleState.resumed) {
       final scene = widget._scene.scene as Scene;
       scene.dialogueManager.resumeDialogue();
+      scene.backgroundAmbientManager.resumeAmbientBackground();
+      widget.ambient.resumeAmbientBackground();
     }
     if (state == AppLifecycleState.detached) {}
     if (state == AppLifecycleState.paused) {}
@@ -424,13 +430,21 @@ class _GameplayState extends State<Gameplay> with WidgetsBindingObserver {
   }
 
   @override
+  void dispose() {
+    widget.ambient.stopAmbientBackground();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     _onInit();
 
     return WillPopScope(
       onWillPop: () async {
         final scene = widget._scene.scene as Scene;
+        scene.backgroundAmbientManager.stopAmbientBackground();
         scene.dialogueManager.stopAllSounds();
+        widget.ambient.stopAmbientBackground();
         return true;
       },
       child: StreamBuilder(

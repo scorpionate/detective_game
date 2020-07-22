@@ -28,6 +28,8 @@ class MT08 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[4, 12];
+  static String ambient = 'audio/effects/pub.mp3';
 
-  MT08(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT08(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 }

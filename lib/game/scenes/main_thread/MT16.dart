@@ -28,8 +28,10 @@ class MT16 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
-  MT16(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT16(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   List<int> forcedDlgIndexes = <int>[];
   int index = 0;

@@ -35,8 +35,10 @@ class MT04 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[19];
+  static String ambient;
 
-  MT04(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT04(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void onStart() {

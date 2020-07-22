@@ -24,8 +24,10 @@ class MK01 extends Scene {
   ];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
-  MK01(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MK01(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void nextScene() {

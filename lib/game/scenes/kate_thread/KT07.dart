@@ -21,7 +21,10 @@ class KT07 extends Scene {
 
   static List<int> chgBackground = <int>[];
 
-  KT07(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  static String ambient;
+
+  KT07(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void nextScene() {

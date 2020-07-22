@@ -13,8 +13,10 @@ class MT12 extends Scene {
   static List<String> dlgFiles = <String>[];
 
   static List<int> chgBackground = <int>[];
+  static String ambient;
 
-  MT12(Gameplay gameplay) : super(bgdImages, dlgFiles, chgBackground, gameplay);
+  MT12(Gameplay gameplay)
+      : super(bgdImages, dlgFiles, chgBackground, gameplay, ambient);
 
   @override
   void bottomButtonClicked({int id}) {
