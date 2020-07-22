@@ -75,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen>
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         FlatButton(
-                            onPressed: this._onReset, child: Text('Reset')),
+                            onPressed: () => this._onReset(context),
+                            child: Text('Reset')),
                         FlatButton(
                             onPressed: this._onPlay, child: Text('Play')),
                         FlatButton(
@@ -112,10 +113,30 @@ class _HomeScreenState extends State<HomeScreen>
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(_animController);
   }
 
-  void _onReset() {
-    // Reset user's progress
-    LocalSaveManager().saveGameState(GameState(0));
-    LocalSaveManager().clearAllSavedChoices();
+  void _onReset(BuildContext context) {
+    // Show confirmation dialog
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              content: Text('Do you want to reset your progress?'),
+              actions: <Widget>[
+                FlatButton(
+                    child: Text('Yes'),
+                    onPressed: () {
+                      // Reset user's progress
+                      LocalSaveManager().saveGameState(GameState(0));
+                      LocalSaveManager().clearAllSavedChoices();
+                      Navigator.pop(context);
+                    }),
+                FlatButton(
+                    child: Text(
+                      'No',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    onPressed: () => Navigator.pop(context))
+              ]);
+        });
   }
 
   void _onPlay() {
