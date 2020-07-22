@@ -8,10 +8,8 @@ void main() async {
   // Hide Status Bar and bottom buttons
   await SystemChrome.setEnabledSystemUIOverlays([]);
 
-  await SystemChrome.setPreferredOrientations([
-    // DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight
-  ]);
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.landscapeRight]);
 
   runApp(MyApp());
 }

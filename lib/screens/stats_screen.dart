@@ -175,22 +175,28 @@ class StatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _calculateStats();
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Your statistics',
+    return WillPopScope(
+      onWillPop: () async {
+        await LocalSaveManager().clearAllSavedChoices();
+        return true;
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Your statistics',
+            ),
+            backgroundColor: Colors.black54,
+            centerTitle: true,
           ),
-          backgroundColor: Colors.black54,
-          centerTitle: true,
-        ),
-        body: StreamBuilder<Object>(
-            stream: controller.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return StatsScreenCharts(snapshot.data);
-              } else {
-                return LoadingScreen(Colors.black);
-              }
-            }));
+          body: StreamBuilder<Object>(
+              stream: controller.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return StatsScreenCharts(snapshot.data);
+                } else {
+                  return LoadingScreen(Colors.black);
+                }
+              })),
+    );
   }
 }

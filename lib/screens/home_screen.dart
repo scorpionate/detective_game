@@ -1,6 +1,3 @@
-import 'package:detective_game/model/game_state.dart';
-import 'package:detective_game/screens/stats_screen.dart';
-import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/screens/pick_resolution.dart';
@@ -66,37 +63,28 @@ class _HomeScreenState extends State<HomeScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      OutlineButton(
-                        onPressed: () {
-                          LocalSaveManager().saveGameState(GameState(0));
-                          LocalSaveManager().clearAllSavedChoices();
-                        },
-                        child: Text('ResetProgress'),
-                      ),
-                      OutlineButton(
+                      // FlatButton(
+                      //   onPressed: () {
+                      //     LocalSaveManager().saveGameState(GameState(0));
+                      //     LocalSaveManager().clearAllSavedChoices();
+                      //   },
+                      //   child: Text('ResetProgress'),
+                      // ),
+                      FlatButton(
                         onPressed: () {
                           _animController.forward();
                         },
-                        child: Text('Play.'),
+                        child: Text('Play'),
                       ),
-                      OutlineButton(
-                        onPressed: () {
+                      FlatButton(
+                        onPressed: () async {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => PickResolutionScreen(
                                       scene: ConfigResolution(Gameplay()))));
                         },
-                        child: Text('Resolution.'),
-                      ),
-                      OutlineButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => StatsScreen()));
-                        },
-                        child: Text('Stats.'),
+                        child: Text('Resolution'),
                       ),
                     ],
                   )
