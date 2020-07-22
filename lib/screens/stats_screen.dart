@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:detective_game/model/game_state.dart';
 import 'package:detective_game/screens/loading_screen.dart';
 import 'package:detective_game/screens/widgets/stats_screen_charts.dart';
 import 'package:detective_game/services/local_save_manager.dart';
@@ -177,7 +178,9 @@ class StatsScreen extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        await LocalSaveManager().clearAllSavedChoices();
+        // TODO: Uncomment
+        // await LocalSaveManager().clearAllSavedChoices();
+        // await LocalSaveManager().saveGameState(GameState(0));
         return true;
       },
       child: Scaffold(

@@ -1,3 +1,4 @@
+import 'package:detective_game/screens/stats_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/screens/pick_resolution.dart';
@@ -85,6 +86,15 @@ class _HomeScreenState extends State<HomeScreen>
                                       scene: ConfigResolution(Gameplay()))));
                         },
                         child: Text('Resolution'),
+                      ),
+                      FlatButton(
+                        onPressed: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StatsScreen()));
+                        },
+                        child: Text('Stats'),
                       ),
                     ],
                   )

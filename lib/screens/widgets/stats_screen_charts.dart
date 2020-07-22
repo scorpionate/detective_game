@@ -69,17 +69,43 @@ class _StatsScreenChartsState extends State<StatsScreenCharts>
         Container(
           padding: EdgeInsets.all(10),
           width: width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              AutoSizeText(
-                "Basing on your in-game choices, we concluded your Wyatt's character.",
-                minFontSize: 7,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
+          child: ListView(children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                AutoSizeText(
+                  '''Your choices helped us discover Wyatt's character. '''
+                  '''If you made this far, thank you for playing the game!'''
+                  '''\n''',
+                  minFontSize: 7,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
+                ),
+                AutoSizeText(
+                  '''The game is distributed with MIT license. The source is available: https://github.com/maksmaxx/detective_game'''
+                  '''\n\n'''
+                  '''During the development the following assets were used:'''
+                  '''\n\n'''
+                  '''Dances and Dames by Kevin MacLeod https://incompetech.com/'''
+                  '''\n'''
+                  '''Promoted by MrSnooze https://youtu.be/iYOvAO1rAM0'''
+                  '''\n'''
+                  '''License: CC BY 3.0 https://goo.gl/Yibru5'''
+                  '''\n\n'''
+                  '''Ambient sounds:'''
+                  '''\n'''
+                  '''http://pbblogassets.s3.amazonaws.com/uploads/2016/09/15-Free-Ambient-Sound-Effects.zip'''
+                  '''\n\n'''
+                  '''Font:'''
+                  '''\n'''
+                  '''https://fonts.google.com/specimen/Quicksand''',
+                  minFontSize: 7,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
+          ]),
         ),
 
         // s
