@@ -1,9 +1,9 @@
 import 'package:detective_game/game/scenes/config_resolution.dart';
+import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:detective_game/game/scene/scene.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // Displays and shifts background
 class BackgroundManager {
@@ -38,9 +38,7 @@ class BackgroundManager {
   }
 
   Future<void> _loadAssets() async {
-    final prefs = await SharedPreferences.getInstance();
-    // Add automatic pixel density detection
-    final resolution = prefs.getString('RESOLUTION') ?? '@2x';
+    final resolution = await LocalSaveManager().loadResolution();
 
     _images.forEach((element) {
       // ConfigResolution has different file paths from other scenes

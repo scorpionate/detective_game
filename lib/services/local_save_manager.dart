@@ -89,4 +89,10 @@ class LocalSaveManager {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(resolutionKey, factor);
   }
+
+  Future<String> loadResolution() async {
+    final prefs = await SharedPreferences.getInstance();
+    final resolution = prefs.getString(resolutionKey) ?? '@2x';
+    return resolution;
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:detective_game/model/game_state.dart';
-import 'package:detective_game/screens/stats_screen.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 import 'package:detective_game/game/gameplay.dart';
 import 'package:detective_game/screens/pick_resolution.dart';
@@ -38,66 +37,53 @@ class _HomeScreenState extends State<HomeScreen>
     final buttonHeight = titleHeight * 0.9;
 
     return Scaffold(
-      body: Stack(fit: StackFit.expand, children: <Widget>[
-        // Background(big image) Layer
-        Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/coverart.png'),
-                    fit: BoxFit.cover))),
+        body: Stack(fit: StackFit.expand, children: <Widget>[
+      // Background(big image) Layer
+      Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/coverart.png'),
+                  fit: BoxFit.cover))),
 
-        // Opacity layer
-        Positioned.fill(
-            child: Container(color: Colors.black.withOpacity(_opacity.value))),
+      // Opacity layer
+      Positioned.fill(
+          child: Container(color: Colors.black.withOpacity(_opacity.value))),
 
-        // UI Layer(title + buttons)
-        Container(
-            padding: EdgeInsets.symmetric(vertical: 5),
-            alignment: Alignment.center,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  // Main Title
-                  Container(
-                      alignment: Alignment.center,
-                      height: titleHeight,
-                      child: AutoSizeText(title,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 50, fontWeight: FontWeight.w400))),
+      // UI Layer(title + buttons)
+      Container(
+          padding: EdgeInsets.symmetric(vertical: 5),
+          alignment: Alignment.center,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                // Main Title
+                Container(
+                    alignment: Alignment.center,
+                    height: titleHeight,
+                    child: AutoSizeText(title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 50, fontWeight: FontWeight.w400))),
 
-                  // Bottom Buttons
-                  Container(
+                // Bottom Buttons
+                Container(
                     height: buttonHeight,
                     alignment: Alignment.center,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        FlatButton(
-                            onPressed: () => this._onReset(context),
-                            child: Text('Reset')),
-                        FlatButton(
-                            onPressed: this._onPlay, child: Text('Play')),
-                        FlatButton(
-                            onPressed: this._onResolution,
-                            child: Text('Resolution')),
-                        // TODO: delete
-                        FlatButton(
-                          onPressed: () async {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => StatsScreen()));
-                          },
-                          child: Text('Stats'),
-                        ),
-                      ],
-                    ),
-                  )
-                ])),
-      ]),
-    );
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          FlatButton(
+                              onPressed: () => this._onReset(context),
+                              child: Text('Reset')),
+                          FlatButton(
+                              onPressed: this._onPlay, child: Text('Play')),
+                          FlatButton(
+                              onPressed: this._onResolution,
+                              child: Text('Resolution'))
+                        ]))
+              ]))
+    ]));
   }
 
   // Animates fade in when enetring gameplay

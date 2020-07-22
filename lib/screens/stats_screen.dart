@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:detective_game/model/game_state.dart';
 import 'package:detective_game/screens/loading_screen.dart';
 import 'package:detective_game/services/local_save_manager.dart';
 import 'package:detective_game/screens/widgets/stats_screen_charts.dart';
@@ -14,26 +13,19 @@ class StatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _calculateStats();
 
-    return WillPopScope(
-        onWillPop: () async {
-          // TODO: Uncomment
-          // await LocalSaveManager().clearAllSavedChoices();
-          // await LocalSaveManager().saveGameState(GameState(0));
-          return true;
-        },
-        child: Scaffold(
-            appBar: AppBar(
-                title: Text('Your statistics'),
-                backgroundColor: Colors.black54,
-                centerTitle: true),
-            body: StreamBuilder<Object>(
-                stream: _controller.stream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData)
-                    return StatsScreenCharts(snapshot.data);
-                  else
-                    return LoadingScreen(Colors.black);
-                })));
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Your statistics'),
+            backgroundColor: Colors.black54,
+            centerTitle: true),
+        body: StreamBuilder<Object>(
+            stream: _controller.stream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData)
+                return StatsScreenCharts(snapshot.data);
+              else
+                return LoadingScreen(Colors.black);
+            }));
   }
 
   Future<void> _calculateStats() async {
