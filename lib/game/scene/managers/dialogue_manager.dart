@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audio_cache.dart';
-import 'package:detective_game/game/scene/scene.dart';
+import 'package:wyatts_story/services/local_save_manager.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
 
 class DialogueManager {
   // Plays dialogues from provided paths

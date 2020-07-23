@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flame/flame.dart';
-import 'package:detective_game/game/scene/scene.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
 
 class FadeOutBox extends StatefulWidget {
 // Shows over UI, when triggered, animates from black screen into transparent screen

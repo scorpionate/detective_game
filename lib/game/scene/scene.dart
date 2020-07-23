@@ -2,11 +2,11 @@ import 'dart:ui';
 import 'package:flame/flame.dart';
 import 'package:flame/game/game.dart';
 import 'package:flutter/material.dart';
-import 'package:detective_game/game/gameplay.dart';
-import 'package:detective_game/game/scene/managers/ui_manager.dart';
-import 'package:detective_game/game/scene/managers/background_manager.dart';
-import 'package:detective_game/game/scene/managers/dialogue_manager.dart';
-import 'package:detective_game/game/scene/managers/background_ambient_manager.dart';
+import 'package:wyatts_story/game/gameplay.dart';
+import 'package:wyatts_story/game/scene/managers/ui_manager.dart';
+import 'package:wyatts_story/game/scene/managers/background_manager.dart';
+import 'package:wyatts_story/game/scene/managers/dialogue_manager.dart';
+import 'package:wyatts_story/game/scene/managers/background_ambient_manager.dart';
 
 // Construct for specific scenes. Manages flow in single scene and handles
 // showing background, playing dialogues, etc. Implemets Flame engine methods

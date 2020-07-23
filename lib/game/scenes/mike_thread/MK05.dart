@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:detective_game/game/gameplay.dart';
-import 'package:detective_game/game/scene/scene.dart';
+import 'package:wyatts_story/game/gameplay.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
 
 class MK05 extends Scene {
   // MK05 ==> Mike Thread (Scene) 05

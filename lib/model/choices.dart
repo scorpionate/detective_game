@@ -1,4 +1,4 @@
-import 'package:detective_game/model/choice.dart';
+import 'package:wyatts_story/model/choice.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'choices.g.dart';

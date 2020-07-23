@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:detective_game/game/scene/scene.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
 
 class MessageBox extends StatelessWidget {
 // Displays simple beam with message(NOT DIALOGUE!) - optional

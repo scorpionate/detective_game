@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:detective_game/game/scene/scene.dart';
-import 'package:detective_game/game/scene/ui_widgets/fadeout_box.dart';
-import 'package:detective_game/game/scene/ui_widgets/fadein_box.dart';
-import 'package:detective_game/game/scene/ui_widgets/dialog_box.dart';
-import 'package:detective_game/game/scene/ui_widgets/message_box.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
+import 'package:wyatts_story/game/scene/ui_widgets/fadeout_box.dart';
+import 'package:wyatts_story/game/scene/ui_widgets/fadein_box.dart';
+import 'package:wyatts_story/game/scene/ui_widgets/dialog_box.dart';
+import 'package:wyatts_story/game/scene/ui_widgets/message_box.dart';
 
 class UIKeys {
   static String hideUI = "#HIDEUI";

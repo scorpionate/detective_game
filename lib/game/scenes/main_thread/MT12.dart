@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flame/flame.dart';
-import 'package:detective_game/game/gameplay.dart';
-import 'package:detective_game/game/scene/scene.dart';
+import 'package:wyatts_story/game/gameplay.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
 
 // MT12 is manager for playing partial threads. It doesnt contain any self dialogues etc.
 // It is a switch between partial scenes and UI displayer

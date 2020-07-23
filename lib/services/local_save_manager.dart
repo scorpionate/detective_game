@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:detective_game/model/choice.dart';
-import 'package:detective_game/model/choices.dart';
-import 'package:detective_game/model/game_state.dart';
+import 'package:wyatts_story/model/choice.dart';
+import 'package:wyatts_story/model/choices.dart';
+import 'package:wyatts_story/model/game_state.dart';
 
 class LocalSaveManager {
 // Manages saving data into shared preferences.

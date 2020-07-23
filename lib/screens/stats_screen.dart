@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:detective_game/screens/loading_screen.dart';
-import 'package:detective_game/services/local_save_manager.dart';
-import 'package:detective_game/screens/widgets/stats_screen_charts.dart';
+import 'package:wyatts_story/screens/loading_screen.dart';
+import 'package:wyatts_story/services/local_save_manager.dart';
+import 'package:wyatts_story/screens/widgets/stats_screen_charts.dart';
 
 class StatsScreen extends StatelessWidget {
 // Shows statistics after last scene of gameplay

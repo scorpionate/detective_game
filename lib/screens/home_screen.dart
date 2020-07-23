@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:detective_game/model/game_state.dart';
-import 'package:detective_game/services/local_save_manager.dart';
-import 'package:detective_game/game/gameplay.dart';
-import 'package:detective_game/screens/pick_resolution.dart';
-import 'package:detective_game/game/scenes/config_resolution.dart';
+import 'package:wyatts_story/model/game_state.dart';
+import 'package:wyatts_story/services/local_save_manager.dart';
+import 'package:wyatts_story/game/gameplay.dart';
+import 'package:wyatts_story/screens/pick_resolution.dart';
+import 'package:wyatts_story/game/scenes/config_resolution.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

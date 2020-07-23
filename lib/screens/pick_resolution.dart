@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:detective_game/game/scenes/config_resolution.dart';
+import 'package:wyatts_story/game/scenes/config_resolution.dart';
 
 class PickResolutionScreen extends StatefulWidget {
 // Allows user to change resolution of displayed bacgorund for every scene

@@ -1,7 +1,7 @@
 import 'dart:ui';
-import 'package:detective_game/game/gameplay.dart';
-import 'package:detective_game/game/scene/scene.dart';
-import 'package:detective_game/services/local_save_manager.dart';
+import 'package:wyatts_story/game/gameplay.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
+import 'package:wyatts_story/services/local_save_manager.dart';
 
 class MT07 extends Scene {
   // MT07 ==> Main Thread (Scene) 07

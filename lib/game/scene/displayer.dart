@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:detective_game/game/scene/scene.dart';
-import 'package:detective_game/game/scene/user_interface.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
+import 'package:wyatts_story/game/scene/user_interface.dart';
 
 class Displayer extends StatelessWidget {
 // Displayer combines single scene's game layer with UI layer and

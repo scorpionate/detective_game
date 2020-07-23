@@ -1,4 +1,4 @@
-package com.example.detective_game
+package com.mmx.wyatts_story
 
 import io.flutter.embedding.android.FlutterActivity
 

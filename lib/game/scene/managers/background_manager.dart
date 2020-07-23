@@ -1,9 +1,9 @@
-import 'package:detective_game/game/scenes/config_resolution.dart';
-import 'package:detective_game/services/local_save_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
-import 'package:detective_game/game/scene/scene.dart';
+import 'package:wyatts_story/game/scenes/config_resolution.dart';
+import 'package:wyatts_story/services/local_save_manager.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
 
 // Displays and shifts background
 class BackgroundManager {

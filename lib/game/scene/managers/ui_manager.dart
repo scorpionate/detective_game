@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:detective_game/game/scene/user_interface.dart';
+import 'package:wyatts_story/game/scene/user_interface.dart';
 
 // Communicator between game layer =>  ui layer
 // Send data to be displayed in UI(dialogues, messages, buttons)

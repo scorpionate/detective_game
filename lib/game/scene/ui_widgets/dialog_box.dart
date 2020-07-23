@@ -1,6 +1,6 @@
-import 'package:detective_game/game/scene/scene.dart';
-import 'package:detective_game/game/scenes/main_thread/MT11.dart';
 import 'package:flutter/material.dart';
+import 'package:wyatts_story/game/scene/scene.dart';
+import 'package:wyatts_story/game/scenes/main_thread/MT11.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class DialogBox extends StatefulWidget {
